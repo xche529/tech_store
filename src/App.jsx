@@ -1,6 +1,8 @@
 import React from 'react';
-import './App.css'; 
+import './index.css';
+import './components/css/cart.css';
 import MainPage from './MainPage'; // Import MainPage component
+
 
 function App() {
   return (

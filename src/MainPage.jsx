@@ -1,5 +1,5 @@
 import React from 'react';
-import meme from './components/images/meme.jpg';
+import meme from './images/meme.jpg';
 
 function MainPage() {
   return (
@@ -11,7 +11,7 @@ function MainPage() {
         <img className="image" src={meme}/>
       </div>
       <br />
-      <a href="/cart" target="_self">
+      <a href="/shopping-cart/CartPage" target="_self">
         购物车
       </a>
       <a href="/items" target="_self">
