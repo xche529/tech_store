@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 function CartPage() {
   const [quantity, setQuantity] = useState(1);
@@ -20,9 +22,7 @@ function CartPage() {
           <div className="header">
             <h1>YOUR BAG</h1>
             <p className="item-count">{quantity} ITEM</p>
-            <a href="index.html" className="continue-shopping" target="_self">
-              Continue Shopping
-            </a>
+            <Link to="/">Continue Shopping</Link>
           </div>
           <table>
             <thead>
@@ -81,9 +81,9 @@ function CartPage() {
             </tbody>
           </table>
           <div className="checkout-container">
-            <a href="checkout.html">
-              <button className="checkout-button">Proceed to checkout</button>
-            </a>
+          <Link to="/checkout">
+            <button className="checkout-button">Proceed to checkout</button>
+          </Link>
           </div>
         </div>
       </div>

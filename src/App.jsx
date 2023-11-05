@@ -5,7 +5,7 @@ import meme from './images/meme.jpg';
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CartPage from './components/checkout/CartPage';
 import CheckoutPage from './components/checkout/CheckoutPage';
-import ItemDetails from './components/Item'
+import ItemDetails from './components/Item';
 
 function MainPage() {
 
@@ -40,4 +40,3 @@ function App() {
 }
 
 export default App;
-

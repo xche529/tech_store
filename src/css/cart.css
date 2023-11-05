@@ -8,6 +8,11 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
+
+ body > #root > div {
+    height: 100vh;
+ }
+
 .cart-page {
     max-width: 100%;
     background-color: #fff;

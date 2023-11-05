@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 function Checkout() {
   return (
@@ -22,7 +24,7 @@ function Checkout() {
         <button type="submit">Place Order</button>
       </form>
 
-      <a href="/index.html">Back to Home</a>
+      <Link to="/">Back to Home</Link>
     </div>
   );
 }
