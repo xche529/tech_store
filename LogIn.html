@@ -24,6 +24,32 @@
     a {
       clear: both;
     }
+
+    .logInTable {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+    }
+
+    td {
+      font-size: 20px;
+    }
+
+    .font-center {
+      text-align: center;
+    }
+
+    .font-right {
+      text-align: right;
+    }
+
+    .logInSumbit {
+      font-size: 20px;
+      background-color: #a2c3e7;
+    }
+
   </style>
 
 </head>
@@ -42,24 +68,31 @@
   <a href="SignUp.html" target="_self"> 注册</a>
   <br />
 
-  <table>
-    <tr>
-      <td>
-        email/username:
-      </td>
-      <td>
-        <input type="text">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        password:
-      </td>
-      <td>
-        <input type="password">
-      </td>
-    </tr>
-  </table>
+  <div class="logInTable">
+    <table>
+      <tr>
+        <td class="font-right">
+          email/username:
+        </td>
+        <td>
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <td class="font-right">
+          password:
+        </td>
+        <td>
+          <input type="password">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="font-center">
+          <input type="submit" class="logInSumbit" value="log in">
+        </td>
+      </tr>
+    </table>
+  </div>
 
 </body>
 
