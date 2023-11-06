@@ -7,15 +7,27 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 100vh;
 }
-/* Style for the left and right sections of shopping cart. */
+
+ body > #root > div {
+    height: 100vh;
+ }
+
+.cart-page {
+    max-width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    flex: 1; /* Make the content section expand to fill the available space */
+}
+
 .left-section {
-    flex: 0 0 70%; /* Set the left section to take 70% of available space */
+    flex: 0 0 70%; /* The left section takes 70% of the space */
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ccc;
-}
+} 
 
 .right-section {
     flex: 1; /* The right section takes the remaining space */
@@ -36,27 +48,10 @@ body {
     padding: 10px 20px;
 }
 
-
-.cart-page {
-    max-width: 100%;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    display: flex;
-    flex: 1; /* Make the content section expand to fill the available space */
-}
-
-.content {
-    display: flex;
-    flex: 1;
-}
-
 /* Style for the summary table */
 .summary-table{
     width: 100%; /* Make the table take full width */
-    margin-top: -100px;
-
-   
+    margin-top: 100px;
 }
 
 .totalPrice{
@@ -68,7 +63,7 @@ body {
 .code-container {
     display: flex;
     flex-direction: column;
-    margin-top:-180px;
+    margin-top: 0px;
 }
 
 .code-input{
@@ -79,7 +74,7 @@ body {
 .apply-button{
     margin-top: 10px;
     margin-left: -20px;
-    width: 100px;
+    width: 200px;
     cursor: pointer;
     background-color: #000000;
     color: #ffffff;
@@ -127,16 +122,13 @@ input[type="text"] {
 }
 
 .checkout-button {
-    
     background-color: #a30999;
-    height: fit-content;
     width: 300px;
     border-radius: 20%;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    margin-bottom: 100px;
     transition: background-color 0.3s;
 }
 
