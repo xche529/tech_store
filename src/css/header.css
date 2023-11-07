@@ -1,0 +1,61 @@
+/* Common styles for all screen sizes */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Permanent+Marker&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-bar {
+    background-color: #8ADBFE;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.nav-bar ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;   
+}
+
+.logo_icon img {
+    width: 40px;
+    height: 40px;
+}
+
+
+.logo_icon {
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+} 
+
+ .search_pkg {
+  position: relative;
+  left: -50px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 8px;
+} 
+
+
+
+
+
