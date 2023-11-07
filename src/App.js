@@ -10,12 +10,13 @@ import Header from './components/Header';
 function App() {
   return (
     <div class="wrapper">
-    <Header />
+
     <Router>
+    <Header />
       <Routes>
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
-				<Route path="/items" element={<ItemDetails />} />
+		<Route path="/items" element={<ItemDetails />} />
       </Routes>
     </Router>
     </div>

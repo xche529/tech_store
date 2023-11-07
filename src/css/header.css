@@ -47,13 +47,42 @@ body {
 
  .search_pkg {
   position: relative;
-  left: -50px;
+  left: -150px;
   display: flex;
   align-items: center;
   width: 100%;
   max-width: 600px;
   margin-bottom: 8px;
 } 
+
+.category{
+    position: relative;
+    left: -70px;
+    font-weight: 800;
+}
+
+.nav_links{
+    font-weight: 300;
+    position: absolute;
+    left: 1050px;
+    cursor: pointer;
+}
+
+
+.nav_links li{
+  margin-right: 20px;
+}
+
+
+.icon{
+    justify-content: space-between;
+    float: right;
+}
+
+.icon span {
+    cursor: pointer;
+    margin-right: 30px; /* Adjust the right margin to increase space between spans */
+}
 
 
 
