@@ -47,13 +47,30 @@ body {
 
  .search_pkg {
   position: relative;
-  left: -150px;
+  left: -100px;
   display: flex;
   align-items: center;
   width: 100%;
   max-width: 600px;
   margin-bottom: 8px;
 } 
+
+.search_button {
+    align-items: center;
+    position: relative;
+    left: -100px;
+    background-color: #6c009e;
+    margin-bottom: -10px;
+    padding: 10px 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.search_button:hover {
+    background-color: #b007ff;
+    color: #fff;
+}
 
 .category{
     position: relative;
