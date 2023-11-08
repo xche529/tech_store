@@ -55,11 +55,14 @@ body {
   margin-bottom: 8px;
 } 
 
+.search_pkg input{
+    background-color: none;
+}
+
 .search_button {
     align-items: center;
     position: relative;
     left: -100px;
-    background-color: #6c009e;
     margin-bottom: -10px;
     padding: 10px 50px;
     border: none;
@@ -72,10 +75,35 @@ body {
     color: #fff;
 }
 
-.category{
-    position: relative;
-    left: -70px;
+.menu{
+    cursor: pointer;
+}
+
+.menu li > ul {
+    display:none;
+    transition: all .4s ease-in-out;
+    position: absolute; /* Add absolute positioning for dropdown */
+    top: 100%; /* Position the dropdown below the parent li */
+    left: 0;
+    background-color: #fff;
+}
+
+.menu li:hover > ul {
+    display:block;
+}
+
+.cat_text{
     font-weight: 800;
+    position: relative;
+    left: -50px;
+    bottom: 4px;
+    align-items: center;   
+}
+
+.expand_more{
+    position: relative;
+    bottom: -6px;
+    align-items: center;   
 }
 
 .nav_links{
@@ -101,6 +129,13 @@ body {
     margin-right: 30px; /* Adjust the right margin to increase space between spans */
 }
 
+.material-symbols-outlined.expand_more {
+    transition: transform 0.3s; 
+}
+
+.material-symbols-outlined.expand_more.rotate-180 {
+    transform: rotate(180deg); 
+}
 
 
 
