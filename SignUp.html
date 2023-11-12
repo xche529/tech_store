@@ -1,11 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
+  <style>
+    .text-with-image {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .text {
+      flex: 1;
+    }
+
+    .image {
+      width: 100px;
+      height: auto;
+      margin-left: 20px;
+    }
+
+    a {
+      clear: both;
+    }
+  </style>
+
 </head>
+
 <body>
-  
+  <div class="text-with-image">
+    <p class="text" style="font-size: 24px;">欢迎来到UOA线上超商</p>
+    <img class="image" src="meme.jpg" alt="meme">
+  </div>
+  <br />
+  <a href="basket.html" target="_self"> 购物车</a>
+  <a href="item.html" target="_self"> 商品</a>
+  <a href="checkout.html" target="_self"> 结算</a>
+  <a href="index.html" target="_self"> 主页</a>
+  <a href="LogIn.html" target="_self"> 登录</a>
+  <a href="SignUp.html" target="_self"> 注册</a>
+  <br />
+
+  <div class="logInTable">
+    <>
+      <tr>
+        <td class="font-right">
+          Email:
+        </td>
+        <td>
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Username:
+        </td>
+        <td>
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <td class="font-right">
+          Password:
+        </td>
+        <td>
+          <input type="Password">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Confirm Password:
+        </td>
+        <td>
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Address:
+        </td>
+        <td>
+          <input type="text">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="font-center">
+          <input type="submit" class="logInSumbit" value="log in">
+        </td>
+      </tr>
+    </table>
+  </div>
+
 </body>
+
 </html>
