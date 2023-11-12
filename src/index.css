@@ -8,7 +8,7 @@ body {
     padding: 0;
   }
 
-.wrapper {margin:0 auto;width:1440px;}
+.wrapper {margin:0 auto;width:100%;}
 
 .text-with-image {
     display: inline-flex;

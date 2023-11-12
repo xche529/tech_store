@@ -47,7 +47,6 @@ body {
 
  .search_pkg {
   position: relative;
-  left: -100px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -95,7 +94,7 @@ body {
 .cat_text{
     font-weight: 800;
     position: relative;
-    left: -50px;
+    left: 0px;
     bottom: 4px;
     align-items: center;   
 }
@@ -108,8 +107,8 @@ body {
 
 .nav_links{
     font-weight: 300;
-    position: absolute;
-    left: 1050px;
+    position: relative;
+    left: -50px;
     cursor: pointer;
 }
 
