@@ -1,0 +1,27 @@
+# _config.yml
+
+source: src
+
+destination: build
+
+exclude:
+  - node_modules
+  - build
+
+plugins:
+  - jekyll-feed
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+     
+server:
+  host: localhost
+  port: 4000
+
+build:
+  markdown: kramdown
+  theme: your-theme-name
