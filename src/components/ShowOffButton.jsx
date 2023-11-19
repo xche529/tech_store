@@ -1,14 +1,20 @@
 import React from 'react';
+import '../css/showOffButton.css';
 
 
-function ShowOffButton({ src, alt, onClick }) {
+function ShowOffButton({ src, alt, onClick, name}) {
     return (
-        <img
-            src={src}
-            alt={alt}
-            style={{ cursor: 'pointer' }}
-            onClick={onClick}
-        />
+        <div className = "button" >
+            <img className='image'
+                src={src}
+                alt={alt}
+                style={{ cursor: 'pointer' }}
+                onClick={onClick}
+            />
+            <div className = "name">
+                {name}
+            </div>
+        </div>
     );
 }
 export default ShowOffButton;

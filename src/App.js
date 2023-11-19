@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import './css/cart.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -11,7 +11,7 @@ import HomePage from './components/HomePage';
 function App() {
   return (
     <div>
-      <div class="wrapper">
+      <div className="wrapper">
 
         <Router>
           <Header />
@@ -24,7 +24,6 @@ function App() {
       </div>
 
       <HomePage />
-      
     </div>
   );
 }
