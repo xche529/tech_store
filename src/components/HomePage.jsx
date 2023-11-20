@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useImperativeHandle, useState, forwardRef } from 'react';
 import SeaCucumber from '../images/SeaCucumber.jpg';
 import ShowOffButton from './ShowOffButton';
 import '../css/homePage.css';
 
 
-function HomePage() {
+const HomePage = forwardRef((props, ref) => {
+    const homePageRef = React.useRef();
+
+    useImperativeHandle(ref, () => ({
+        hide: homePageRef.current.hide,
+        show: homePageRef.current.show,
+    }));
+
+    return <Content ref={homePageRef} />;
+});
+
+function Content({ forwardedRef }) {
+
     const [isVisible, setIsVisible] = useState(true);
 
     const hide = () => {
