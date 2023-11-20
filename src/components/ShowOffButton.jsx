@@ -23,4 +23,3 @@ function ShowOffButton({ src, alt, onClick, name, price }) {
     );
 }
 export default ShowOffButton;
-
