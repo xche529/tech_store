@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/showOffButton.css';
 
 
-function ShowOffButton({ src, alt, onClick, name, price }) {
+function ShowOffButton({ src, alt, onClick, name, price, discription }) {
     return (
         <div className="button" >
             <img className='image'
@@ -18,6 +18,10 @@ function ShowOffButton({ src, alt, onClick, name, price }) {
                 <div className="price">
                     ${price}
                 </div>
+            </div>
+            
+            <div className='discription'>
+                {discription}
             </div>
         </div>
     );

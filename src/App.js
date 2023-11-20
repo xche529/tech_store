@@ -31,7 +31,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/cart" element={<CartPage />}  />
-            <Route path="/checkout" element={<CheckoutPage hideMainPage={homePageRef.current.hide} />} />
+            <Route path="/checkout" element={<CheckoutPage  />} />
             <Route path="/items" element={<ItemDetails />} />
           </Routes>
         </Router>
