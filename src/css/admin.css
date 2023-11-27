@@ -1,4 +1,3 @@
-/* AdminDashboard.css */
 .admin-dashboard {
     display: flex;
   }
@@ -37,3 +36,21 @@
     background-color: #4CAF50;
   }
   
+  .admin-product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .admin-product-item {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .admin-product-item:hover {
+    transform: scale(1.05);
+  }
