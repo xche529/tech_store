@@ -1,4 +1,4 @@
-import React, { useState, useRef} from 'react';
+import React, { useRef } from 'react';
 import './index.css';
 import './css/cart.css';
 import { withRouter, BrowserRouter as Router, Route, Routes} from "react-router-dom";
