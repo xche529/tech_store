@@ -15,16 +15,18 @@ import HomePage from './components/HomePage';
 function App() {
 
   const childRef = useRef();
+  const [isMainPage, setIsMainPage] = useState(true);
 
-
-  
   const hideMainPage = () => {
     childRef.current.hide();
+    setIsMainPage(false);
   };
 
-  const ShowMainPage = () => {
+  const showMainPage = () => {
     childRef.current.show();
-  }
+    setIsMainPage(true);
+  };
+  
   return (
     <div>
       <div className="wrapper">
@@ -40,8 +42,9 @@ function App() {
           </Routes>
         </Router>
       </div>
-
+    if (isMainPage) {
       <HomePage />
+    }
     </div>
   );
 }

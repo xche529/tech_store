@@ -38,22 +38,22 @@ function Content({ forwardedRef }) {
 
 function content() {
 
-    const handleButtonClick = () => {
-        console.log('SeaCucumber clicked!');
+    const handleButtonClick = (index) => {
+        console.log('SeaCucumber' + index + 'clicked!');
     };
 
     return (
         <div className='main'>
 
             {/* temporary list for effect */}
-            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick} name={'海参'} price={80} discription={'好吃！'} />
-            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick} name={'海参'} price={90} discription={'好吃！'} />
-            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick} name={'海参'} price={1000} discription={'好吃！'} />
-            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick} name={'海参'} price={200} discription={'好吃！'} />
-            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick} name={'海参'} price={70} discription={'好吃！'} />
-            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick} name={'海参'} price={400} discription={'好吃！'} />
-            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick} name={'海参'} price={200} discription={'好吃！'} />
-            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick} name={'海参'} price={99} discription={'好吃！'} />
+            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick(1)} name={'海参'} price={80} discription={'好吃！'} />
+            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick(2)} name={'海参'} price={90} discription={'好吃！'} />
+            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick(3)} name={'海参'} price={1000} discription={'好吃！'} />
+            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick(4)} name={'海参'} price={200} discription={'好吃！'} />
+            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick(5)} name={'海参'} price={70} discription={'好吃！'} />
+            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick(6)} name={'海参'} price={400} discription={'好吃！'} />
+            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick(7)} name={'海参'} price={200} discription={'好吃！'} />
+            <ShowOffButton src={SeaCucumber} alt="meme" onClick={handleButtonClick(8)} name={'海参'} price={99} discription={'好吃！'} />
 
         </div>
     );
