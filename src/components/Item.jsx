@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Item() {
+function Item(product, ) {
   return (
     <div>
       <h4>这里是商品界面</h4>

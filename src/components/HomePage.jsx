@@ -1,11 +1,11 @@
-import React, { useImperativeHandle, useState, forwardRef, useEffect } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import SeaCucumber from '../images/SeaCucumber.jpg';
 import ShowOffButton from './ShowOffButton';
 import '../css/homePage.css';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
-const HomePage = forwardRef((props, ref) => {
+function HomePage() {
     const productsRef = collection(db, 'products');
     const [products, setProducts] = useState([]);
 
@@ -18,29 +18,30 @@ const HomePage = forwardRef((props, ref) => {
         fetchProducts();
     }, []);
 
-    return content(products); 
-});
+    return content(products);
+};
 
 
 function content(products) {
-
+    {/**/}
     const handleButtonClick = (index) => {
+
         console.log('SeaCucumber' + index + 'clicked!');
     };
 
     return (
         <div className='main'>
-      {products.map((product, index) => (
-        <ShowOffButton
-          key={index}
-          src={product.imageURL}
-          alt="SeaCucumber"
-          onClick={() => handleButtonClick(index)}
-          name={product.name}
-          price={product.price}
-          description={'好吃！'}
-        />
-      ))}
+            {products.map((product, index) => (
+                <ShowOffButton
+                    key={index}
+                    src={product.imageURL}
+                    alt="SeaCucumber"
+                    onClick={() => handleButtonClick(index)}
+                    name={product.name}
+                    price={product.price}
+                    description={'好吃！'}
+                />
+            ))}
         </div>
     );
 }
