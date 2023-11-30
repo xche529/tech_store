@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import './index.css';
 import './css/cart.css';
-import { withRouter, BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { withRouter, BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { collection , getDocs } from '@firebase/firestore'
+import { collection, getDocs } from '@firebase/firestore'
 import './css/homePage.css';
 import CartPage from './components/checkout/CartPage';
 import CheckoutPage from './components/checkout/CheckoutPage';
@@ -26,25 +26,25 @@ function App() {
     childRef.current.show();
     setIsMainPage(true);
   };
-  
+
   return (
     <div>
       <div className="wrapper">
 
         <Router>
-         <ShowHeader>
+          <ShowHeader>
             <Header />
-        </ShowHeader>   
+          </ShowHeader>
           <Routes>
-            <Route path="/cart" element={<CartPage />}  />
-            <Route path="/checkout" element={<CheckoutPage  />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/items" element={<ItemDetails />} />
           </Routes>
         </Router>
       </div>
-    if (isMainPage) {
-      <HomePage />
-    }
+
+        <HomePage />
+      
     </div>
   );
 }
