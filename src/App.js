@@ -41,7 +41,7 @@ function App() {
         </Router>
       </div>
 
-      <HomePage />
+      {/* <HomePage /> */}
     </div>
   );
 }

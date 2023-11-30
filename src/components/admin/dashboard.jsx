@@ -42,7 +42,7 @@ const AdminDashboard = () => {
           className={`tab ${activeTab === 'products' ? 'active' : ''}`}
           onClick={() => handleTabChange('products')}
         >
-          Products
+            Products
         </div>
           <div
             className={`tab ${activeTab === 'orders' ? 'active' : ''}`}
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
         </div>
       </div>
       <div className="main-content">
-        <h1>Admin Dashboard</h1>
+        <h1 className='title'>Product List</h1>
         <div className="tab-content">
           {activeTab === 'dashboard' && <DashboardContent />}
           {activeTab === 'products' && <AdminProductList />}
