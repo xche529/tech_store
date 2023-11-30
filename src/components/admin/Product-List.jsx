@@ -3,6 +3,7 @@ import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db } from '../../firebase-config';
 import { updateImage } from './update-image';
+import { deleteImage } from './delete-image';
 
 const AdminProductList = () => {
     const [products, setProducts] = useState([]);
@@ -54,7 +55,6 @@ const AdminProductList = () => {
   
       try {
         const downloadURL = await updateImage(productId, file);
-  
         // Update the product document in Firestore with the image URL
         const productDoc = doc(db, 'products', productId);
         await updateDoc(productDoc, { imageUrl: downloadURL });
@@ -119,7 +119,7 @@ const AdminProductList = () => {
               type="file"
               onChange={onChangeImage}
             />
-            <button onClick={() => handleImageUpload(product.id)}>Confirm Change</button>
+            <button onClick={() => deleteImage(product.imageUrl) && handleImageUpload(product.id) }>Confirm Change</button>
           </div>
         ))}
       </div>
