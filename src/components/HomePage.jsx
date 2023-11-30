@@ -34,8 +34,9 @@ function content(products) {
             {products.map((product, index) => (
                 <ShowOffButton
                     key={index}
-                    src={product.imageURL}
-                    alt="SeaCucumber"
+                    src={"fef"}
+                    fallbackSrc={SeaCucumber}
+                    alt="seacucumber"
                     onClick={() => handleButtonClick(index)}
                     name={product.name}
                     price={product.price}

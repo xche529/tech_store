@@ -1,14 +1,15 @@
 import React from 'react';
 import '../css/showOffButton.css';
+import ImageWithFallback from './image';
 
 
-function ShowOffButton({ src, alt, onClick, name, price, discription }) {
+function ShowOffButton({ src, fallbackSrc, alt, onClick, name, price, discription }) {
     return (
         <div className="button" onClick={onClick}>
-            <img className='image'
+            <ImageWithFallback className='image'
                 src={src}
+                fallbackSrc={fallbackSrc}
                 alt={alt}
-                style={{ cursor: 'pointer' }}
             />
             <div className='textInfo'>
                 <div className="name">
