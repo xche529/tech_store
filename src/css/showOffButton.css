@@ -34,9 +34,10 @@
 }
 
 .name {
-    font-size: calc(1.2vw + 0.5em);
+    font-size: calc(1.2vw );
     font-weight: bold;
-    margin-left: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .price {

@@ -70,7 +70,7 @@ const AdminProductList = () => {
           <p>Price: ${product.price}</p>
           <p>Stock: {product.stock}</p>
           <img
-            src={product.imageURL || previewImage}
+            src={product.imageUrl || previewImage}
             alt={product.name}
             style={{ width: '100%', height: 'auto' }}
           />
