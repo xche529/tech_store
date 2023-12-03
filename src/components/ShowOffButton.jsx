@@ -4,25 +4,25 @@ import ImageWithFallback from './image';
 
 
 
-function ShowOffButton({ src, fallbackSrc, alt, onClick, name, price, description }) {
+function ShowOffButton({ fallbackSrc, alt, onClick, product  }) {
     return (
         <div className="button" onClick={onClick}>
             <ImageWithFallback className='image'
-                src={src}
+                src={product.imageUrl }
                 fallbackSrc={fallbackSrc}
                 alt={alt}
             />
             <div className='textInfo'>
                 <div className="name">
-                    {name}
+                    {product.name}
                 </div>
                 <div className="price">
-                    ${price}
+                    {product.price}
                 </div>
             </div>
             
             <div className='discription'>
-                {description}
+                {product.description}
             </div>
         </div>
     );

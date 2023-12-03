@@ -25,7 +25,6 @@ function HomePage() {
 
 function Content(products) {
     const [selectedProduct, setSelectedProduct] = useState(null);
-
     const handleButtonClick = (product, index) => {
         setSelectedProduct(product);
         console.log('SeaCucumber' + index + 'clicked!');
@@ -37,19 +36,14 @@ function Content(products) {
             {products.map((product, index) => (
                 <ShowOffButton
                     key={index}
-                    src={"fef"}
                     fallbackSrc={SeaCucumber}
                     alt="seacucumber"
                     onClick={() => handleButtonClick(product, index)}
-                    name={product.name}
-                    price={product.price}
-                    description={'hao'}
+                    product={product}
                 />
             ))}
                   {selectedProduct && <Item product={selectedProduct} />}
-
         </div>
-
     );
 }
 
