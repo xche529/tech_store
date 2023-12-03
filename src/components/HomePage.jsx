@@ -1,6 +1,7 @@
-import React, { useState, forwardRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SeaCucumber from '../images/SeaCucumber.jpg';
 import ShowOffButton from './ShowOffButton';
+import Item from './Item';
 import '../css/homePage.css';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase-config';
@@ -18,18 +19,20 @@ function HomePage() {
         fetchProducts();
     }, []);
 
-    return content(products);
+    return Content(products);
 };
 
 
-function content(products) {
-    {/**/}
-    const handleButtonClick = (index) => {
+function Content(products) {
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
+    const handleButtonClick = (product, index) => {
+        setSelectedProduct(product);
         console.log('SeaCucumber' + index + 'clicked!');
     };
 
     return (
+
         <div className='main'>
             {products.map((product, index) => (
                 <ShowOffButton
@@ -37,13 +40,16 @@ function content(products) {
                     src={"fef"}
                     fallbackSrc={SeaCucumber}
                     alt="seacucumber"
-                    onClick={() => handleButtonClick(index)}
+                    onClick={() => handleButtonClick(product, index)}
                     name={product.name}
                     price={product.price}
-                    description={'好吃！'}
+                    description={'hao'}
                 />
             ))}
+                  {selectedProduct && <Item product={selectedProduct} />}
+
         </div>
+
     );
 }
 

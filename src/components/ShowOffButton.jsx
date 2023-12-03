@@ -3,7 +3,8 @@ import '../css/showOffButton.css';
 import ImageWithFallback from './image';
 
 
-function ShowOffButton({ src, fallbackSrc, alt, onClick, name, price, discription }) {
+
+function ShowOffButton({ src, fallbackSrc, alt, onClick, name, price, description }) {
     return (
         <div className="button" onClick={onClick}>
             <ImageWithFallback className='image'
@@ -21,7 +22,7 @@ function ShowOffButton({ src, fallbackSrc, alt, onClick, name, price, discriptio
             </div>
             
             <div className='discription'>
-                {discription}
+                {description}
             </div>
         </div>
     );
