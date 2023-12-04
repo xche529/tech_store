@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import SeaCucumber from '../images/SeaCucumber.jpg';
 
 
 const ImageWithFallback = ({ src, fallbackSrc, alt , className}) => {
     const [imageSrc, setImageSrc] = useState(src);
+
+    useEffect(() => {
+        setImageSrc(src);
+    }, [src, fallbackSrc]);
 
     const handleImageError = () => {
         setImageSrc(fallbackSrc);
@@ -17,6 +21,7 @@ const ImageWithFallback = ({ src, fallbackSrc, alt , className}) => {
         }
     }
 
+  
 
     return <img src={imageSrc} alt={alt} onError={handleImageError} className={className}/>;
 };

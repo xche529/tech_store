@@ -2,3 +2,26 @@
     margin: 2%;
     flex-wrap: wrap;
 }
+
+
+.itemImage{
+    width: 40%;
+    height: auto;
+    margin: 2%;
+}
+
+.itemPage{
+    display: flex;
+    width: 90%;
+    height: 100%;
+    margin: 5%;
+    background-color: #ffe8eb;
+    border-radius: 8px;
+    
+}
+
+.price{
+    width: 100%;
+    height: auto;
+    margin: 2%;
+}

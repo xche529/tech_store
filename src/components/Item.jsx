@@ -1,24 +1,27 @@
 import React from 'react';
+import { useState , useEffect } from 'react';
 import ImageWithFallback from './image';
-import SeaCucumber from '../images/SeaCucumber.jpg';
 import '../css/item.css';
 
 
 
 function Item(props) {
 
-  const { product } = props;
+  const [product, setProduct] = useState(props.product);
+  const [imageSrc, setImageSrc] = useState(props.product.imageUrl);
+  useEffect(() => {
+      setProduct(props.product);
+      setImageSrc(props.product.imageUrl);
+  }, [props.product]);
+
 
   return (
-    <div>
-      <ImageWithFallback className='image'
-        src={product.imageUrl}
-        alt={"Seacucumber"}
-      />
+    <div className='itemPage'>
+      <ImageWithFallback className='itemImage' src={imageSrc} alt={"Seacucumber"} />
       <div className='infoBox'>
-      <div>product name: {product.name}</div>
-      <div>description: {product.description}</div>
-      <div>price: {product.price}</div>
+        <div>Product name: {product.name}</div>
+        <div className='price'>Price: ${product.price}</div>
+        <div>description: {product.description}</div>
       </div>
 
     </div>
