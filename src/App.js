@@ -24,19 +24,19 @@ function App() {
             <Header />
           </ShowHeader>
           <Routes>
-          <Route path="/*" element={<Navigate to="/home" />} />
+            <Route path="/*" element={<Navigate to="/home" />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/items" element={<ItemDetails />} />
             <Route path="/item" element={<Item />} />
             <Route path="/home" element={<HomePage />} />
-            
+
           </Routes>
 
         </Router>
       </div>
 
-      
+
     </div>
   );
 }

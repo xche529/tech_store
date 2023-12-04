@@ -1,11 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ImageWithFallback from './image';
+import SeaCucumber from '../images/SeaCucumber.jpg';
 
-function Item(product ) {
+
+function Item(product) {
   return (
     <div>
-      <h4>这里是商品界面</h4>
-      <Link to="/">主页</Link>
+      <ImageWithFallback className='image'
+        src={product.imageUrl}
+        fallbackSrc={SeaCucumber}
+        alt={"Seacucumber"}
+      />
+      <div>{product.name}</div>
+      <div>{product.description}</div>
+      <div>{product.price}</div>
+
     </div>
   );
 }

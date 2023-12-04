@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SeaCucumber from '../images/SeaCucumber.jpg';
 import ShowOffButton from './ShowOffButton';
 import Item from './Item';
 import '../css/homePage.css';
@@ -31,19 +30,21 @@ function Content(products) {
     };
 
     return (
+        <>
+            {selectedProduct && <Item product={selectedProduct} />}
 
-        <div className='main'>
-            {products.map((product, index) => (
-                <ShowOffButton
-                    key={index}
-                    fallbackSrc={SeaCucumber}
-                    alt="seacucumber"
-                    onClick={() => handleButtonClick(product, index)}
-                    product={product}
-                />
-            ))}
-                  {selectedProduct && <Item product={selectedProduct} />}
-        </div>
+            <div className='main'>
+
+                {products.map((product, index) => (
+                    <ShowOffButton
+                        key={index}
+                        alt="seacucumber"
+                        onClick={() => handleButtonClick(product, index)}
+                        product={product}
+                    />
+                ))}
+            </div>
+        </>
     );
 }
 
