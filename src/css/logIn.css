@@ -37,6 +37,11 @@
   border: none;
 }
 
+.login button:hover {
+  background-color: #8ADBFE;
+  color: #000;
+}
+
 
 .login p {
   text-align: center;
