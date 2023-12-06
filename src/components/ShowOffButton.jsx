@@ -18,12 +18,14 @@ function ShowOffButton({ alt, onClick, product  }) {
                     {product.name}
                 </div>
                 <div className='price'>
-                    ${product.price}
+
+                    {product.price? '$' + product.price : ''}
                 </div>
             </div>
             
             <div className='discription'>
                 {product.description}
+                {product.id}
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import ShowOffButton from './ShowOffButton';
 import Item from './Item';
 import '../css/homePage.css';
@@ -6,8 +7,10 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 function HomePage() {
+
     const productsRef = collection(db, 'products');
     const [products, setProducts] = useState([]);
+    
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -21,18 +24,23 @@ function HomePage() {
     return Content(products);
 };
 
-
 function Content(products) {
+    const navigate = useNavigate();
     const [selectedProduct, setSelectedProduct] = useState(null);
     const handleButtonClick = (product, index) => {
         setSelectedProduct(product);
+        navigate('/Item/' + product.id)
         console.log('SeaCucumber' + index + 'clicked!');
     };
+    const navigateToContacts = () => {
+        navigate('/Item/4');
+      };
+
 
     return (
         <>
             {selectedProduct && <Item product={selectedProduct} />}
-
+            <button onClick={navigateToContacts}>Go to Item</button>
             <div className='main'>
 
                 {products.map((product, index) => (
