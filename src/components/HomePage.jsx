@@ -40,7 +40,6 @@ function Content(products) {
     return (
         <>
             {selectedProduct && <Item product={selectedProduct} />}
-            <button onClick={navigateToContacts}>Go to Item</button>
             <div className='main'>
 
                 {products.map((product, index) => (

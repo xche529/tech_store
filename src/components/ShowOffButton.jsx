@@ -14,7 +14,7 @@ function ShowOffButton({ alt, onClick, product  }) {
                 alt={alt}
             />
             <div className='textInfo'>
-                <div className="name">
+                <div className="itemName">
                     {product.name}
                 </div>
                 <div className='price'>
@@ -25,7 +25,9 @@ function ShowOffButton({ alt, onClick, product  }) {
             
             <div className='discription'>
                 {product.description}
-                {product.id}
+            </div>
+            <div className='id'>
+            ID: {product.id}
             </div>
         </div>
     );

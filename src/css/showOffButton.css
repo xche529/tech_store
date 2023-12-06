@@ -32,7 +32,7 @@
     margin-bottom: 1%;
 }
 
-.name {
+.itemName {
     font-size: 110% ;
     font-weight: bold;
     margin-left: 10%;
@@ -50,4 +50,9 @@
     font-size: calc(1vw);
     color: #585858;
     margin-bottom: 2%;
+}
+
+.id{
+    margin-top: auto;
+    margin-bottom: 3%;
 }

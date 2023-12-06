@@ -29,7 +29,7 @@ function App() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/items" element={<ItemDetails />} />
             <Route path="/home" element={<HomePage />} />
-            <Route path="/item/:id" element={<Item />} />
+            <Route path="/item/:itemId" element={<Item />} />
           </Routes>
 
         </Router>

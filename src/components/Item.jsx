@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ImageWithFallback from './image';
 import '../css/item.css';
-import { collection, getDocs, Firestore } from 'firebase/firestore';
+import { collection, getDoc,doc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 
@@ -11,12 +11,15 @@ import { db } from '../firebase-config';
 function Item() {
 
   const { itemId } = useParams();
+  console.log('itemId:', itemId);
   const [item, setItem] = useState(null);
+  const productsRef = collection(db, 'products');
 
   useEffect(() => {
     const getItemById = async () => {
       try {
-        const itemDoc = await Firestore.collection('your_collection').doc(itemId).get();
+        const itemDoc = await getDoc(doc(db, 'products', itemId));
+
 
         if (itemDoc.exists) {
           setItem(itemDoc.data());
@@ -64,6 +67,7 @@ if (item) {
         </div>
   );
   } else { 
+    console.log('Item:', item);
     return(
       <h1>Error! please reload</h1>
     );
