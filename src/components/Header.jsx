@@ -43,6 +43,9 @@ function Header() {
         <Link to="/login">
         <span className="material-symbols-outlined account">account_circle</span>
         </Link>
+      <Link to="/items">
+        <span className="material-symbols-outlined account">account_circle</span>
+     </Link>
         <span className="material-symbols-outlined watchlist">favorite</span>
         <Link to="/cart">
           <span className="material-symbols-outlined cart">shopping_cart</span>
@@ -53,5 +56,3 @@ function Header() {
 }
 
 export default Header;
-
-    
