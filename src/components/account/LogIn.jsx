@@ -30,7 +30,7 @@ function LogIn() {
         <label htmlFor="password">Password</label>
         <input type="password" id="password" value={password} onChange={handlePasswordChange} />
         <br />
-        <button type="submit">Log In <Link to ="/login"></Link></button>
+        <button type="submit">Log In </button>
       </form>
       <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
     </div>

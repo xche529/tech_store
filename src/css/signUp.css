@@ -2,16 +2,28 @@
   position: absolute;
   top: 25%;
   left: 50%;
-  margin: 0 -250px;
-  width: 500px;
-  font-size: 20px;
-  border: 1px solid #000000;
+  margin: 0 -400px;
+  width: 800px;
+  border: 1px solid #ccc;
 }
 
 .signup h1 {
   text-align: center;
   font-weight: normal;
-  font-style: 25px;
+  margin: 0;
+  margin-top: 0.67em;
+}
+
+.signup p {
+  text-align: center;
+  font-size: 12px;
+  color: gray;
+  margin-top: 0;
+  margin-bottom: 2em;
+}
+
+.signup a:hover {
+  color: #000000;
 }
 
 .signup label {
@@ -42,12 +54,3 @@ input[type="text"] {
 }
 
 
-.signup p {
-  text-align: center;
-  font-size: 12px;
-  color: gray;
-}
-
-.signup a:hover {
-  color: #000000;
-}

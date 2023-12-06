@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../css/signUp.css';
 
 function SignUp() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,11 +26,15 @@ function SignUp() {
     console.log(`Name: ${name}`);
     console.log(`Email: ${email}`);
     console.log(`Password: ${password}`);
+
+    // Assuming signup is successful, redirect to the login page
+    navigate('/login');
   };
 
   return (
     <div className="signup">
-      <h1>Sign Up</h1>
+      <h1>Sign Up to your account</h1>
+      <p>Already have an account? <Link to="/login">Log In</Link></p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
         <input type="text" id="name" value={name} onChange={handleNameChange} />
@@ -41,7 +47,6 @@ function SignUp() {
         <br />
         <button type="submit">Sign Up</button>
       </form>
-      <p>Already have an account? <Link to="/login">Log In</Link></p>
     </div>
   );
 }
