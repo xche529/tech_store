@@ -32,27 +32,27 @@
     margin-bottom: 1%;
 }
 
-.itemName {
-    font-size: 110% ;
+.mainName {
+    font-size: 110%;
     font-weight: bold;
     margin-left: 10%;
     margin-right: 10%;
 }
 
-.price {
+.mainPrice {
     font-size: 111%;
     font-weight: bold;
     margin-left: auto;
     margin-right: 10%;
 }
 
-.discription{
+.discription {
     font-size: calc(1vw);
     color: #585858;
     margin-bottom: 2%;
 }
 
-.id{
+.id {
     margin-top: auto;
     margin-bottom: 3%;
 }

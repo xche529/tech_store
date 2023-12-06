@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import ShowOffButton from './ShowOffButton';
 import Item from './Item';
 import '../css/homePage.css';
@@ -10,7 +10,7 @@ function HomePage() {
 
     const productsRef = collection(db, 'products');
     const [products, setProducts] = useState([]);
-    
+
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -34,7 +34,7 @@ function Content(products) {
     };
     const navigateToContacts = () => {
         navigate('/Item/4');
-      };
+    };
 
 
     return (

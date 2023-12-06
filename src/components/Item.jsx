@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ImageWithFallback from './image';
 import '../css/item.css';
-import { collection, getDoc,doc } from 'firebase/firestore';
+import { collection, getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 
@@ -45,30 +45,30 @@ function Item() {
     }
   }, [item]);
 
-if (item) {
-  return (
+  if (item) {
+    return (
 
-        <div className='itemPage'>
-          <ImageWithFallback className='itemImagei' src={imageSrc} alt={"Seacucumber"} />
-          <div className='infoBox'>
-            <div className='name'>Product name: {item?.name}</div>
-            <div className='price'>Price: {item?.price ? '$' + item?.price : 'No price available'}</div>
-            <div>
-              <h3>Description:</h3>
-              {description}
-            </div>
-          </div>
+      <div className='itemPage'>
+        <ImageWithFallback className='itemImagei' src={imageSrc} alt={"Seacucumber"} />
+        <div className='infoBox'>
+          <div className='itemName'>Product name: {item?.name}</div>
+          <div className='itemPrice'>Price: {item?.price ? '$' + item?.price : 'No price available'}</div>
           <div>
-            <button className='itemButton' >Add to Cart</button>
-            <button className='itemButton' >Save for Later</button>
-            <Link to="/" className='link'>      <button className='goHome' >Continue Shopping</button>
-            </Link>
+            <h3>Description:</h3>
+            {description}
           </div>
         </div>
-  );
-  } else { 
+        <div>
+          <button className='itemButton' >Add to Cart</button>
+          <button className='itemButton' >Save for Later</button>
+          <Link to="/" className='link'>      <button className='goHome' >Continue Shopping</button>
+          </Link>
+        </div>
+      </div>
+    );
+  } else {
     console.log('Item:', item);
-    return(
+    return (
       <h1>Error! please reload</h1>
     );
   }

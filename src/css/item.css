@@ -22,17 +22,21 @@
     border: 1px solid #bbbbbb;
 }
 
-.price{
-    width: 100%;
-    height: auto;
-    margin: 0%;
-}
-
-.name{
+.itemPrice{
     width: 100%;
     height: auto;
     margin: 0%;
     font-size: large;
+    font-weight: bold;
+    color: rgb(118, 88, 140);
+}
+
+.itemName{
+    width: 100%;
+    height: auto;
+    margin: 0%;
+    font-size: large;
+    font-weight: bold;
 }
 
 .itemButton{
