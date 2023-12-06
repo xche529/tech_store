@@ -1,0 +1,66 @@
+.infoBox{
+    flex-wrap: wrap;
+    padding: 2%;
+}
+
+
+.itemImagei{
+    width: 40%;
+    height: auto;
+    margin-bottom: auto;
+    border-radius: 2%;
+}
+
+.itemPage{
+    padding: 4%;
+    display: flex;
+    width: 90%;
+    height: auto;
+    margin: 5%;
+    background-color: rgb(85, 238, 50);
+    border-radius: 8px;
+    border: 1px solid #bbbbbb;
+}
+
+.itemPrice{
+    width: 100%;
+    height: auto;
+    margin: 0%;
+    font-size: large;
+    font-weight: bold;
+    color: rgb(118, 88, 140);
+}
+
+.itemName{
+    width: 100%;
+    height: auto;
+    margin: 0%;
+    font-size: large;
+    font-weight: bold;
+}
+
+.itemButton{
+    width: 3cm;
+    height: 1cm;
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1%;
+}
+
+.goHome{
+    width: 3cm;
+    height: 1cm;
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5%;
+}
+
+.link{
+    width: 3cm;
+    height: 1cm;
+    margin: 2%;
+}

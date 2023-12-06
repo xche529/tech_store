@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import './index.css';
 import './css/cart.css';
-import { withRouter, BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { collection, getDocs } from '@firebase/firestore'
@@ -15,20 +15,6 @@ import HomePage from './components/HomePage';
 import Item from './components/Item';
 
 function App() {
-
-  const childRef = useRef();
-  const [isMainPage, setIsMainPage] = useState(true);
-
-  const hideMainPage = () => {
-    childRef.current.hide();
-    setIsMainPage(false);
-  };
-
-  const showMainPage = () => {
-    childRef.current.show();
-    setIsMainPage(true);
-  };
-
   return (
     <div>
       <div className="wrapper">
@@ -38,18 +24,18 @@ function App() {
             <Header />
           </ShowHeader>
           <Routes>
+            <Route path="/*" element={<Navigate to="/home" />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/items" element={<ItemDetails />} />
-            <Route path="/item" component={<Item />} />
-
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/item/:itemId" element={<Item />} />
           </Routes>
-          <HomePage />
 
         </Router>
       </div>
 
-      
+
     </div>
   );
 }
