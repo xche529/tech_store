@@ -40,6 +40,9 @@ function Header() {
         <li>Contact</li>
       </ul>
       <div className="icon">
+        <Link to="/login">
+        <span className="material-symbols-outlined account">account_circle</span>
+        </Link>
       <Link to="/items">
         <span className="material-symbols-outlined account">account_circle</span>
      </Link>

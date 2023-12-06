@@ -10,6 +10,8 @@ import CartPage from './components/checkout/CartPage';
 import CheckoutPage from './components/checkout/CheckoutPage';
 import ItemDetails from './components/admin/dashboard';
 import Header from './components/Header';
+import LogIn from './components/account/LogIn';
+import SignUp from './components/account/SignUp';
 import ShowHeader from './components/ShowHeader';
 import HomePage from './components/HomePage';
 import Item from './components/Item';
@@ -27,6 +29,8 @@ function App() {
             <Route path="/*" element={<Navigate to="/home" />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/items" element={<ItemDetails />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/item/:itemId" element={<Item />} />
@@ -34,7 +38,6 @@ function App() {
 
         </Router>
       </div>
-
 
     </div>
   );
