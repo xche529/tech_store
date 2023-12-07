@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db } from '../../firebase-config';
-import { updateImage } from './update-image';
-import ProductOverlay from './product-overlay';
-import { deleteImage } from './delete-image';
+import { updateImage } from './UpdateImage';
+import ProductOverlay from './ProductOverlay';
+import  Search  from './SearchArea';
+import { deleteImage } from './DeleteImage';
 
 const AdminProductList = () => {
     const [products, setProducts] = useState([]);
@@ -76,7 +77,9 @@ const AdminProductList = () => {
     };
 
     return (
+
         <div className="admin-product-list">
+         <Search />
           {filteredProducts.map((product) => (
             <div key={product.id} className="admin-product-item" onClick={() => setSelectedProduct(product)}>
           <h1 className="product-name">{product.name}</h1>

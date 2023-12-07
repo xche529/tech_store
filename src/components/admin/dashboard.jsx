@@ -4,7 +4,7 @@ import '../../css/admin.css';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { useEffect } from 'react';
-import AdminProductList from './Product-List'
+import AdminProductList from './ProductList'
 import { Link } from 'react-router-dom';
 
 const AdminDashboard = () => {
