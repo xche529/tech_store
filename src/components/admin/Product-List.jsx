@@ -3,12 +3,14 @@ import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db } from '../../firebase-config';
 import { updateImage } from './update-image';
+import ProductOverlay from './product-overlay';
 import { deleteImage } from './delete-image';
 
 const AdminProductList = () => {
     const [products, setProducts] = useState([]);
     const [file, setFile] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -73,58 +75,19 @@ const AdminProductList = () => {
       }
     };
 
-  return (
-    <div className="admin-product-list">
-      {/* <div className="search">
-      <input
-          id="search"
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        /> */}
-        {/* <label htmlFor="search">Search:</label>
-        <input
-          id="search"
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <label htmlFor="category">Category:</label>
-        <select
-          id="category"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          <option value="">All Categories</option>
-          Add options dynamically based on your product categories
-          <option value="category1">Category 1</option>
-          <option value="category2">Category 2</option>  
-        </select> */}
-      {/* </div>  */}
-      <div className="products-grid">
-        {filteredProducts.map((product) => (
-          <div key={product.id} className="admin-product-item">
-            {/* Display product information */}
-            <h2>{product.name}</h2>
-            <img
-              src={product.imageUrl || previewImage}
-              alt={product.name}
-              style={{ width: '70%', height: 'auto' }}
-            />
-            <p>Price: ${product.price}</p>
-            <p>Stock: {product.stock}</p>
-            <label htmlFor={`imageInput-${product.id}`}>New Image:</label>
-            <input
-              id={`imageInput-${product.id}`}
-              type="file"
-              onChange={onChangeImage}
-            />
-            <button onClick={() => deleteImage(product.imageUrl) && handleImageUpload(product.id) }>Confirm Change</button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    return (
+        <div className="admin-product-list">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="admin-product-item" onClick={() => setSelectedProduct(product)}>
+          <h1 className="product-name">{product.name}</h1>
+          <h1 className='product-price'>Price: ${product.price}</h1>
+            </div>
+          ))}
+          <ProductOverlay product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+        </div>
+      );
+      
+      
 };
 
 export default AdminProductList;
