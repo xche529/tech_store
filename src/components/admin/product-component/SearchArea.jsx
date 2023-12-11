@@ -1,22 +1,37 @@
 import React from "react";
+import "../../../css/admin-search.css";
 
+const SearchArea = ({ onSearch, onCategoryChange }) => {
+  const handleSearchChange = (e) => {
+    const searchTerm = e.target.value;
+    onSearch(searchTerm);
+  };
 
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    onCategoryChange(selectedCategory);
+  };
 
-const SearchArea = () => {
-  
-    return (
-        <div class="search-and-filter">
-        <label for="search">Search:</label>
-        <input id="search" type="text" placeholder="Search products...">
-        </input>
-        <label for="category">Category:</label>
-        <select id="category">
-          <option value="">All Categories</option>
-          <option value="category1">Category 1</option>
-          <option value="category2">Category 2</option>
-        </select>
+  return (
+    <div className="search-and-filter">
+      <input
+        className="search-box"
+        type="text"
+        placeholder="Enter Product Name"
+        onChange={handleSearchChange}
+      />
+      <div className="cat-component">
+      <label className="category">Category:</label>
+      <select id="category" onChange={handleCategoryChange}>
+        <option value="">All Categories</option>
+        <option value="phone">Phone</option>
+        <option value="laptop">Laptop</option>
+      </select>
       </div>
-    );
+    </div>
+  );
 };
-    export default SearchArea;
+
+export default SearchArea;
+
 

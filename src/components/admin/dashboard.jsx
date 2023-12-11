@@ -53,7 +53,7 @@ const AdminDashboard = () => {
         </div>
       </div>
       <div className="main-content">
-        <h1 className='title'>Product List</h1>
+        <h1 className='title'>Admin Dashboard</h1>
         <div className="tab-content">
           {activeTab === 'dashboard' && <DashboardContent />}
           {activeTab === 'products' && <AdminProductList />}

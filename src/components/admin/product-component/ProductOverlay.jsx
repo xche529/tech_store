@@ -28,11 +28,11 @@ const ProductOverlay = ({ product, onClose }) => {
               <div className="component">
                 <div className="item-detail">
                   <span>Price: </span>
-                  <input type="text" placeholder={product.price} />
+                  <input type="number" placeholder={product.price} />
                 </div>
                 <div className="item-detail">
                   <span>Stock:</span>
-                  <input type="text" placeholder={product.stock} onChange={updateStock} />
+                  <input type="number" placeholder={product.stock} onChange={updateStock} />
                 </div>
                
                 </div>  
@@ -41,7 +41,10 @@ const ProductOverlay = ({ product, onClose }) => {
               <input type="text" placeholder={product.description} onChange={updateStock} />
               </div>
             </div>
+            <div className="buttons">
             <button onClick={onClose}>Close</button>
+            <button>Save Changes</button>
+            </div>
           </div>
         </div>
       </div>

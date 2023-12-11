@@ -5,6 +5,8 @@ import { db } from '../../firebase-config';
 import { updateImage } from './product-component/UpdateImage';
 import ProductOverlay from './product-component/ProductOverlay';
 import  Search  from './product-component/SearchArea';
+import '../../css/admin.css';
+import '../../css/admin-search.css';
 
 const AdminProductList = () => {
     const [products, setProducts] = useState([]);
@@ -16,26 +18,35 @@ const AdminProductList = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
   
     const productsRef = collection(db, 'products');
-  
-    useEffect(() => {
-      const fetchProducts = async () => {
-        const data = await getDocs(productsRef);
-        const productsData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-        setProducts(productsData);
-        setFilteredProducts(productsData);
-      };
-  
-      fetchProducts();
-    }, [productsRef]);
-  
-    useEffect(() => {
-      // Filter products based on search term and category
-      const filtered = products.filter((product) =>
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const data = await getDocs(productsRef);
+      const productsData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setProducts(productsData);
+      setFilteredProducts(productsData);
+    };
+
+    fetchProducts();
+  }, [productsRef]);
+
+  useEffect(() => {
+    // Filter products based on search term and category
+    const filtered = products.filter(
+      (product) =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
         (selectedCategory ? product.category === selectedCategory : true)
-      );
-      setFilteredProducts(filtered);
-    }, [searchTerm, selectedCategory, products]);
+    );
+    setFilteredProducts(filtered);
+  }, [searchTerm, selectedCategory, products]);
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
   
     const onChangeImage = (e) => {
       const image = e.target.files[0];
@@ -78,7 +89,7 @@ const AdminProductList = () => {
     return (
 
         <div className="admin-product-list">
-         <Search />
+         <Search onSearch={handleSearch} onCategoryChange={handleCategoryChange}  />
           {filteredProducts.map((product) => (
             <div key={product.id} className="admin-product-item" onClick={() => setSelectedProduct(product)}>
           <h1 className="product-name">{product.name}</h1>

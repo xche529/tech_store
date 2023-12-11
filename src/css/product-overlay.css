@@ -1,3 +1,13 @@
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+
+
 .overlay-background{
     position: fixed;
     top: 0;
@@ -9,7 +19,7 @@
 
 
 .overlay-container{
-    background-color: white;
+    background-color: rgb(225, 209, 231);
     position: fixed;
     top: 0;
     bottom: 0;
@@ -18,7 +28,8 @@
     z-index: 10;
     margin: auto;
     padding: 30px;
-    width: fit-content;
+    flex-wrap: wrap;
+    width: 400px;
     height: fit-content;
 
 }
@@ -44,6 +55,8 @@
   
  
 .item-detail{
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;

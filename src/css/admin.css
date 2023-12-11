@@ -68,7 +68,7 @@
   
   
   .admin-product-item {
-    background-color: #afdff0;
+    background-color: #bbe0ee;
     cursor: pointer;
     padding: 10px;
     margin: 1px;
@@ -92,3 +92,19 @@
   .admin-product-item:hover {
     transform: scale(1.02);
   }
+
+  .admin-product-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cat-component{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
