@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db } from '../../firebase-config';
-import { updateImage } from './UpdateImage';
-import ProductOverlay from './ProductOverlay';
-import  Search  from './SearchArea';
-import { deleteImage } from './DeleteImage';
+import { updateImage } from './product-component/UpdateImage';
+import ProductOverlay from './product-component/ProductOverlay';
+import  Search  from './product-component/SearchArea';
 
 const AdminProductList = () => {
     const [products, setProducts] = useState([]);
@@ -83,7 +82,7 @@ const AdminProductList = () => {
           {filteredProducts.map((product) => (
             <div key={product.id} className="admin-product-item" onClick={() => setSelectedProduct(product)}>
           <h1 className="product-name">{product.name}</h1>
-          <h1 className='product-price'>Price: ${product.price}</h1>
+          <h1 className="product-price">${product.price}</h1>
             </div>
           ))}
           <ProductOverlay product={selectedProduct} onClose={() => setSelectedProduct(null)} />
@@ -94,6 +93,7 @@ const AdminProductList = () => {
 };
 
 export default AdminProductList;
+
 
 
 

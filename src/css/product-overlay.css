@@ -1,0 +1,60 @@
+.overlay-background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.overlay-container{
+    background-color: white;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    margin: auto;
+    padding: 30px;
+    width: fit-content;
+    height: fit-content;
+
+}
+
+.product-image{
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-description{
+    gap: 10px;
+}
+
+.component{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   flex-wrap: wrap;
+   gap: 1rem;
+}
+  
+ 
+.item-detail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    gap: 5px;
+}
+
+.item-detail input{
+    width: 70px;
+}
+  
+
+
+
