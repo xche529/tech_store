@@ -15,6 +15,17 @@ import SignUp from './components/account/SignUp';
 import ShowHeader from './components/ShowHeader';
 import HomePage from './components/HomePage';
 import Item from './components/Item';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from '../firebase-config';
+
+const firebaseConfig = {
+  firebaseConfig
+};
+
+firebase.initializeApp(firebaseConfig);
+
+// 然后可以在应用程序中使用firebase.auth()等方法
 
 function App() {
   return (
@@ -38,7 +49,6 @@ function App() {
 
         </Router>
       </div>
-
     </div>
   );
 }

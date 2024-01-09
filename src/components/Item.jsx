@@ -20,7 +20,6 @@ function Item() {
       try {
         const itemDoc = await getDoc(doc(db, 'products', itemId));
 
-
         if (itemDoc.exists) {
           setItem(itemDoc.data());
           console.log('Item found');
@@ -47,7 +46,6 @@ function Item() {
 
   if (item) {
     return (
-
       <div className='itemPage'>
         <ImageWithFallback className='itemImagei' src={imageSrc} alt={"Seacucumber"} />
         <div className='infoBox'>
