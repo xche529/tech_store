@@ -15,15 +15,9 @@ import SignUp from './components/account/SignUp';
 import ShowHeader from './components/ShowHeader';
 import HomePage from './components/HomePage';
 import Item from './components/Item';
-import firebase from 'firebase/app';
+import { AuthProvider } from './context/authContext';
 import 'firebase/auth';
-import firebaseConfig from '../firebase-config';
 
-const firebaseConfig = {
-  firebaseConfig
-};
-
-firebase.initializeApp(firebaseConfig);
 
 // 然后可以在应用程序中使用firebase.auth()等方法
 
@@ -31,23 +25,23 @@ function App() {
   return (
     <div>
       <div className="wrapper">
-
-        <Router>
-          <ShowHeader>
-            <Header />
-          </ShowHeader>
-          <Routes>
-            <Route path="/*" element={<Navigate to="/home" />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/items" element={<ItemDetails />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/item/:itemId" element={<Item />} />
-          </Routes>
-
-        </Router>
+        <AuthProvider>
+          <Router>
+            <ShowHeader>
+              <Header />
+            </ShowHeader>
+            <Routes>
+              <Route path="/*" element={<Navigate to="/home" />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/items" element={<ItemDetails />} />
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/item/:itemId" element={<Item />} />
+            </Routes>
+          </Router>
+        </AuthProvider>
       </div>
     </div>
   );
