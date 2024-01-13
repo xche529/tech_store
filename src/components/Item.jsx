@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ImageWithFallback from './image';
 import '../css/item.css';
-import { collection, getDoc, doc } from 'firebase/firestore';
+import { collection, getDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 
@@ -19,7 +19,6 @@ function Item() {
     const getItemById = async () => {
       try {
         const itemDoc = await getDoc(doc(db, 'products', itemId));
-
 
         if (itemDoc.exists) {
           setItem(itemDoc.data());
@@ -37,7 +36,13 @@ function Item() {
   const [imageSrc, setImageSrc] = useState(null);
   const [description, setDescription] = useState(null);
   const defaultDescription = "Discover innovation at its finest with our cutting-edge product! Unfortunately, the detailed description is temporarily unavailable. Rest assured, this item boasts top-notch quality, functionality, and style. Embrace the mystery and trust that you're in for a delightful surprise when you experience the unparalleled features of this must-have product."
-
+  const addToCart = () => {
+    setDoc(doc(db, "cities", "LA"), {
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA"
+    });
+  }
   useEffect(() => {
     if (item) {
       { item.description ? setDescription(item.description) : setDescription(defaultDescription) }
@@ -47,7 +52,6 @@ function Item() {
 
   if (item) {
     return (
-
       <div className='itemPage'>
         <ImageWithFallback className='itemImagei' src={imageSrc} alt={"Seacucumber"} />
         <div className='infoBox'>

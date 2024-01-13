@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useAuth } from '../.././context/authContext';
+
+
 import '../../css/logIn.css';
 
 function LogIn() {
+  const {login} = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,9 +18,22 @@ function LogIn() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value); // Update password state
   };
-
-  const handleSubmit = (e) => {
+ 
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent form from refreshing page
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        login(userCredential.user);
+        console.log(userCredential.user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+
+
     console.log(`Email: ${email}`);
     console.log(`Password: ${password}`);
   };
