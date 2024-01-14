@@ -5,11 +5,12 @@ import ImageWithFallback from './image';
 import '../css/item.css';
 import { collection, getDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
+import { useAuth } from '../context/authContext';
 
 
 
 function Item() {
-
+  const { user } = useAuth();
   const { itemId } = useParams();
   console.log('itemId:', itemId);
   const [item, setItem] = useState(null);
@@ -37,7 +38,7 @@ function Item() {
   const [description, setDescription] = useState(null);
   const defaultDescription = "Discover innovation at its finest with our cutting-edge product! Unfortunately, the detailed description is temporarily unavailable. Rest assured, this item boasts top-notch quality, functionality, and style. Embrace the mystery and trust that you're in for a delightful surprise when you experience the unparalleled features of this must-have product."
   const addToCart = () => {
-    setDoc(doc(db, "cities", "LA"), {
+    setDoc(doc(db, "users", user), {
       name: "Los Angeles",
       state: "CA",
       country: "USA"
@@ -51,6 +52,7 @@ function Item() {
   }, [item]);
 
   if (item) {
+    console.log('Item:', item, 'user:', user);
     return (
       <div className='itemPage'>
         <ImageWithFallback className='itemImagei' src={imageSrc} alt={"Seacucumber"} />
