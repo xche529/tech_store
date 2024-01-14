@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ImageWithFallback from './image';
 import '../css/item.css';
-import { collection, getDoc, doc, setDoc } from 'firebase/firestore';
+import { collection, getDoc, doc, setDoc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '../firebase-config';
 import { useAuth } from '../context/authContext';
 
@@ -14,6 +14,7 @@ function Item() {
   const { itemId } = useParams();
   console.log('itemId:', itemId);
   const [item, setItem] = useState(null);
+
   const productsRef = collection(db, 'products');
 
   useEffect(() => {
@@ -37,12 +38,23 @@ function Item() {
   const [imageSrc, setImageSrc] = useState(null);
   const [description, setDescription] = useState(null);
   const defaultDescription = "Discover innovation at its finest with our cutting-edge product! Unfortunately, the detailed description is temporarily unavailable. Rest assured, this item boasts top-notch quality, functionality, and style. Embrace the mystery and trust that you're in for a delightful surprise when you experience the unparalleled features of this must-have product."
-  const addToCart = () => {
-    setDoc(doc(db, "users", user), {
-      name: "Los Angeles",
-      state: "CA",
-      country: "USA"
-    });
+  const addToCart = async () => {
+    if (user) {
+      const cartRef = doc(db, 'users', user.email, 'cart', itemId);
+      const cartDoc = await getDoc(cartRef, 'quantity');
+      console.log('cartDoc:', cartDoc);
+      if (cartDoc.exists()) {
+        await updateDoc(cartRef, {
+          quantity: increment(1)
+        });
+        console.log('quantity updated');
+      }else{
+        await setDoc(cartRef, {
+          quantity: increment(1)
+        });
+        console.log('quantity set');
+      }
+    }
   }
   useEffect(() => {
     if (item) {
@@ -65,7 +77,7 @@ function Item() {
           </div>
         </div>
         <div>
-          <button className='itemButton' >Add to Cart</button>
+          <button className='itemButton' onClick={addToCart}>Add to Cart</button>
           <button className='itemButton' >Save for Later</button>
           <Link to="/" className='link'>      <button className='goHome' >Continue Shopping</button>
           </Link>
