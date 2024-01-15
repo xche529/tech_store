@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { collection, getDocs, getDoc, doc, updateDoc, increment } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, updateDoc, increment, deleteDoc} from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { useAuth } from '../../context/authContext';
 
 
 
-
 function CartPage() {
-  let update = 0;
   const { user } = useAuth();
 
   async function increaseQuantity(itemId) {
@@ -17,7 +15,6 @@ function CartPage() {
       quantity: increment(1)
     });
     console.log('quantity updated');
-    update++;
     fetchCart()
   };
 
@@ -27,12 +24,20 @@ function CartPage() {
       quantity: increment(-1)
     });
     console.log('quantity updated');
-    update++;
     fetchCart()
   };
 
+  async function removeItem(itemId) {
+    const cartRef = doc(db, 'users', user.email, 'cart', itemId);
+    await deleteDoc(cartRef);
+    console.log('item removed');
+    fetchCart()
+  }
+
 
   const [cart, setCarts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [tax, setTax] = useState(0);
 
   const fetchCart = async () => {
     try {
@@ -55,6 +60,14 @@ function CartPage() {
       }));
 
       setCarts(updatedCart.filter((item) => item !== null));
+      let totalCost = 0;
+      let taxCost = 0;
+      for (let i = 0; i < cart.length; i++) {
+        totalCost += updatedCart[i].price * updatedCart[i].quantity;
+        taxCost += updatedCart[i].price * updatedCart[i].quantity * 0.15;
+      }
+      setTotal(totalCost.toFixed(2));
+      setTax(taxCost.toFixed(2));
 
     } catch {
       console.log('error');
@@ -103,7 +116,7 @@ function CartPage() {
                     <button onClick={() => increaseQuantity(item.id)} className='numberButton'>+</button></td>
                   <td>${item.price}</td>
                   <td>${item.price * item.quantity}</td>
-                  <td><button className="remove-button">X</button></td>
+                  <td><button onClick={() => removeItem(item.id)} className="remove-button" >X</button></td>
                 </tr>
               ))}
 
@@ -127,15 +140,15 @@ function CartPage() {
               </tr>
               <tr>
                 <td>Tax</td>
-                <td className="right-align">$0.00</td>
+                <td className="right-align">${tax}</td>
               </tr>
               <tr>
                 <td>Discount</td>
-                <td className="right-align">${ }</td>
+                <td className="right-align">${0}</td>
               </tr>
               <tr>
                 <td>Subtotal</td>
-                <td className="right-align">${ }</td>
+                <td className="right-align">${total}</td>
               </tr>
             </tbody>
           </table>
