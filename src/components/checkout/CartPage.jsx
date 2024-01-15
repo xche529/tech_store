@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { collection, getDocs, getDoc, doc, updateDoc, increment, deleteDoc} from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, updateDoc, increment, deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import { useAuth } from '../../context/authContext';
 
@@ -18,13 +18,15 @@ function CartPage() {
     fetchCart()
   };
 
-  async function decreaseQuantity(itemId) {
-    const cartRef = doc(db, 'users', user.email, 'cart', itemId);
-    await updateDoc(cartRef, {
-      quantity: increment(-1)
-    });
-    console.log('quantity updated');
-    fetchCart()
+  async function decreaseQuantity(itemId, quantity) {
+    if (quantity > 1) {
+      const cartRef = doc(db, 'users', user.email, 'cart', itemId);
+      await updateDoc(cartRef, {
+        quantity: increment(-1)
+      });
+      console.log('quantity updated');
+      fetchCart()
+    }
   };
 
   async function removeItem(itemId) {
@@ -32,6 +34,18 @@ function CartPage() {
     await deleteDoc(cartRef);
     console.log('item removed');
     fetchCart()
+  }
+
+  async function updateQuantity(itemId, event) {
+    const isValid = /^\d*$/.test(event.target.value);
+    if (isValid) {
+      const cartRef = doc(db, 'users', user.email, 'cart', itemId);
+      await updateDoc(cartRef, {
+        quantity: Math.abs(parseInt(event.target.value, 10)) || ''
+      });
+      console.log('quantity updated');
+      fetchCart()
+    }
   }
 
 
@@ -78,7 +92,7 @@ function CartPage() {
     if (user) {
       fetchCart();
     }
-  },[]);
+  }, []);
 
 
   if (!user) {
@@ -110,9 +124,10 @@ function CartPage() {
               {cart.map(item => (
                 <tr key={item.id}>
                   <td>{item.name}</td>
-                  <td>
-                    <button onClick={() => decreaseQuantity(item.id)} className='numberButton'>-</button>
-                    <span id="quantity">{item.quantity}</span>
+                  <td className='numberBox'>
+                    <button onClick={() => decreaseQuantity(item.id, item.quantity)} className='numberButton'>-</button>
+                    <input type='text' className='numberInput' value={item.quantity} onChange={(event) => updateQuantity(item.id, event)}
+                    />
                     <button onClick={() => increaseQuantity(item.id)} className='numberButton'>+</button></td>
                   <td>${item.price}</td>
                   <td>${item.price * item.quantity}</td>
