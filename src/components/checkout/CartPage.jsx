@@ -36,6 +36,7 @@ function CartPage() {
     fetchCart()
   }
 
+  // used for when user manually types in quantity
   async function updateQuantity(itemId, event) {
     const isValid = /^\d*$/.test(event.target.value);
     if (isValid) {
@@ -53,6 +54,7 @@ function CartPage() {
   const [total, setTotal] = useState(0);
   const [tax, setTax] = useState(0);
 
+  // used to update local cart from database
   const fetchCart = async () => {
     try {
       const cartRef = collection(db, 'users', user.email, 'cart')
@@ -88,6 +90,7 @@ function CartPage() {
     }
   };
 
+  // update local cart when the user is logged in
   useEffect(() => {
     if (user) {
       fetchCart();

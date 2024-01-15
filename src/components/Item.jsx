@@ -14,6 +14,7 @@ function Item() {
   console.log('itemId:', itemId);
   const [item, setItem] = useState(null);
 
+  // fetch item from database with itemId
   useEffect(() => {
     const getItemById = async () => {
       try {
@@ -32,14 +33,24 @@ function Item() {
     getItemById();
   }, [itemId]);
 
+  useEffect(() => {
+    if (item) {
+      { item.description ? setDescription(item.description) : setDescription(defaultDescription) }
+      setImageSrc(item.imageUrl);
+    }
+  }, [item]);
+
+
   const [imageSrc, setImageSrc] = useState(null);
   const [description, setDescription] = useState(null);
   const defaultDescription = "Discover innovation at its finest with our cutting-edge product! Unfortunately, the detailed description is temporarily unavailable. Rest assured, this item boasts top-notch quality, functionality, and style. Embrace the mystery and trust that you're in for a delightful surprise when you experience the unparalleled features of this must-have product."
+  
   const addToCart = async () => {
     if (user) {
       const cartRef = doc(db, 'users', user.email, 'cart', itemId);
       const cartDoc = await getDoc(cartRef, 'quantity');
       console.log('cartDoc:', cartDoc);
+      // if item already exists in cart, increment quantity by 1
       if (cartDoc.exists()) {
         await updateDoc(cartRef, {
           quantity: increment(1)
@@ -53,12 +64,7 @@ function Item() {
       }
     }
   }
-  useEffect(() => {
-    if (item) {
-      { item.description ? setDescription(item.description) : setDescription(defaultDescription) }
-      setImageSrc(item.imageUrl);
-    }
-  }, [item]);
+
 
   if (item) {
     console.log('Item:', item, 'user:', user);

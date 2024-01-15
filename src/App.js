@@ -19,12 +19,12 @@ import { AuthProvider } from './context/authContext';
 import 'firebase/auth';
 
 
-// 然后可以在应用程序中使用firebase.auth()等方法
 
 function App() {
   return (
     <div>
       <div className="wrapper">
+        
         <AuthProvider>
           <Router>
             <ShowHeader>

@@ -9,6 +9,7 @@ import { db } from '../firebase-config';
 function HomePage() {
 
     const productsRef = collection(db, 'products');
+    //main page products list
     const [products, setProducts] = useState([]);
 
 
@@ -26,22 +27,16 @@ function HomePage() {
 
 function Content(products) {
     const navigate = useNavigate();
-    const [selectedProduct, setSelectedProduct] = useState(null);
+
     const handleButtonClick = (product, index) => {
-        setSelectedProduct(product);
         navigate('/Item/' + product.id)
         console.log('SeaCucumber' + index + 'clicked!');
     };
-    const navigateToContacts = () => {
-        navigate('/Item/4');
-    };
-
-
+    
+// return the list of products
     return (
         <>
-            {selectedProduct && <Item product={selectedProduct} />}
             <div className='main'>
-
                 {products.map((product, index) => (
                     <ShowOffButton
                         key={index}

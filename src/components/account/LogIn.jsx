@@ -7,7 +7,7 @@ import { useAuth } from '../.././context/authContext';
 import '../../css/logIn.css';
 
 function LogIn() {
-  const {login} = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,7 +18,7 @@ function LogIn() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value); // Update password state
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent form from refreshing page
 
