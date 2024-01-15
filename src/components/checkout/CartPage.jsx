@@ -76,7 +76,7 @@ function CartPage() {
       setCarts(updatedCart.filter((item) => item !== null));
       let totalCost = 0;
       let taxCost = 0;
-      for (let i = 0; i < cart.length; i++) {
+      for (let i = 0; i < updatedCart.length; i++) {
         totalCost += updatedCart[i].price * updatedCart[i].quantity;
         taxCost += updatedCart[i].price * updatedCart[i].quantity * 0.15;
       }
