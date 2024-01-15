@@ -8,14 +8,11 @@ import { db } from '../firebase-config';
 import { useAuth } from '../context/authContext';
 
 
-
 function Item() {
   const { user } = useAuth();
   const { itemId } = useParams();
   console.log('itemId:', itemId);
   const [item, setItem] = useState(null);
-
-  const productsRef = collection(db, 'products');
 
   useEffect(() => {
     const getItemById = async () => {
