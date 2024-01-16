@@ -42,7 +42,9 @@ function Header() {
       <ul className="nav_links">
         <li>About</li>
         <li>Contact</li>
-      </ul><div> {user ? (<div>{user.email}</div>) : (<Link to="/login" className='link-to-normal'>
+      </ul><div> {user ? (<Link to="/profile" className='link-to-normal'>
+        {user.email}
+      </Link>) : (<Link to="/login" className='link-to-normal'>
         SignIn
       </Link>
       )}</div>
