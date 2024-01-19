@@ -10,6 +10,7 @@ import CartPage from './components/checkout/CartPage';
 import CheckoutPage from './components/checkout/CheckoutPage';
 import ItemDetails from './components/admin/dashboard';
 import Header from './components/Header';
+import Profile from './components/account/Profile';
 import LogIn from './components/account/LogIn';
 import SignUp from './components/account/SignUp';
 import ShowHeader from './components/ShowHeader';
@@ -19,12 +20,12 @@ import { AuthProvider } from './context/authContext';
 import 'firebase/auth';
 
 
-// 然后可以在应用程序中使用firebase.auth()等方法
 
 function App() {
   return (
     <div>
       <div className="wrapper">
+        
         <AuthProvider>
           <Router>
             <ShowHeader>
@@ -39,6 +40,7 @@ function App() {
               <Route path="/items" element={<ItemDetails />} />
               <Route path="/home" element={<HomePage />} />
               <Route path="/item/:itemId" element={<Item />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </Router>
         </AuthProvider>

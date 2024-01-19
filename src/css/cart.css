@@ -9,9 +9,9 @@ body {
     justify-content: space-between;
 }
 
- body > #root > div {
+body>#root>div {
     height: 100vh;
- }
+}
 
 .cart-page {
     max-width: 100%;
@@ -19,18 +19,21 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     display: flex;
-    flex: 1; /* Make the content section expand to fill the available space */
+    flex: 1;
+    /* Make the content section expand to fill the available space */
 }
 
 .left-section {
-    flex: 0 0 70%; /* The left section takes 70% of the space */
+    flex: 0 0 70%;
+    /* The left section takes 70% of the space */
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ccc;
-} 
+}
 
 .right-section {
-    flex: 1; /* The right section takes the remaining space */
+    flex: 1;
+    /* The right section takes the remaining space */
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -49,13 +52,15 @@ body {
 }
 
 /* Style for the summary table */
-.summary-table{
-    width: 100%; /* Make the table take full width */
+.summary-table {
+    width: 100%;
+    /* Make the table take full width */
     margin-top: 100px;
 }
 
-.totalPrice{
-    width: 70px; /* Adjust the width as needed */
+.totalPrice {
+    width: 70px;
+    /* Adjust the width as needed */
     text-align: center;
 }
 
@@ -66,12 +71,12 @@ body {
     margin-top: 0px;
 }
 
-.code-input{
+.code-input {
     margin-top: -20px;
     display: flex;
 }
 
-.apply-button{
+.apply-button {
     margin-top: 10px;
     margin-left: -20px;
     width: 200px;
@@ -79,7 +84,7 @@ body {
     background-color: #000000;
     color: #ffffff;
     border: none;
-  
+
 }
 
 .apply-button:hover {
@@ -91,7 +96,8 @@ table {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
-    border: none; /* Remove border lines for the table */
+    border: none;
+    /* Remove border lines for the table */
 }
 
 .summary-table td.right-align {
@@ -99,7 +105,8 @@ table {
 }
 
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
 }
@@ -136,5 +143,15 @@ input[type="text"] {
     background-color: #36003b;
 }
 
+.numberButton {
+    margin: 5%;
+}
 
+.numberInput {
+    text-align: center;
+}
 
+.numberBox {
+    display: flex;
+    text-align: center;
+}

@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   const showResult = () => {
     console.log(user);
   };
+
   const logout = () => {
     setUser(null);
   };
