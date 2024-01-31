@@ -45,6 +45,8 @@ function App() {
           </Router>
         </AuthProvider>
       </div>
+
+      {/* <HomePage /> */}
     </div>
   );
 }
