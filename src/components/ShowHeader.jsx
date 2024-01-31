@@ -17,7 +17,7 @@ const ShowHeader = ({ children }) => {
     }
     , [location]);
     return (
-        <div>{showHeader && children } </div>   
+        <div>{showHeader && children } </div>
     )
 }
 
