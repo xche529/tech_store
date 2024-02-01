@@ -43,7 +43,11 @@ function Header() {
         <li>About</li>
         <li>Contact</li>
       </ul><div> {user ? (<Link to="/profile" className='link-to-normal'>
-        {user.email}
+        {user.avatar ? (
+          <img src={user.avatar} alt="Avatar" className="avatar" />
+        ) : (
+          user.email
+        )}
       </Link>) : (<Link to="/login" className='link-to-normal'>
         SignIn
       </Link>

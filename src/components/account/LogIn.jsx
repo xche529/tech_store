@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useAuth } from '../.././context/authContext';
-
-
 import '../../css/logIn.css';
+
 
 function LogIn() {
   const provider = new GoogleAuthProvider();
@@ -75,3 +74,4 @@ function LogIn() {
 }
 
 export default LogIn;
+
