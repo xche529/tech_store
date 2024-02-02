@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  //store user data and get user detail from db
   async function login(userData) {
     try {
       localStorage.setItem('user', JSON.stringify(userData));
@@ -40,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
   };
 
+  //update local storage of userDetail
   const reloadUserDetail = async () => {
     localStorage.removeItem('userDetail');
     setUserDetail(null);
@@ -59,7 +61,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, userDetail, login, logout }}>
+    <AuthContext.Provider value={{ user, userDetail, login, logout, reloadUserDetail }}>
       {children}
     </AuthContext.Provider>
   );

@@ -9,8 +9,8 @@ import { db } from '../../firebase-config';
 
 
 function Profile() {
-  const { user } = useAuth();
-  const { logout } = useAuth();
+  const { user, logout, reloadUserDetail } = useAuth();
+  const {  } = useAuth();
   const storage = getStorage();
   const [selectedAvatar, setSelectedAvatar] = useState(null);
 
@@ -39,13 +39,13 @@ function Profile() {
       await updateDoc(avatarRef, {
         avatar: downloadURL
       });
-
+      reloadUserDetail();
     } catch (error) {
       console.error('error:', error);
     }
   }
 
-
+  // used to upload user address to database
   function AddressForm() {
     const upLoadAddress = async () => {
       const addressRef = doc(db, 'users', user.email);
@@ -72,6 +72,7 @@ function Profile() {
     const handleSubmit = (event) => {
       event.preventDefault();
       upLoadAddress();
+      reloadUserDetail();
       console.log('Form data:', formData);
     };
 
