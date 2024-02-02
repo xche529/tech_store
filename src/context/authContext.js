@@ -6,36 +6,27 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userDetail, setUserDetail] = useState(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const storedUserDetail = localStorage.getItem('userDetail');
     let tempUser = null;
     if (storedUser) {
-      tempUser = JSON.parse(storedUser)
-      if(storedUserDetail != undefined){
-        console.log("storedUserDetail:", storedUserDetail)
-        tempUser.avatar = (storedUserDetail)
+      setUser(JSON.parse(storedUser))
+      if (storedUserDetail) {
+        setUserDetail(JSON.parse(storedUserDetail))
+        console.log("Read User Success")
       }
-      setUser(tempUser);
     }
-    console.log("Read User:", tempUser)  
   }, []);
 
-  async function login(userData){
-    try{
-      const userDetailRef = collection(db, 'users')
-      const userDetailDoc = doc(userDetailRef, userData.email)
-      console.log("avatarDoc:", userDetailDoc)
-      const userDetail = await getDoc(userDetailDoc)
-      if(userDetail.exists()){
-        userData.avatar = userDetail.data().avatar
-        console.log("avatar:", userData.avatar)
-        localStorage.setItem('userDetail', userData.avatar);
-      }
-      setUser(userData);
+  async function login(userData) {
+    try {
       localStorage.setItem('user', JSON.stringify(userData));
-    }catch(err){
+      reloadUserDetail()
+      setUser(userData);
+    } catch (err) {
       console.log(err)
     }
   };
@@ -49,8 +40,26 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
   };
 
+  const reloadUserDetail = async () => {
+    localStorage.removeItem('userDetail');
+    setUserDetail(null);
+    const userData = JSON.parse(localStorage.getItem('user'));
+    try {
+      const userDetailRef = collection(db, 'users')
+      const userDetailDoc = doc(userDetailRef, userData.email)
+      const userDetail = await getDoc(userDetailDoc)
+      if (userDetail.exists()) {
+        setUserDetail(userDetail.data());
+        localStorage.setItem('userDetail', JSON.stringify(userDetail.data()));
+        console.log("User detail refreshed:", userDetail.data())
+      }
+    } catch {
+
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, userDetail, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

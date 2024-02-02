@@ -36,13 +36,90 @@ function Profile() {
       const downloadURL = await getDownloadURL(storageRef);
       console.log('File available at', downloadURL);
       const avatarRef = doc(db, 'users', user.email);
-      await setDoc(avatarRef, {
+      await updateDoc(avatarRef, {
         avatar: downloadURL
       });
 
     } catch (error) {
       console.error('error:', error);
     }
+  }
+
+
+  function AddressForm() {
+    const upLoadAddress = async () => {
+      const addressRef = doc(db, 'users', user.email);
+      await updateDoc(addressRef, {
+        address: formData
+      });
+    }
+
+    const [formData, setFormData] = useState({
+      street: '',
+      city: '',
+      state: '',
+      zip: ''
+    });
+
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      upLoadAddress();
+      console.log('Form data:', formData);
+    };
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="street">Street Address:</label>
+        <input
+          type="text"
+          id="street"
+          name="street"
+          value={formData.street}
+          onChange={handleChange}
+          required
+        />
+
+        <label htmlFor="city">City:</label>
+        <input
+          type="text"
+          id="city"
+          name="city"
+          value={formData.city}
+          onChange={handleChange}
+          required
+        />
+
+        <label htmlFor="state">State:</label>
+        <input
+          type="text"
+          id="state"
+          name="state"
+          value={formData.state}
+          onChange={handleChange}
+          required
+        />
+
+        <label htmlFor="zip">Zip Code:</label>
+        <input
+          type="text"
+          id="zip"
+          name="zip"
+          value={formData.zip}
+          onChange={handleChange}
+          required
+        />
+
+        <button type="submit">Submit</button>
+      </form>
+    );
   }
 
   return (
@@ -54,7 +131,7 @@ function Profile() {
       <p>Upload a Avatar</p>
       <input type="file" accept="image/*" onChange={handleAvatarChange} />
       {selectedAvatar && <button onClick={() => upLoadAvatar()}>Upload</button>}
-
+      {AddressForm()}
     </div>
   );
 }
