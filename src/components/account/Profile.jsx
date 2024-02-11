@@ -10,7 +10,7 @@ import { db } from '../../firebase-config';
 
 function Profile() {
   const { user, logout, reloadUserDetail } = useAuth();
-  const {  } = useAuth();
+  const { } = useAuth();
   const storage = getStorage();
   const [selectedAvatar, setSelectedAvatar] = useState(null);
 
@@ -36,10 +36,18 @@ function Profile() {
       const downloadURL = await getDownloadURL(storageRef);
       console.log('File available at', downloadURL);
       const avatarRef = doc(db, 'users', user.email);
-      await updateDoc(avatarRef, {
-        avatar: downloadURL
-      });
-      reloadUserDetail();
+      const avatarDoc = await getDoc(avatarRef, 'quantity');
+      if (!avatarDoc.exists()) {
+        await setDoc(avatarRef, {
+          avatar: downloadURL
+        });
+        reloadUserDetail();
+      } else {
+        await updateDoc(avatarRef, {
+          avatar: downloadURL
+        });
+        reloadUserDetail();
+      }
     } catch (error) {
       console.error('error:', error);
     }

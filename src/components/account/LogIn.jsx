@@ -32,16 +32,12 @@ function LogIn() {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-
-
-    console.log(`Email: ${email}`);
-    console.log(`Password: ${password}`);
   };
 
 
   const handleGoogleSignIn = async () => {
     const auth = getAuth();
-    signInWithPopup(auth,provider).then((result) => {
+    signInWithPopup(auth, provider).then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
