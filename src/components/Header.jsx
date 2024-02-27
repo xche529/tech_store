@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import meme from '../images/meme.jpg';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import '../css/header.css';
 import { useAuth } from '../context/authContext';
 
 
 function Header() {
-  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const { user, userDetail } = useAuth();
   const [isDropdownOpen, setDropdownOpen] = useState(false); // Use state to track dropdown open state
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen); // Toggle dropdown state
   };
-  if (user) console.log('user:', user);
+
+
+  const onSearch = (event) =>{
+    navigate('/home/')
+
+
+  }
   return (
     <nav className="nav-bar">
       <div className="logo_icon">
@@ -35,7 +44,7 @@ function Header() {
       </ul>
       <div className="search_pkg">
         <input className="search_input" type="text" placeholder="Search products, brands, and more..." />
-        <button className="search_button" type="submit">
+        <button className="search_button" type="submit" onClick={() =>onSearch()}>
           Search
         </button>
       </div>
@@ -43,7 +52,9 @@ function Header() {
         <li>About</li>
         <li>Contact</li>
       </ul><div> {user ? (<Link to="/profile" className='link-to-normal'>
-        {user.email}
+        {userDetail ? (userDetail.avatar ? (
+          <img src={userDetail.avatar} alt="Avatar" className="avatar" />
+        ) : (user.email)) : (user.email)}
       </Link>) : (<Link to="/login" className='link-to-normal'>
         SignIn
       </Link>
