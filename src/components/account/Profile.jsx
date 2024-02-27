@@ -5,6 +5,8 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { collection, getDocs, getDoc, doc, updateDoc, increment, deleteDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
+import '../../css/profile.css';
+import Notification from '../Notification';
 
 
 
@@ -13,6 +15,7 @@ function Profile() {
   const { } = useAuth();
   const storage = getStorage();
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [isNotification, setNotification] = useState(null);
 
   const handleAvatarChange = (event) => {
     setSelectedAvatar(event.target.files[0]);
@@ -53,6 +56,14 @@ function Profile() {
     }
   }
 
+  function showNotification() {
+    setNotification(true);
+    setTimeout(() => {
+      setNotification(false);
+    }, 1500);
+  }
+  
+
   // used to upload user address to database
   function AddressForm() {
     const upLoadAddress = async () => {
@@ -83,6 +94,7 @@ function Profile() {
       reloadUserDetail();
       console.log('Form data:', formData);
     };
+
 
     return (
       <form onSubmit={handleSubmit}>
@@ -132,17 +144,22 @@ function Profile() {
   }
 
   return (
+    
     <div>
+
+      <Notification isNotification={isNotification} message='Update Success!' />
       <h1>Profile</h1>
       <p>Profile page</p>
+      <p>User: {user ? user.email : 'Not logged in'}</p>
       <button onClick={() => signOut()}>Sign Out</button>
       <br />
-      <p>Upload a Avatar</p>
+      <p>Upload an Avatar</p>
       <input type="file" accept="image/*" onChange={handleAvatarChange} />
       {selectedAvatar && <button onClick={() => upLoadAvatar()}>Upload</button>}
       {AddressForm()}
+      <botton onClick={() => showNotification()}>Show Notification</botton>
     </div>
   );
 }
-
+ 
 export default Profile;
