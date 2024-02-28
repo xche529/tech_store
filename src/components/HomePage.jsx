@@ -1,26 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import ShowOffButton from './ShowOffButton';
 import Item from './Item';
 import '../css/homePage.css';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, getDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 function HomePage() {
 
-    const productsRef = collection(db, 'products');
+    let productsQuery = collection(db, 'products');
     //main page products list
     const [products, setProducts] = useState([]);
 
+    const { keyWordString } = useParams();
+
+
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            const data = await getDocs(productsRef);
-            setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
+        setProducts([])
+        let keyWords = [];
 
-        fetchProducts();
-    }, []);
+        console.log(keyWordString)
+        if(typeof keyWordString === 'string'){
+            console.log(keyWordString)
+            keyWords = keyWordString.split(" ");
+            console.log(keyWords)
+    
+        }
+
+        const fetchProducts = async (productsQuery, keyWords = []) => {
+            let query = productsQuery;
+            if (keyWords.length > 0) {
+              keyWords.forEach(keyword => {
+                query = query.where("title", "array-contains", keyword);
+              });
+            }
+            const data = await getDocs(query);
+            setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+                  };
+
+        fetchProducts(productsQuery);
+    }, [keyWordString]);
+
 
     return Content(products);
 };

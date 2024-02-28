@@ -11,16 +11,24 @@ function Header() {
 
   const { user, userDetail } = useAuth();
   const [isDropdownOpen, setDropdownOpen] = useState(false); // Use state to track dropdown open state
+  const [searchWord, setSearchWord] = useState(null)
+
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen); // Toggle dropdown state
   };
 
 
-  const onSearch = (event) =>{
-    navigate('/home/')
-
-
+  const onSearch = (event) => {
+    if(typeof searchWord === 'string'){
+      navigate('/home/' + searchWord)
+    }
   }
+
+  const handleSearchWordChange = (event) => {
+    setSearchWord(event.target.value)
+  }
+
+
   return (
     <nav className="nav-bar">
       <div className="logo_icon">
@@ -43,8 +51,8 @@ function Header() {
         </li>
       </ul>
       <div className="search_pkg">
-        <input className="search_input" type="text" placeholder="Search products, brands, and more..." />
-        <button className="search_button" type="submit" onClick={() =>onSearch()}>
+        <input className="search_input" type="text" placeholder="Search products, brands, and more..." onChange={handleSearchWordChange} value={searchWord}/>
+        <button className="search_button" type="submit" onClick={() => onSearch()}>
           Search
         </button>
       </div>
