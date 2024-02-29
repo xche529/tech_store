@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import ShowOffButton from './ShowOffButton';
 import Item from './Item';
 import '../css/homePage.css';
-import { collection, getDocs, getDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, where } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 function HomePage() {
@@ -28,18 +28,18 @@ function HomePage() {
     
         }
 
-        const fetchProducts = async (productsQuery, keyWords = []) => {
+        const fetchProducts = async (productsQuery, keyWords) => {
             let query = productsQuery;
             if (keyWords.length > 0) {
               keyWords.forEach(keyword => {
-                query = query.where("title", "array-contains", keyword);
+                query = query.where("name", "array-contains", keyword);
               });
             }
             const data = await getDocs(query);
             setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
                   };
 
-        fetchProducts(productsQuery);
+        fetchProducts(productsQuery, keyWords);
     }, [keyWordString]);
 
 
