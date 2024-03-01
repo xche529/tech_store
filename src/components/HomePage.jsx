@@ -3,12 +3,12 @@ import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import ShowOffButton from './ShowOffButton';
 import Item from './Item';
 import '../css/homePage.css';
-import { collection, getDocs, getDoc, where } from 'firebase/firestore';
+import { collection, getDocs, where, query, limit, orderBy } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 function HomePage() {
 
-    let productsQuery = collection(db, 'products');
+    let productsRef = collection(db, 'products');
     //main page products list
     const [products, setProducts] = useState([]);
 
@@ -20,28 +20,27 @@ function HomePage() {
         setProducts([])
         let keyWords = [];
 
-        console.log(keyWordString)
-        if(typeof keyWordString === 'string'){
+        if (typeof keyWordString === 'string') {
             console.log(keyWordString)
             keyWords = keyWordString.split(" ");
             console.log(keyWords)
-    
+
         }
 
-        const fetchProducts = async (productsQuery, keyWords) => {
-            let query = productsQuery;
+        const fetchProducts = async (productsRef, keyWords) => {
+            let q = productsRef;
+            let data;
+
             if (keyWords.length > 0) {
-              keyWords.forEach(keyword => {
-                query = query.where("name", "array-contains", keyword);
-              });
+                q = query(productsRef, where("tag", "array-contains-any", keyWords));
             }
-            const data = await getDocs(query);
+            data = await getDocs(q);
+
             setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-                  };
+        };
 
-        fetchProducts(productsQuery, keyWords);
+        fetchProducts(productsRef, keyWords);
     }, [keyWordString]);
-
 
     return Content(products);
 };
@@ -53,8 +52,8 @@ function Content(products) {
         navigate('/Item/' + product.id)
         console.log('SeaCucumber' + index + 'clicked!');
     };
-    
-// return the list of products
+
+    // return the list of products
     return (
         <>
             <div className='main'>
