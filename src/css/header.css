@@ -38,9 +38,6 @@ body {
     width: 80%;
     height: 75px;
 }
-  
-
-
 .menu{
     cursor: pointer;
 }
@@ -66,11 +63,12 @@ body {
     align-items: center;   
 }
 
-/* .expand_more{
+.expand_more{
     position: relative;
     bottom: -6px;
     align-items: center;   
-} */
+}
+
 
 .icon{
     justify-content: space-between;
@@ -80,6 +78,10 @@ body {
 .icon span {
     cursor: pointer;
     margin-right: 30px; /* Adjust the right margin to increase space between spans */
+}
+
+.icon :visited{
+    color: black;
 }
 
 .material-symbols-outlined.expand_more {
@@ -92,6 +94,7 @@ body {
 
 .link-to-normal{
     text-decoration: none;
+    font-weight: 600;
     color: black;
 }
 
