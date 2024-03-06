@@ -39,7 +39,7 @@ function Header() {
             expand_more
           </span>
           <ul>
-            <li><Link to="/home/Tablet" className='link-to-normal'>Tablet</Link></li>
+            <li><Link to="/home/tablet" className='link-to-normal'>Tablet</Link></li>
             <li><Link to="/home/phone" className='link-to-normal'>Phone</Link></li>
             <li><Link to="/home/laptop" className='link-to-normal'>Laptop</Link></li>
             <li><Link to="/home/accessories" className='link-to-normal'>Accessories</Link></li>

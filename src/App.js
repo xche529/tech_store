@@ -31,7 +31,7 @@ function App() {
               <Header />
             </ShowHeader>
             <Routes>
-              <Route path="/*" element={<Navigate to="/home" />} />
+              <Route path="/*" element={<Navigate to="/home/homepage" />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/login" element={<LogIn />} />
