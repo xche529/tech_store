@@ -12,34 +12,33 @@ function HomePage() {
     //main page products list
     const [products, setProducts] = useState([]);
 
-    const { keyWordString } = useParams();
- 
+    const { keyWordString = "homepage" } = useParams();
+
+    const [keyWords, setKeyWords] = useState([]);
+
+    const fetchProducts = async () => {
+        setProducts([])
+        let q = productsRef;
+        let data;
+        console.log('keyWords:', keyWords);
+
+        if (keyWords.length > 0) {
+            q = query(productsRef, where("tag", "array-contains-any", keyWords));
+        }
+        data = await getDocs(q);
+        setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+    }
+
+    useEffect(() => {
+        fetchProducts();
+    }, [keyWords]);
 
 
     useEffect(() => {
-        setProducts([])
-        let keyWords = [];
-
-        if (typeof keyWordString === 'string') {
-            console.log(keyWordString)
-            keyWords = keyWordString.split(" ");
-            console.log(keyWords)
-
-        }
-
-        const fetchProducts = async (productsRef, keyWords) => {
-            let q = productsRef;
-            let data;
-
-            if (keyWords.length > 0) {
-                q = query(productsRef, where("tag", "array-contains-any", keyWords));
-            }
-            data = await getDocs(q);
-
-            setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-
-        fetchProducts(productsRef, keyWords);
+        const keyWords = keyWordString ? keyWordString.split(" ") : ["homepage"];
+        let lowerCaseKeyWords = keyWords.map((word) => word.toLowerCase());
+        setKeyWords(lowerCaseKeyWords);
     }, [keyWordString]);
 
     return Content(products);

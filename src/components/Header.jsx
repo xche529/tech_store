@@ -4,7 +4,7 @@ import meme from '../images/logo.png';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import '../css/header.css';
 import { useAuth } from '../context/authContext';
-import { SearchBar } from './search-bar';
+import { SearchBar } from './SearchBar';
 
 
 function Header() {
@@ -12,21 +12,16 @@ function Header() {
 
   const { user, userDetail } = useAuth();
   const [isDropdownOpen, setDropdownOpen] = useState(false); // Use state to track dropdown open state
-  const [searchWord, setSearchWord] = useState(null)
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen); // Toggle dropdown state
   };
 
 
-  const onSearch = (event) => {
-    if(typeof searchWord === 'string'){
-      navigate('/home/' + searchWord)
+  const onSearch = (string) => {
+    if(typeof string === 'string'){
+      navigate('/home/' + string)
     }
-  }
-
-  const handleSearchWordChange = (event) => {
-    setSearchWord(event.target.value)
   }
 
 
@@ -44,14 +39,14 @@ function Header() {
             expand_more
           </span>
           <ul>
-            <li><Link to="/home/Tablet" className='link-to-normal'>Tablet</Link></li>
+            <li><Link to="/home/tablet" className='link-to-normal'>Tablet</Link></li>
             <li><Link to="/home/phone" className='link-to-normal'>Phone</Link></li>
             <li><Link to="/home/laptop" className='link-to-normal'>Laptop</Link></li>
             <li><Link to="/home/accessories" className='link-to-normal'>Accessories</Link></li>
           </ul>
         </li>
       </ul>
-    <SearchBar />
+    <SearchBar onSearch={onSearch}/>
     <div>
        {user ? (<Link to="/profile" className='link-to-normal'>
         {userDetail ? (userDetail.avatar ? (
