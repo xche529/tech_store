@@ -4,7 +4,7 @@ import meme from '../images/logo.png';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import '../css/header.css';
 import { useAuth } from '../context/authContext';
-import { SearchBar } from './search-bar';
+import { SearchBar } from './SearchBar';
 
 
 function Header() {
