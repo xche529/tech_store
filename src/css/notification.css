@@ -1,9 +1,11 @@
 .notification {
     position: fixed;
-    top: 20px;
+    width: 500px;
+    height: 400px;
+    top: 50px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #333;
+    background-color: #1e00ff;
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;

@@ -12,16 +12,24 @@ function Header() {
 
   const { user, userDetail } = useAuth();
   const [isDropdownOpen, setDropdownOpen] = useState(false); // Use state to track dropdown open state
+  const [searchWord, setSearchWord] = useState(null)
+
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen); // Toggle dropdown state
   };
 
 
-  const onSearch = (event) =>{
-    navigate('/home/')
-
-
+  const onSearch = (event) => {
+    if(typeof searchWord === 'string'){
+      navigate('/home/' + searchWord)
+    }
   }
+
+  const handleSearchWordChange = (event) => {
+    setSearchWord(event.target.value)
+  }
+
+
   return (
     <nav className="nav-bar">
       <div className="logo-icon">
@@ -36,10 +44,10 @@ function Header() {
             expand_more
           </span>
           <ul>
-            <li>Tablet</li>
-            <li>Phone</li>
-            <li>Laptop</li>
-            <li>Accessories</li>
+            <li><Link to="/home/Tablet" className='link-to-normal'>Tablet</Link></li>
+            <li><Link to="/home/phone" className='link-to-normal'>Phone</Link></li>
+            <li><Link to="/home/laptop" className='link-to-normal'>Laptop</Link></li>
+            <li><Link to="/home/accessories" className='link-to-normal'>Accessories</Link></li>
           </ul>
         </li>
       </ul>

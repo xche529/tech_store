@@ -25,7 +25,6 @@ function App() {
   return (
     <div>
       <div className="wrapper">
-        
         <AuthProvider>
           <Router>
             <ShowHeader>
@@ -38,7 +37,7 @@ function App() {
               <Route path="/login" element={<LogIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/items" element={<ItemDetails />} />
-              <Route path="/home" element={<HomePage />} />
+              <Route path="/home/:keyWordString" element={<HomePage />} />
               <Route path="/item/:itemId" element={<Item />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>
