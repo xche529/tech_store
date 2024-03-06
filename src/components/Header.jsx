@@ -12,21 +12,16 @@ function Header() {
 
   const { user, userDetail } = useAuth();
   const [isDropdownOpen, setDropdownOpen] = useState(false); // Use state to track dropdown open state
-  const [searchWord, setSearchWord] = useState(null)
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen); // Toggle dropdown state
   };
 
 
-  const onSearch = (event) => {
-    if(typeof searchWord === 'string'){
-      navigate('/home/' + searchWord)
+  const onSearch = (string) => {
+    if(typeof string === 'string'){
+      navigate('/home/' + string)
     }
-  }
-
-  const handleSearchWordChange = (event) => {
-    setSearchWord(event.target.value)
   }
 
 
@@ -51,7 +46,7 @@ function Header() {
           </ul>
         </li>
       </ul>
-    <SearchBar />
+    <SearchBar onSearch={onSearch}/>
     <div>
        {user ? (<Link to="/profile" className='link-to-normal'>
         {userDetail ? (userDetail.avatar ? (
