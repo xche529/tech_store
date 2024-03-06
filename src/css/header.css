@@ -17,61 +17,27 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0rem;
-    gap: 5%;
+    /* padding: 0rem; */
+    /* gap: 5%; */
     padding: 0 1rem;
 }
 
-.nav-bar ul{
+.sign-in{
+    height: 100%;
+}
+
+ .nav-bar ul{
     padding: 0;
     margin: 0;
     list-style: none;
     display: flex;
-    gap: 1rem;   
-}
+    gap: 1rem;  
+} 
 
-.logo_icon img {
+.logo-icon img {
     width: 80%;
-    height: auto;
+    height: 75px;
 }
-
-
-.logo_icon {
-  font-size: 2rem;
-  font-weight: bold;
-  display: flex;
-  gap: 10px;
-} 
-
- .search_pkg {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 8px;
-} 
-
-.search_pkg input{
-    background-color: none;
-}
-
-.search_button {
-    align-items: center;
-    position: relative;
-    left: -100px;
-    margin-bottom: -10px;
-    padding: 10px 50px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-}
-
-.search_button:hover {
-    background-color: #b007ff;
-    color: #fff;
-}
-
 .menu{
     cursor: pointer;
 }
@@ -103,27 +69,19 @@ body {
     align-items: center;   
 }
 
-.nav_links{
-    font-weight: 300;
-    position: relative;
-    left: -50px;
-    cursor: pointer;
-}
-
-
-.nav_links li{
-  margin-right: 20px;
-}
-
 
 .icon{
     justify-content: space-between;
-    float: right;
+    /* float: right; */
 }
 
 .icon span {
     cursor: pointer;
     margin-right: 30px; /* Adjust the right margin to increase space between spans */
+}
+
+.icon :visited{
+    color: black;
 }
 
 .material-symbols-outlined.expand_more {
@@ -136,6 +94,7 @@ body {
 
 .link-to-normal{
     text-decoration: none;
+    font-weight: 600;
     color: black;
 }
 

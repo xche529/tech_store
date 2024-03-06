@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import meme from '../images/meme.jpg';
+import meme from '../images/logo.png';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import '../css/header.css';
 import { useAuth } from '../context/authContext';
+import { SearchBar } from './search-bar';
 
 
 function Header() {
@@ -31,10 +32,10 @@ function Header() {
 
   return (
     <nav className="nav-bar">
-      <div className="logo_icon">
-        <Link to="/" className='link'>        <img className="logo" src={meme} alt="" />
+      <div className="logo-icon">
+        <Link to="/" className='link'>        
+        <img className="logo" src={meme} alt="" />
         </Link>
-        <a>CSZ Tech</a>
       </div>
       <ul className={`menu ${isDropdownOpen ? 'open' : ''}`} onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
         <li className='cat_text'>
@@ -50,16 +51,9 @@ function Header() {
           </ul>
         </li>
       </ul>
-      <div className="search_pkg">
-        <input className="search_input" type="text" placeholder="Search products, brands, and more..." onChange={handleSearchWordChange} value={searchWord}/>
-        <button className="search_button" type="submit" onClick={() => onSearch()}>
-          Search
-        </button>
-      </div>
-      <ul className="nav_links">
-        <li>About</li>
-        <li>Contact</li>
-      </ul><div> {user ? (<Link to="/profile" className='link-to-normal'>
+    <SearchBar />
+    <div>
+       {user ? (<Link to="/profile" className='link-to-normal'>
         {userDetail ? (userDetail.avatar ? (
           <img src={userDetail.avatar} alt="Avatar" className="avatar" />
         ) : (user.email)) : (user.email)}
