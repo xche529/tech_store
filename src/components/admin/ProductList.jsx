@@ -47,44 +47,6 @@ const AdminProductList = () => {
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
-  
-    const onChangeImage = (e) => {
-      const image = e.target.files[0];
-      setFile(image);
-  
-      const reader = new FileReader();
-      reader.onload = () => {
-        const imageDataURL = reader.result;
-        setPreviewImage(imageDataURL);
-      };
-      reader.readAsDataURL(image);
-    };
-  
-    const handleImageUpload = async (productId) => {
-      if (!file) {
-        console.error('No file selected');
-        return;
-      }
-  
-      try {
-        const downloadURL = await updateImage(productId, file);
-        // Update the product document in Firestore with the image URL
-        const productDoc = doc(db, 'products', productId);
-        await updateDoc(productDoc, { imageUrl: downloadURL });
-  
-        setProducts((prevProducts) =>
-          prevProducts.map((product) =>
-            product.id === productId ? { ...product, imageUrl: downloadURL } : product
-          )
-        );
-  
-        // Reset file and preview image
-        setFile(null);
-        setPreviewImage(null);
-      } catch (error) {
-        console.error('Error handling image upload:', error.message);
-      }
-    };
 
     return (
 
