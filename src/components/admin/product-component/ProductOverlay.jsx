@@ -1,11 +1,17 @@
-import React from "react";
-import '../../../css/product-overlay.css';
-import { collection, getDocs, updateDoc, doc, query } from 'firebase/firestore';
-import { db } from "../../../firebase-config";
+import React, { useState } from 'react';
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from '../../../firebase-config';
+import { Audio } from 'react-loader-spinner';
 import 'firebase/firestore';
+import '../../../css/product-overlay.css';
 
-const saveChanges = async (product, onClose) => {
+const ProductOverlay = ({ product, onClose }) => {
+  const [loading, setLoading] = useState(false);
+
+  const saveChanges = async (product, onClose) => {
     try {
+      setLoading(true); // Set loading state to true when starting the update process
+
       const productDocRef = doc(db, 'products', product.id);
       await updateDoc(productDocRef, {
         name: document.getElementById('productNameInput').value,
@@ -17,13 +23,11 @@ const saveChanges = async (product, onClose) => {
       onClose(); // Close the overlay after changes are saved
     } catch (error) {
       console.error('Error updating document: ', error);
+    } finally {
+      setLoading(false); // Reset loading state regardless of success or failure
     }
   };
-  
-  
-  
 
-const ProductOverlay = ({ product, onClose }) => {
   if (!product) {
     return null;
   }
@@ -36,31 +40,41 @@ const ProductOverlay = ({ product, onClose }) => {
             <h2>{product.name}</h2>
             <img className="product-image" src={product.imageUrl} alt={product.name} />
             <div className="product-description">
-                <div className="">
-              <label>
-                Item Name: 
-              </label>
-              <input type="text" placeholder={product.name} id="productNameInput"/>
+              <div className="">
+                <label>
+                  Item Name: 
+                </label>
+                <input type="text" placeholder={product.name} id="productNameInput" disabled={loading}/>
               </div>
               <div className="component">
                 <div className="productPrice">
                   <span>Price: </span>
-                  <input type="number" placeholder={product.price} id="productPriceInput"/>
+                  <input type="number" placeholder={product.price} id="productPriceInput" disabled={loading}/>
                 </div>
                 <div className="productStock">
                   <span>Stock:</span>
-                  <input type="number" placeholder={product.stock} id="productStockInput" />
+                  <input type="number" placeholder={product.stock} id="productStockInput" disabled={loading}/>
                 </div>
-               
-                </div>  
-                <div className="productDescription">
+              </div>  
+              <div className="productDescription">
                 <span>Description:</span>
-              <input type="text" placeholder={product.description} id="productDescriptionInput" />
+                <input type="text" placeholder={product.description} id="productDescriptionInput" disabled={loading}/>
               </div>
             </div>
             <div className="buttons">
-            <button onClick={onClose}>Close</button>
-            <button onClick={() => saveChanges(product, onClose)}>Save Changes</button>
+              <button onClick={onClose} disabled={loading}>Close</button>
+              <button onClick={() => saveChanges(product, onClose)} disabled={loading}>
+                {loading ? (
+                  <Audio
+                    height={24}
+                    width={24}
+                    color="#FFFFFF"
+                    timeout={3000} // Optional timeout in milliseconds
+                  />
+                ) : (
+                  'Save Changes'
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -71,8 +85,3 @@ const ProductOverlay = ({ product, onClose }) => {
 
 export default ProductOverlay;
 
-
-
-
-
-  
