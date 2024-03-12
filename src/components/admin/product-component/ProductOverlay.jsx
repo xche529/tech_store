@@ -1,5 +1,24 @@
 import React from "react";
 import '../../../css/product-overlay.css';
+import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { db } from "../../../firebase-config";
+import 'firebase/firestore';
+
+const saveChanges = async (product) => {
+    try {
+      const productDocRef = doc(db, 'products', product.id);
+      await updateDoc(productDocRef, {
+        name: product.name, 
+        price: parseFloat(document.getElementById('productPriceInput').value), 
+        stock: parseInt(document.getElementById('productStockInput').value), 
+        description: document.getElementById('productDescriptionInput').value 
+      });
+      console.log('Document successfully updated!');
+    } catch (error) {
+      console.error('Error updating document: ', error);
+    }
+  };
+  
 
 const ProductOverlay = ({ product, onClose }) => {
   if (!product) {
@@ -23,27 +42,27 @@ const ProductOverlay = ({ product, onClose }) => {
               <label>
                 Item Name: 
               </label>
-              <input type="text" placeholder={product.name} />
+              <input type="text" placeholder={product.name} id="productNameInput"/>
               </div>
               <div className="component">
-                <div className="item-detail">
+                <div className="productPrice">
                   <span>Price: </span>
-                  <input type="number" placeholder={product.price} />
+                  <input type="number" placeholder={product.price} id="productPriceInput"/>
                 </div>
-                <div className="item-detail">
+                <div className="productStock">
                   <span>Stock:</span>
-                  <input type="number" placeholder={product.stock} onChange={updateStock} />
+                  <input type="number" placeholder={product.stock} onChange={updateStock} id="productStockInput" />
                 </div>
                
                 </div>  
-                <div className="">
+                <div className="productDescription">
                 <span>Description:</span>
-              <input type="text" placeholder={product.description} onChange={updateStock} />
+              <input type="text" placeholder={product.description} onChange={updateStock} id="productDescriptionInput" />
               </div>
             </div>
             <div className="buttons">
             <button onClick={onClose}>Close</button>
-            <button>Save Changes</button>
+            <button onClick={() => saveChanges(product)}>Save Changes</button>
             </div>
           </div>
         </div>
