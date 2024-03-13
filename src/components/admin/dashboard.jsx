@@ -28,9 +28,9 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="admin-dashboard">
+    <div className="admin-dashboard font-montserrat">
       <div className="sidebar">
-        <h2>Admin Panel</h2>
+        <h2 className='text-xl font-bold'>Admin Panel</h2>
         <div className="tabs">
           <div
             className={`tab ${activeTab === 'dashboard' ? 'active' : ''}`}
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
         </div>
       </div>
       <div className="main-content">
-        <h1 className='title'>Admin Dashboard</h1>
+        <h1 className='title text-xl font-bold'>Admin Dashboard</h1>
         <div className="tab-content">
           {activeTab === 'dashboard' && <DashboardContent />}
           {activeTab === 'products' && <AdminProductList />}
