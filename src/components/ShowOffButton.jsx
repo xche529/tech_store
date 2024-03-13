@@ -4,7 +4,7 @@ import ImageWithFallback from './image';
 
 function ShowOffButton({ alt, onClick, product }) {
   return (
-    <div className="bg-white w-80 h-100 flex flex-col justify-center items-center m-2 p-2 border border-gray-300 rounded-lg hover:scale-105 duration-300" onClick={onClick}>
+    <div className="cursor-pointer bg-white w-80 h-100 flex flex-col justify-center items-center m-2 p-2 border border-gray-300 rounded-lg hover:scale-105 duration-300" onClick={onClick}>
       <div className="w-full flex justify-center items-center">
         <ImageWithFallback
           className='w-10/12 h-50 rounded-lg m-2'

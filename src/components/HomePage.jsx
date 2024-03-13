@@ -35,7 +35,7 @@ function HomePage() {
     };
 
     return (
-        <div className="main grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center">
+        <div className="main bg-gray-200 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center">
             {products.map((product, index) => (
                 <ShowOffButton key={index} alt="seacucumber"  onClick={() => handleButtonClick(product, index)} product={product} />
             ))}
