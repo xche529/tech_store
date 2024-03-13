@@ -1,7 +1,5 @@
 import React from "react";
-import { useState, useEffect } from 'react';
-
-import "../css/search-bar.css";
+import { useState} from 'react';
 
 
 
@@ -24,11 +22,12 @@ export const SearchBar = ({ onSearch }) => {
     };
 
     return (
-        <div className="search-container">
+       
+        <div className="w-full flex items-center px-4 h-10 max-w-xs rounded-lg bg-white shadow-md">
             <span className="material-symbols-outlined search">
                 search
             </span>
-            <input placeholder="Search..." onKeyUp={handleKeyPress} onChange={handleInputChange} />
+            <input className=" w-full bg-transparent border-none text-base ml-1 focus:outline-none" placeholder="Search..." onKeyUp={handleKeyPress} onChange={handleInputChange} />
         </div>
     );
 }
