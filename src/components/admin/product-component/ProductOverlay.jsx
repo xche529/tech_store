@@ -52,22 +52,18 @@ const ProductOverlay = ({ product, onClose }) => {
       <div className="bg-gradient-to-r from-gray-200 to-gray-300 p-6 rounded-lg max-w-sm">
         <div className="text-center">
           <h2 className="text-lg font-bold">{product.name}</h2>
-          <div 
-            className="relative w-65 mx-auto my-4 cursor:pointer" 
-            onMouseEnter={handleHover} 
-            onMouseLeave={handleMouseLeave}
-          >
+          <div className="relative mx-auto my-4 cursor:pointer max-h-60 sm:max-h-96 overflow-hidden" onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
+          <div className="relative w-64 h-64 mx-auto"> 
             {hovered && (
-              <div className="absolute cursor-pointer inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white">
-                <UpdateImage product={product} onUpdateImage={updateImageUrl} />
-                {/* <span className="text-lg">Update Image</span> */}
-              </div>
+                   <UpdateImage product={product} onUpdateImage={updateImageUrl} />
             )}
-            <img 
-              className="w-full h-full object-cover rounded-lg" 
-              src={product.imageUrl} 
-              alt={product.name} 
-            />
+           
+          <img 
+               className="absolute inset-0 w-full h-full object-cover rounded-lg" 
+                src={product.imageUrl} 
+                alt={product.name} 
+           />
+          </div>
           </div>
         </div>
         <div className="text-left">
@@ -94,8 +90,8 @@ const ProductOverlay = ({ product, onClose }) => {
           </div>
         </div>
         <div className="flex justify-center">
-          <button onClick={onClose} disabled={loading} className="btn btn-secondary mr-4">Close</button>
-          <button onClick={() => saveChanges(product, onClose)} disabled={loading} className="btn btn-primary">
+          <button onClick={onClose} disabled={loading} className="btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border-2 border-grey-300 hover:bg-red-700 rounded">Close</button>
+          <button onClick={() => saveChanges(product, onClose)} disabled={loading} className="btn btn-primary bg-blue-500 hover:bg-blue-400 text-black font-bold py-2 px-4 border-2 border-grey-200 hover:bg-blue-300 rounded">
             {loading ? (
               <Audio
                 height={24}
