@@ -1,6 +1,37 @@
 .main{
-    margin: 0cqb;
+    margin: 5vh;
     display: flex;
     flex-wrap: wrap;
+    justify-content: left;
+}
+
+
+.outer_container{
+    display: flex;
+}
+
+.left_strip{
+    margin-left: 0%;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    width: 20%;
+    height: 100vh;
+    background-color: #f1ffa1;
+    border-right: 1px solid #e6e6e6;
+}
+
+.right_strip{
+    margin-right: 0%;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    height: 100vh;
+    background-color: #f1ffa1;
+    border-left: 1px solid #e6e6e6;
 }

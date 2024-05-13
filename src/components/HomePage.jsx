@@ -54,7 +54,9 @@ function Content(products) {
 
     // return the list of products
     return (
-        <>
+        <> <div className='outer_container'>
+            <div className='left_strip'>left</div>
+
             <div className='main'>
                 {products.map((product, index) => (
                     <ShowOffButton
@@ -65,6 +67,8 @@ function Content(products) {
                     />
                 ))}
             </div>
+            <div className='right_strip'>right</div>
+        </div>
         </>
     );
 }
