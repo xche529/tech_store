@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { HashRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import './css/homePage.css';
 import CartPage from './components/checkout/CartPage';
 import CheckoutPage from './components/checkout/CheckoutPage';
