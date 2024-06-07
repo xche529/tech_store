@@ -6,16 +6,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser,faStore, faHeart} from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../context/authContext';
 import { SearchBar } from './SearchBar';
+import LogIn from './account/LogIn';
 
 
 function Header() {
   const navigate = useNavigate();
 
   const { user, userDetail } = useAuth();
-  const [isDropdownOpen, setDropdownOpen] = useState(false); // Use state to track dropdown open state
+  const [isDropdownOpen, setDropdownOpen] = useState(false); 
+  const [isOverlayOpen, setOverlayOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen); // Toggle dropdown state
+  };
+
+  const toggleOverlay = () => {
+    setOverlayOpen(!isOverlayOpen); // Toggle overlay state
   };
 
 
@@ -37,18 +43,16 @@ function Header() {
       </div> */}
 
       <div className="icon">
-       {user ? (<Link to="/profile" className='link-to-normal'>
+       {/* {user ? (<Link to="/profile" className='link-to-normal'>
         {userDetail ? (userDetail.avatar ? (
           <img src={userDetail.avatar} alt="Avatar" className="avatar" />
         ) : (user.email)) : (user.email)}
-      </Link>) : (<Link to="/login" className='link-to-normal'>
-      <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+      </Link>) : (<Link to="/login" className='link-to-normal'> */}
+      <button  onClick={toggleOverlay} class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
         Account  <Link to="/items">
         <FontAwesomeIcon icon={faUser}/>
         </Link>
       </button>
-      </Link>
-      )} 
       <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
         About <FontAwesomeIcon icon={faStore} />
        </button>
@@ -88,6 +92,16 @@ function Header() {
     <SearchBar onSearch={onSearch}/>
     </div>
     </div>
+    {isOverlayOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50" onClick={toggleOverlay}>
+          <div
+            className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
+            onClick={(e) => e.stopPropagation()} // Prevent overlay from closing when clicked inside
+          >
+            <LogIn /> {/* Render LogIn component */}
+          </div>
+        </div>
+      )}
 
     </div>
 

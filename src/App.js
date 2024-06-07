@@ -1,10 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import './index.css';
-import './css/cart.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { collection, getDocs } from '@firebase/firestore'
 import './css/homePage.css';
 import CartPage from './components/checkout/CartPage';
 import CheckoutPage from './components/checkout/CheckoutPage';
