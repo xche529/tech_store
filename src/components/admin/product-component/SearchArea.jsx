@@ -22,6 +22,8 @@ const SearchArea = ({ onSearch, onCategoryChange }) => {
           />
         </div>
         <div className="w-1/2">
+        
+        <div>
           <label>Category:  </label>
           <select
             id="category"
@@ -32,6 +34,7 @@ const SearchArea = ({ onSearch, onCategoryChange }) => {
             <option value="phone">Phone</option>
             <option value="laptop">Laptop</option>
           </select>
+          </div>
         </div>
       </div>
     );

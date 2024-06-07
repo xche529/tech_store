@@ -16,6 +16,7 @@ import SignUp from './components/account/SignUp';
 import ShowHeader from './components/ShowHeader';
 import HomePage from './components/HomePage';
 import Item from './components/Item';
+import Admin from './components/admin/dashboard';
 import { AuthProvider } from './context/authContext';
 import 'firebase/auth';
 
@@ -40,6 +41,7 @@ function App() {
               <Route path="/home/:keyWordString" element={<HomePage />} />
               <Route path="/item/:itemId" element={<Item />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/admin" element={<Admin />} />
             </Routes>
           </Router>
         </AuthProvider>

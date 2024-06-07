@@ -19,7 +19,7 @@ const AdminDashboard = () => {
 
 
   return (
-    <div className="font-montserrat">
+    <div>
         <div>
            <AdminProductList />
         </div>

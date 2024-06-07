@@ -45,7 +45,7 @@ const AdminProductList = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="mb-3">
-        <h1 className="text-4xl font-bold font-montserrat">Admin Dashboard</h1>
+        <h1 className="text-4xl font-bold font-montserrat text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text">Admin Dashboard</h1>
       </div>
       <div className="w-2/3 mb-4">
         <Search onSearch={handleSearch} onCategoryChange={handleCategoryChange} />
@@ -58,7 +58,7 @@ const AdminProductList = () => {
             onClick={() => setSelectedProduct(product)}
           >
             <div>
-              <h1 className="font-bold font-montserrat">{product.name}</h1>
+              <h1 className="font-bold">{product.name}</h1>
             </div>
             <div>
               <h1>{product.price}</h1>

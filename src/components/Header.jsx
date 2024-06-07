@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import meme from '../images/logo.png';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import '../css/header.css';
+import logo from '../images/logo.png';
+import {  useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser,faStore, faHeart} from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../context/authContext';
 import { SearchBar } from './SearchBar';
 
@@ -26,13 +27,48 @@ function Header() {
 
 
   return (
-    <nav className="nav-bar">
-      <div className="logo-icon">
+ <div className='flex flex-col justify-cneter item-center mb-4'>
+ <div>
+    <div className='my-10 flex justify-between'>
+      {/* <div>
         <Link to="/" className='link'>        
-        <img className="logo" src={meme} alt="" />
+        <img className="w-52" src={logo} alt="logo-picture" />
         </Link>
-      </div>
-      <ul className={`menu ${isDropdownOpen ? 'open' : ''}`} onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
+      </div> */}
+
+      <div className="icon">
+       {user ? (<Link to="/profile" className='link-to-normal'>
+        {userDetail ? (userDetail.avatar ? (
+          <img src={userDetail.avatar} alt="Avatar" className="avatar" />
+        ) : (user.email)) : (user.email)}
+      </Link>) : (<Link to="/login" className='link-to-normal'>
+      <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+        Account  <Link to="/items">
+        <FontAwesomeIcon icon={faUser}/>
+        </Link>
+      </button>
+      </Link>
+      )} 
+      <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+        About <FontAwesomeIcon icon={faStore} />
+       </button>
+       </div>
+
+    <div className='mr-5'>
+       <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+        Cart<Link to="/cart">
+          <span className="material-symbols-outlined cart">shopping_cart</span>
+        </Link>
+       </button>
+       <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+        Watchlist  <Link to="/cart">
+          <FontAwesomeIcon icon={faHeart} />
+        </Link>
+       </button>
+     </div>
+
+
+     {/* <ul className={`menu ${isDropdownOpen ? 'open' : ''}`} onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
         <li className='cat_text'>
           Categories
           <span className={`material-symbols-outlined expand_more ${isDropdownOpen ? 'rotate-180' : ''}`}>
@@ -45,28 +81,17 @@ function Header() {
             <li><Link to="/home/accessories" className='link-to-normal'>Accessories</Link></li>
           </ul>
         </li>
-      </ul>
-    <SearchBar onSearch={onSearch}/>
-    <div>
-       {user ? (<Link to="/profile" className='link-to-normal'>
-        {userDetail ? (userDetail.avatar ? (
-          <img src={userDetail.avatar} alt="Avatar" className="avatar" />
-        ) : (user.email)) : (user.email)}
-      </Link>) : (<Link to="/login" className='link-to-normal'>
-        SignIn
-      </Link>
-      )}</div>
+      </ul> */}
 
-      <div className="icon">
-        <Link to="/items">
-          <span className="material-symbols-outlined account">account_circle</span>
-        </Link>
-        <span className="material-symbols-outlined watchlist">favorite</span>
-        <Link to="/cart">
-          <span className="material-symbols-outlined cart">shopping_cart</span>
-        </Link>
-      </div>
-    </nav>
+    </div>
+     <div className='flex justify-center'>
+    <SearchBar onSearch={onSearch}/>
+    </div>
+    </div>
+
+    </div>
+
+ 
   );
 }
 
