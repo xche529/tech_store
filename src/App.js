@@ -13,6 +13,7 @@ import ShowHeader from './components/ShowHeader';
 import HomePage from './components/HomePage';
 import Item from './components/Item';
 import Admin from './components/admin/dashboard';
+import Footer from './components/Footer';
 import { AuthProvider } from './context/authContext';
 import 'firebase/auth';
 
@@ -39,6 +40,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/admin" element={<Admin />} />
             </Routes>
+            <Footer/>
           </Router>
         </AuthProvider>
       </div>

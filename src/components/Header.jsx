@@ -36,13 +36,13 @@ function Header() {
  <div className='flex flex-col justify-cneter item-center mb-4'>
  <div>
     <div className='my-10 flex justify-between'>
-      {/* <div>
+      {/* <div className='ml-20'>
         <Link to="/" className='link'>        
-        <img className="w-52" src={logo} alt="logo-picture" />
+        <img className="w-44" src={logo} alt="logo-picture" />
         </Link>
       </div> */}
 
-      <div className="icon">
+      <div className="space-x-4">
        {/* {user ? (<Link to="/profile" className='link-to-normal'>
         {userDetail ? (userDetail.avatar ? (
           <img src={userDetail.avatar} alt="Avatar" className="avatar" />
@@ -58,8 +58,8 @@ function Header() {
        </button>
        </div>
 
-    <div className='mr-5'>
-       <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+    <div className='mr-20 space-x-4'>
+       <button class="px-3 py-3 bg-black text-white font-bold rounded-2xl transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
         Cart<Link to="/cart">
           <span className="material-symbols-outlined cart">shopping_cart</span>
         </Link>
@@ -96,9 +96,9 @@ function Header() {
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50" onClick={toggleOverlay}>
           <div
             className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
-            onClick={(e) => e.stopPropagation()} // Prevent overlay from closing when clicked inside
+            onClick={(e) => e.stopPropagation()} 
           >
-            <LogIn /> {/* Render LogIn component */}
+            <LogIn /> 
           </div>
         </div>
       )}

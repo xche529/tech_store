@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { Link, useNavigate } from 'react-router-dom';
+import '../../css/signUp.css';
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from '../../context/authContext';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function LogIn() {
   const provider = new GoogleAuthProvider();
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false); // State to track if it's signup mode or not
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -19,36 +20,41 @@ function LogIn() {
     setPassword(e.target.value);
   };
 
+  const handleToggleSignUp = () => {
+    setIsSignUp(!isSignUp); // Toggle between login and signup modes
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        login(userCredential.user);
-        console.log(userCredential.user);
-      })
-      .catch((error) => {
-        console.error(error.code, error.message);
-      });
+    
+    if (isSignUp) {
+      // If in signup mode, create a new user
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          login(userCredential.user);
+          navigate('/');
+        })
+        .catch((error) => {
+          console.error(error.code, error.message);
+        });
+    } else {
+      // Otherwise, log in the user
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          login(userCredential.user);
+          navigate('/');
+        })
+        .catch((error) => {
+          console.error(error.code, error.message);
+        });
+    }
   };
-
-  const handleGoogleSignIn = async () => {
-    const auth = getAuth();
-    signInWithPopup(auth, provider).then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const user = result.user;
-      login(user);
-      console.log(user);
-    }).catch((error) => {
-      console.error(error.code, error.message);
-    });
-  }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h1 className="text-2xl font-bold mb-4">Log In</h1>
+        <h1 className="text-2xl font-bold mb-4">{isSignUp ? 'Sign Up' : 'Log In'}</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
@@ -72,23 +78,33 @@ function LogIn() {
               required 
             />
           </div>
-          <button type="submit" className="w-full py-2 px-4 bg-black text-white font-semibold hover:bg-blue-700">Log In</button>
+          <button type="submit" className="w-full py-2 px-4 bg-black text-white font-semibold hover:bg-blue-700">{isSignUp ? 'Sign Up' : 'Log In'}</button>
         </form>
         <button 
-          onClick={handleGoogleSignIn} 
+          onClick={handleToggleSignUp} 
           className="mt-4 w-full py-2 px-4 bg-red-500 text-white font-semibold  hover:bg-red-600"
         >
-            
-          Sign in with Google
+          {isSignUp ? 'Already have an account? Log In' : "Don't have an account? Sign Up"}
         </button>
-        <p className="mt-4 text-center">
-          Don't have an account? <Link to="/signup" className="text-blue-600 hover:underline">Sign Up</Link>
-        </p>
+        <button>
+            <button 
+                onClick={() => signInWithPopup(getAuth(), provider)
+                .then((result) => {
+                    login(result.user);
+                    navigate('/');
+                })
+                .catch((error) => {
+                    console.error(error.code, error.message);
+                })} 
+                className="mt-4 w-full py-2 px-4 bg-blue-500 text-white font-semibold hover:bg-blue-700"
+            >
+                Log In with Google
+            </button>
+        </button>
       </div>
+
     </div>
   );
 }
 
 export default LogIn;
-
-
