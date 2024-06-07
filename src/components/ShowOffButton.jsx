@@ -17,7 +17,7 @@ function ShowOffButton({ alt, onClick, product }) {
         <div className="text-lg font-semibold text-center">
           {product.name}
         </div>
-        <div className="w-20 h-7 bg-blue-500 flex justify-center items-center text-white text-xl font-bold text-md py-0.5 px-2 rounded-full">
+        <div className="w-20 h-7 flex justify-center items-center text-blue-500 text-3xl font-bold text-md py-0.5 px-2 rounded-full">
           {product.price ? '$' + product.price : ''}
         </div>
       </div>

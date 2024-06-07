@@ -39,7 +39,7 @@
     font-weight: bold;
 }
 
-.itemButton{
+/* .itemButton{
     width: 3cm;
     height: 1cm;
     margin: 2%;
@@ -47,7 +47,7 @@
     flex-direction: column;
     align-items: center;
     border-radius: 5px;
-}
+} */
 
 .goHome{
     width: 3cm;

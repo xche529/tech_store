@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import {  useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser,faStore, faHeart} from '@fortawesome/free-solid-svg-icons';
+import { faUser,faStore, faHeart, faCartShopping} from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../context/authContext';
 import { SearchBar } from './SearchBar';
 import LogIn from './account/LogIn';
@@ -42,6 +42,10 @@ function Header() {
         </Link>
       </div> */}
 
+      <div className='ml-20'>
+        <h1 className='font-bold text-5xl'>KIWITECH</h1>
+        </div>
+
       <div className="space-x-4">
        {/* {user ? (<Link to="/profile" className='link-to-normal'>
         {userDetail ? (userDetail.avatar ? (
@@ -53,21 +57,26 @@ function Header() {
         <FontAwesomeIcon icon={faUser}/>
         </Link>
       </button>
+      <Link to="/admin">
+      <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+        Admin 
+       </button>
+         </Link>
       <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
         About <FontAwesomeIcon icon={faStore} />
        </button>
        </div>
 
-    <div className='mr-20 space-x-4'>
-       <button class="px-3 py-3 bg-black text-white font-bold rounded-2xl transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
-        Cart<Link to="/cart">
-          <span className="material-symbols-outlined cart">shopping_cart</span>
-        </Link>
-       </button>
+    <div className='mr-20 space-x-4'>  
        <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
         Watchlist  <Link to="/cart">
           <FontAwesomeIcon icon={faHeart} />
         </Link>
+       </button>
+
+       <button class="px-3 py-3 bg-black text-white font-bold rounded-2xl transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+        <FontAwesomeIcon icon={faCartShopping} size='2x'/>
+        $0.00
        </button>
      </div>
 
