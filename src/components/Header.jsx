@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser,faStore, faHeart, faCartShopping} from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../context/authContext';
@@ -10,6 +10,7 @@ import LogIn from './account/LogIn';
 
 
 function Header() {
+    const location = useLocation();
   const navigate = useNavigate();
 
   const { user, userDetail } = useAuth();
@@ -98,7 +99,11 @@ function Header() {
 
     </div>
      <div className='flex justify-center'>
-    <SearchBar onSearch={onSearch}/>
+     {location.pathname !== '/admin' && (
+          <div className="flex justify-center">
+            <SearchBar onSearch={onSearch} />
+          </div>
+        )}
     </div>
     </div>
     {isOverlayOpen && (
