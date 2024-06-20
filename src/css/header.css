@@ -35,9 +35,8 @@ body {
 } 
 
 .logo-icon img {
-    width: 80%;
-    height: 75px;
-    width:fit-content;
+    height: 30px;
+    width: 30px;
 }
 .menu{
     cursor: pointer;
@@ -73,12 +72,11 @@ body {
 
 .icon{
     justify-content: space-between;
-    /* float: right; */
 }
 
 .icon span {
     cursor: pointer;
-    margin-right: 30px; /* Adjust the right margin to increase space between spans */
+    margin-right: 35px;
 }
 
 .icon :visited{

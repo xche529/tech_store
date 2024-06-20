@@ -3,7 +3,6 @@ import { updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import { Audio } from 'react-loader-spinner';
 import 'firebase/firestore';
-import '../../../css/product-overlay.css';
 import UpdateImage from './UpdateImage';
 
 const ProductOverlay = ({ product, onClose }) => {
@@ -97,7 +96,7 @@ const ProductOverlay = ({ product, onClose }) => {
                 height={24}
                 width={24}
                 color="#FFFFFF"
-                timeout={3000} // Optional timeout in milliseconds
+                timeout={3000}
               />
             ) : (
               'Save Changes'

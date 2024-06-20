@@ -5,13 +5,15 @@
   margin: 0 -250px;
   width: 500px;
   font-size: 20px;
+  padding: 5px;
   border: 1px solid #000000;
 }
 
 .login h1 {
   text-align: center;
-  font-weight: normal;
-  font-style: 25px;
+  font-weight: bold;
+  font-size: 30px;
+
 }
 
 .login label {
@@ -26,6 +28,8 @@
   grid-gap: 10px;
   border: 1px solid #000000;
   font-size: 20px;
+  padding: 5px;
+  outline: none;
 }
 
 .login button {
@@ -35,9 +39,11 @@
   background-color: #000000;
   color: #ffffff;
   border: none;
+  transition: ease-in-out 0.3s;
 }
 
 .login button:hover {
+
   background-color: #8ADBFE;
   color: #000;
 }

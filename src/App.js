@@ -1,10 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import './index.css';
-import './css/cart.css';
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { collection, getDocs } from '@firebase/firestore'
+import { HashRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import './css/homePage.css';
 import CartPage from './components/checkout/CartPage';
 import CheckoutPage from './components/checkout/CheckoutPage';
@@ -16,6 +12,8 @@ import SignUp from './components/account/SignUp';
 import ShowHeader from './components/ShowHeader';
 import HomePage from './components/HomePage';
 import Item from './components/Item';
+import Admin from './components/admin/dashboard';
+import Footer from './components/Footer';
 import { AuthProvider } from './context/authContext';
 import 'firebase/auth';
 
@@ -40,7 +38,9 @@ function App() {
               <Route path="/home/:keyWordString" element={<HomePage />} />
               <Route path="/item/:itemId" element={<Item />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/admin" element={<Admin />} />
             </Routes>
+            <Footer/>
           </Router>
         </AuthProvider>
       </div>
