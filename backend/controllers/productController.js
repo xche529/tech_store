@@ -1,4 +1,5 @@
 import firebase from '../firebase.js';
+import { db } from '../firebase.js';
 import Product from '../models/productModel.js';
 import {
   getFirestore,
@@ -37,8 +38,6 @@ export const getProducts = async (req, res, next) => {
             doc.id,
             doc.data().name,
             doc.data().price,
-            doc.data().retailer,
-            doc.data().amountInStock,
           );
           productArray.push(product);
         });
@@ -59,5 +58,3 @@ export const deleteProduct = async (req, res, next) => {
       res.status(400).send(error.message);
     }
   };
-
-const db = getFirestore(firebase);
