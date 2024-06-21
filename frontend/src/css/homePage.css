@@ -1,0 +1,6 @@
+.main{
+    margin: 0cqb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

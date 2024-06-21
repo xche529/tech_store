@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Permanent+Marker&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-bar {
+    background-color: #8ADBFE;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding: 0rem; */
+    /* gap: 5%; */
+    padding: 0 1rem;
+}
+
+.sign-in{
+    height: 100%;
+}
+
+ .nav-bar ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;  
+} 
+
+.logo-icon img {
+    height: 30px;
+    width: 30px;
+}
+.menu{
+    cursor: pointer;
+}
+
+.menu li > ul {
+    display:none;
+    transition: all .4s ease-in-out;
+    position: absolute; /* Add absolute positioning for dropdown */
+    top: 100%; /* Position the dropdown below the parent li */
+    left: 0;
+    background-color: #fff;
+}
+
+.menu li:hover > ul {
+    display:block;
+}
+
+.cat_text{
+    font-weight: 800;
+    position: relative;
+    left: 0px;
+    bottom: 4px;
+    align-items: center;   
+}
+
+.expand_more{
+    position: relative;
+    bottom: -6px;
+    align-items: center;   
+}
+
+
+.icon{
+    justify-content: space-between;
+}
+
+.icon span {
+    cursor: pointer;
+    margin-right: 35px;
+}
+
+.icon :visited{
+    color: black;
+}
+
+.material-symbols-outlined.expand_more {
+    transition: transform 0.3s; 
+}
+
+.material-symbols-outlined.expand_more.rotate-180 {
+    transform: rotate(180deg); 
+}
+
+.link-to-normal{
+    text-decoration: none;
+    font-weight: 600;
+    color: black;
+}
+
+.avatar{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
