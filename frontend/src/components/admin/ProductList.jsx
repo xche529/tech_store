@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase-config';
 import ProductOverlay from './product-component/ProductOverlay';
 import Search from './product-component/SearchArea';
+import { fetchProducts } from '../../api';
 
 const AdminProductList = () => {
   const [products, setProducts] = useState([]);
@@ -11,18 +10,15 @@ const AdminProductList = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const productsRef = collection(db, 'products');
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const data = await getDocs(productsRef);
-      const productsData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      setProducts(productsData);
-      setFilteredProducts(productsData);
+useEffect(() => {
+    const fetchProductsData = async () => {
+      const products = await fetchProducts(); 
+      setProducts(products);
+      setFilteredProducts(products);
     };
 
-    fetchProducts();
-  }, [productsRef]);
+    fetchProductsData();
+}, []);
 
   useEffect(() => {
     // Filter products based on search term and category

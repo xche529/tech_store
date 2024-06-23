@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { collection, getDocs, where, query } from 'firebase/firestore';
 import { db } from '../firebase-config';
 import ShowOffButton from './ShowOffButton';
+import { fetchProducts } from '../api';
+
 
 function HomePage() {
     const [products, setProducts] = useState([]);
