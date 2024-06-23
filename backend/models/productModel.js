@@ -1,10 +1,11 @@
 class Product {
-    constructor(id, name, price, retailer, amountInStock) {
+    constructor(id, name, price, stock, imageUrl, description) {
       (this.id = id),
         (this.name = name),
         (this.price = price),
-        (this.retailer = retailer),
-        (this.amountInStock = amountInStock);
+        (this.stock= stock),
+        (this.imageUrl = imageUrl);
+        (this.description = description);
     }
   }
   

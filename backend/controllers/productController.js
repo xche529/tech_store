@@ -38,6 +38,9 @@ export const getProducts = async (req, res, next) => {
             doc.id,
             doc.data().name,
             doc.data().price,
+            doc.data().stock,
+            doc.data().imageUrl,
+            doc.data().description
           );
           productArray.push(product);
         });

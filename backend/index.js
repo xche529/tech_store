@@ -5,7 +5,7 @@ import productRoute from './routes/productRoutes.js';
 
 
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; 
 
 app.use(cors());
 app.use(express.json());
@@ -13,6 +13,6 @@ app.use(express.json());
 //routes
 app.use('/api', productRoute);
 
-app.listen(config.port, () =>
-  console.log(`Server is live @ ${config.hostUrl}`),
-);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
