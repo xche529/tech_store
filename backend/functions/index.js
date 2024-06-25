@@ -8,12 +8,16 @@ const cors = require('cors');
 
 admin.initializeApp();
 
+const shoppingCart = require('./shoppingCart');
+
+exports.removeItem = shoppingCart.removeItem;
+
+exports.updateQuantity = shoppingCart.updateQuantity;
 
 exports.helloWorld = onRequest((request, response) => {
   logger.info("Hello logs!", {structuredData: true});
   response.send("Hello from Firebase!");
 });
-
 
 const corsHandler = cors({ origin: true });
 
