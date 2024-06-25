@@ -21,6 +21,55 @@ exports.helloWorld = onRequest((request, response) => {
 
 const corsHandler = cors({ origin: true });
 
+exports.updateProductInfo = functions.https.onRequest((req, res) => {
+    corsHandler(req, res, async () => {
+        try {
+            const { productId, name, price, stock, description} = req.body;
+            const productDocRef = admin.firestore().collection('products').doc(productId);
+            await productDocRef.update({ name, price, stock, description});
+            res.status(200).json({ message: 'Product updated successfully' });
+        } catch (error) {
+            console.error('Error updating product:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+    );
+});
+
+
+exports.uploadImageToStorage = functions.https.onRequest((req, res) => {
+    cors(req, res, async () => {
+      try {
+        const { productId } = req.body;
+        const file = req.file;
+  
+        if (!productId || !file) {
+          return res.status(400).send('ProductId and file are required');
+        }
+  
+        const storageBucket = admin.storage().bucket();
+        const storagePath = `product_images/${productId}/${file.originalname}`;
+  
+        // Upload file to Firebase Storage
+        const storageRef = storageBucket.file(storagePath);
+        await storageRef.save(file.buffer, { contentType: file.mimetype });
+
+        // Get download URL of the uploaded file
+        const downloadURL = await storageRef.getSignedUrl({ action: 'read', expires: '03-09-2491' });
+  
+        // Update Firestore document with the download URL
+        const productDocRef = admin.firestore().collection('products').doc(productId);
+        await productDocRef.update({ imageURL: downloadURL });
+  
+        // Respond with success message or updated product data
+        res.status(200).json({ message: 'Image uploaded successfully', imageURL: downloadURL });
+      } catch (error) {
+        console.error('Error uploading image:', error.message);
+        res.status(500).send('Internal Server Error');
+      }
+    });
+  });
+
 exports.getProducts = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     try {
