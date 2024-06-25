@@ -7,7 +7,6 @@ import Header from './components/Header';
 import Profile from './components/account/Profile';
 import LogIn from './components/account/LogIn';
 import SignUp from './components/account/SignUp';
-import ShowHeader from './components/ShowHeader';
 import HomePage from './components/HomePage';
 import Item from './components/Item';
 import Admin from './components/admin/dashboard';
@@ -23,9 +22,7 @@ function App() {
       <div className="wrapper">
         <AuthProvider>
           <Router>
-            <ShowHeader>
               <Header />
-            </ShowHeader>
             <Routes>
               <Route path="/*" element={<Navigate to="/home/homepage" />} />
               <Route path="/login" element={<LogIn />} />

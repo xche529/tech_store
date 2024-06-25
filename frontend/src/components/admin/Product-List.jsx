@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db } from '../../firebase-config';
+import React, { useState} from 'react';
+import { updateImage } from '../../api';
 
 const AdminProductList = () => {
   const [products, setProducts] = useState([]);
   const [file, setFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-
-  const productsRef = collection(db, 'products');
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const data = await getDocs(productsRef);
-      setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
-    fetchProducts();
-  }, []);
 
   const onChangeImage = (e) => {
     const image = e.target.files[0];
@@ -38,27 +25,19 @@ const AdminProductList = () => {
     }
 
     try {
-      // Upload the image to Firebase Storage
-      const storageRef = ref(getStorage(), `product_images/${productId}`);
-      await uploadBytes(storageRef, file);
-
-      const downloadURL = await getDownloadURL(storageRef);
-
-      // Update the product document in Firestore with the image URL
-      const productDoc = doc(db, 'products', productId);
-      await updateDoc(productDoc, { imageURL: downloadURL });
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === productId ? { ...product, imageURL: downloadURL } : product
-        )
-      );
-
-      // Reset file and preview image
-      setFile(null);
-      setPreviewImage(null);
-    } catch (error) {
-      console.error('Error uploading image:', error.message);
-    }
+        const response = await updateImage(productId, file);
+        console.log(response);
+    
+        setProducts((prevProducts) =>
+            prevProducts.map((product) =>
+            product.id === productId ? { ...product, imageURL: response.data } : product
+            )
+        );
+        setFile(null);
+        setPreviewImage(null);
+        } catch (error) {
+        console.error('Error uploading image:', error.message);
+        }
   };
 
   return (

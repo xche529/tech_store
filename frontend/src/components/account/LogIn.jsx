@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../css/signUp.css';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 import { useAuth } from '../../context/authContext';
 
 function LogIn() {
@@ -11,7 +11,6 @@ function LogIn() {
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false); // State to track if it's signup mode or not
   const navigate = useNavigate();
-
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -27,7 +26,6 @@ function LogIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const auth = getAuth();
-    
     if (isSignUp) {
       // If in signup mode, create a new user
       createUserWithEmailAndPassword(auth, email, password)
