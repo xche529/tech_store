@@ -19,7 +19,7 @@ export const fetchProductsByTag = async (keyWords) => {
 
   export const getProductById = async (itemId) => {
     try {
-      const response = await axios.get(' https://us-central1-tech-store-68146.cloudfunctions.net/geProductById', {
+      const response = await axios.get(' https://us-central1-tech-store-68146.cloudfunctions.net/getProductById', {
         params: { itemId }
       });
       return response.data;
