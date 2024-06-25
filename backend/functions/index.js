@@ -49,3 +49,28 @@ exports.getProductsByTags = functions.https.onRequest(async (req, res) => {
     }
     });
   });
+
+
+  exports.geProductById = functions.https.onRequest(async (req, res) => {
+    corsHandler(req, res, async () => {
+    try {
+      const { itemId } = req.query;
+      if (!itemId) {
+        return res.status(400).json({ error: "Missing itemId parameter" });
+      }
+
+      const itemDoc = await admin.firestore().collection('products').doc(itemId).get();
+
+      if (!itemDoc.exists) {
+        return res.status(404).json({ error: "Item not found" });
+      }
+  
+      const item = itemDoc.data();
+      return res.status(200).json(item);
+    } catch (error) {
+      console.error("Error fetching item:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+  });
