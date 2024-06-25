@@ -51,7 +51,7 @@ exports.getProductsByTags = functions.https.onRequest(async (req, res) => {
   });
 
 
-  exports.geProductById = functions.https.onRequest(async (req, res) => {
+  exports.getProductById = functions.https.onRequest(async (req, res) => {
     corsHandler(req, res, async () => {
     try {
       const { itemId } = req.query;
