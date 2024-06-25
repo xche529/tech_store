@@ -67,3 +67,22 @@ export const updateQuantity = async (itemId, value, email) => {
     return null;
   }
 };
+
+export const updatProductField = async (productId, name, price, stock, description) => { 
+    try {
+        const response = await axios.post(
+        "https://us-central1-tech-store-68146.cloudfunctions.net/updateProductField",
+        {
+            productId,
+            name,
+            price,
+            stock,
+            description,
+        }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error updating product field:", error);
+        return null;
+    }
+};

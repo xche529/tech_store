@@ -6,6 +6,13 @@ const functions = require("firebase-functions");
 const logger = require("firebase-functions/logger");
 const cors = require("cors");
 
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
 admin.initializeApp();
 
 const shoppingCart = require("./shoppingCart");
