@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductOverlay from './product-component/ProductOverlay';
+import ProductOverlay from './ProductOverlay';
 import Search from './product-component/SearchArea';
 import { fetchProducts } from '../../api';
 
@@ -21,7 +21,6 @@ useEffect(() => {
 }, []);
 
   useEffect(() => {
-    // Filter products based on search term and category
     const filtered = products.filter(
       (product) =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -70,6 +69,3 @@ useEffect(() => {
 };
 
 export default AdminProductList;
-
-
-

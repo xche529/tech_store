@@ -7,7 +7,6 @@ const ShowHeader = ({ children }) => {
 
     const [showHeader, setShowHeader] = useState(false);
 
-    // Using useEffect to achieve the header is not shown in the admin page.
     useEffect(() => {
         if (location.pathname === "/items") {
             setShowHeader(false);

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { updateDoc, doc } from 'firebase/firestore';
-import { db } from '../../../firebase-config';
+import { db } from '../../firebase-config';
 import { Audio } from 'react-loader-spinner';
 import 'firebase/firestore';
-import UpdateImage from './UpdateImage';
+import UpdateImage from './product-component/UpdateImage';
 
 const ProductOverlay = ({ product, onClose }) => {
   const [loading, setLoading] = useState(false);

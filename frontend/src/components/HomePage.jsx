@@ -10,6 +10,12 @@ function HomePage() {
     const [products, setProducts] = useState([]);
     const { keyWordString = "homepage" } = useParams();
     const [keyWords, setKeyWords] = useState([]);
+    const navigate = useNavigate(); 
+
+    const handleButtonClick = (product, index) => {
+        navigate('/Item/' + product.id);
+        console.log('SeaCucumber' + index + 'clicked!');
+    };
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -29,12 +35,7 @@ function HomePage() {
         setKeyWords(keyWords.map((word) => word.toLowerCase()));
     }, [keyWordString]);
 
-    const navigate = useNavigate(); 
-
-    const handleButtonClick = (product, index) => {
-        navigate('/Item/' + product.id);
-        console.log('SeaCucumber' + index + 'clicked!');
-    };
+   
 
     return (
         <div className="main bg-gray-100 grid grid-cols-1 sm:grid-cols-3 md:grid-col-4 justify-center">
@@ -46,5 +47,8 @@ function HomePage() {
 }
 
 export default HomePage;
+
+
+
 
 

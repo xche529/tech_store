@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../images/logo.png';
 import {  useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser,faStore, faHeart, faCartShopping} from '@fortawesome/free-solid-svg-icons';
@@ -37,14 +36,11 @@ function Header() {
  <div className='flex flex-col justify-cneter item-center mb-4'>
  <div>
     <div className='my-10 flex justify-between'>
-      {/* <div className='ml-20'>
-        <Link to="/" className='link'>        
-        <img className="w-44" src={logo} alt="logo-picture" />
-        </Link>
-      </div> */}
 
       <div className='ml-20'>
+      <Link to="/">        
         <h1 className='font-bold text-5xl'>KIWITECH</h1>
+        </Link> 
         </div>
 
       <div className="space-x-4">
@@ -80,29 +76,10 @@ function Header() {
         $0.00
        </button>
      </div>
-
-
-     {/* <ul className={`menu ${isDropdownOpen ? 'open' : ''}`} onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
-        <li className='cat_text'>
-          Categories
-          <span className={`material-symbols-outlined expand_more ${isDropdownOpen ? 'rotate-180' : ''}`}>
-            expand_more
-          </span>
-          <ul>
-            <li><Link to="/home/tablet" className='link-to-normal'>Tablet</Link></li>
-            <li><Link to="/home/phone" className='link-to-normal'>Phone</Link></li>
-            <li><Link to="/home/laptop" className='link-to-normal'>Laptop</Link></li>
-            <li><Link to="/home/accessories" className='link-to-normal'>Accessories</Link></li>
-          </ul>
-        </li>
-      </ul> */}
-
     </div>
      <div className='flex justify-center'>
      {location.pathname !== '/admin' && (
-          <div className="flex justify-center">
             <SearchBar onSearch={onSearch} />
-          </div>
         )}
     </div>
     </div>
