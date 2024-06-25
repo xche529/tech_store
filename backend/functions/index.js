@@ -28,3 +28,24 @@ exports.getProducts = functions.https.onRequest((req, res) => {
     }
   });
 });
+
+
+exports.getProductsByTags = functions.https.onRequest(async (req, res) => {
+    corsHandler(req, res, async () => {
+    try {
+      const { tags } = req.query;
+      let tagsArray = tags ? tags.split(" ") : ["homepage"];
+  
+      let productsRef = admin.firestore().collection('products');
+      let query = productsRef.where("tag", "array-contains-any", tagsArray);
+  
+      const snapshot = await query.get();
+      const products = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+  
+      res.status(200).json(products);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+    });
+  });
