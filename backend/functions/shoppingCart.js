@@ -1,19 +1,23 @@
-const { onRequest } = require("firebase-functions/v2/https");
 const { getFirestore } = require("firebase-admin/firestore");
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
 const logger = require("firebase-functions/logger");
-const { initializeApp } = require("firebase-admin/app");
-const db = getFirestore();
 const cors = require('cors');
-const corsHandler = cors({ origin: true });
+const db = getFirestore();
 
-//initializeApp();
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+const corsHandler = cors({ origin: true });
 
 exports.removeItem = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     try {
-      const cartRef = doc(db, "users", req.email, "cart", req.itemId);
+      const { email, itemId } = req.body
+      const cartRef = doc(db, "users", email, "cart", itemId);
       await deleteDoc(cartRef);
       res.status(200).json("removed");
     } catch (error) {
@@ -25,9 +29,10 @@ exports.removeItem = functions.https.onRequest((req, res) => {
 exports.updateQuantity = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     try {
-      const cartRef = doc(db, "users", req.email, "cart", req.itemId);
+      const { email, itemId, value } = req.body
+      const cartRef = doc(db, "users", email, "cart", itemId);
       await updateDoc(cartRef, {
-        quantity: Math.abs(parseInt(req.value, 10)) || "",
+        quantity: Math.abs(parseInt(value, 10)) || "",
       });
       res.status(200).json("quantity updated");
     } catch (error) {
