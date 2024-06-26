@@ -53,7 +53,8 @@ export const getProductById = async (itemId) => {
 
 export const updateQuantity = async (itemId, value, email) => {
   try {
-    const response = await axios.get(
+    console.log(itemId, value, email);
+    const response = await axios.post(
       "https://us-central1-tech-store-68146.cloudfunctions.net/updateQuantity",
       {
         itemId,

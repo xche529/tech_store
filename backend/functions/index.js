@@ -5,20 +5,21 @@ const functions = require("firebase-functions");
 const logger = require("firebase-functions/logger");
 const cors = require("cors");
 
-const corsOptions ={
-    origin:'http://localhost:3000', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
-
 admin.initializeApp();
 const db = getFirestore();
 const corsHandler = cors({ origin: true });
 
+const getCartRef = (email, itemId) => {
+  const productCollectionRef = db.collection("users");
+  const productDocRef = productCollectionRef.doc(email);
+  const typeCollectionRef = productDocRef.collection("cart");
+  return typeCollectionRef.doc(itemId);
+};
+
 exports.removeItem = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     try {
+      logger.info("Request body:", req.body);
       const { email, itemId } = req.body;
       const cartRef = doc(db, "users", email, "cart", itemId);
       await deleteDoc(cartRef);
@@ -32,19 +33,16 @@ exports.removeItem = functions.https.onRequest((req, res) => {
 exports.updateQuantity = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     try {
-      const { email, itemId, value } = req.body;
-      const productCollectionRef = db.collection("users");
-      const productDocRef = productCollectionRef.doc("qweqwpi@163.com");
-      const typeCollectionRef = productDocRef.collection("cart");
-      const cartRef = typeCollectionRef.doc("Zf9cda7Hb8aaP9VDhoRV");
+      const { itemId, email, value } = req.body;
+      const cartRef = getCartRef(email, itemId);
 
-      //const cartRef = doc(db, "users", "qweqwpi@163.com", "cart", 23);
       await cartRef.update({
-        quantity: Math.abs(parseInt(value, 10)) || "",
+        quantity: value,
       });
       res.status(200).json("quantity updated");
     } catch (error) {
-      res.status(500).json({ error });
+      logger.error("Error updating quantity:", error);
+      res.status(500).json({ error: error.message });
     }
   });
 });

@@ -113,7 +113,7 @@ function Header() {
           </div>
         </div>
       )}
-      {isCartOverlayOpen && <Cart closeCart={setCartClose} />}
+      {isCartOverlayOpen && <Cart closeCart={setCartClose} userDetail={user}/>}
     </div>
   );
 }

@@ -8,15 +8,19 @@ import {
 } from "firebase/auth";
 import { updateQuantity } from "../../api";
 
-function Cart({ closeCart }) {
+function Cart({ closeCart, userDetail }) {
   const update = async (itemId, value) => {
-    const email = "qweqwpi@gmail.com"
-    itemId = 23
-    value = 500
+    const email = userDetail.email;
+    itemId = '23'
+    value = 50
     console.log(itemId, value, email);
     const response = await updateQuantity(itemId, value, email);
     console.log(response);
   };
+
+  const test = () => {
+    console.log(userDetail);
+  }
 
   return (
     <div
@@ -28,6 +32,8 @@ function Cart({ closeCart }) {
         className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
       >
         <button onClick={update}> hi</button>
+        <h1></h1>
+        <button onClick={test}> test </button>
       </div>
     </div>
   );
