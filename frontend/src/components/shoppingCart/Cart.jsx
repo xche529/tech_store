@@ -10,7 +10,6 @@ import { updateQuantity } from "../../api";
 
 function Cart({ closeCart }) {
   const update = async (itemId, value) => {
-    const auth = getAuth();
     const email = "qweqwpi@gmail.com"
     itemId = 23
     value = 500
