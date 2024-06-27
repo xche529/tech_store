@@ -88,18 +88,18 @@ function LogIn({ closeLogin }) {
             />
           </div>
           {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-          <button type="submit" className="w-full py-2 px-4 bg-black text-white font-semibold hover:bg-blue-700">{isSignUp ? 'Sign Up' : 'Log In'}</button>
+          <button type="submit" className="w-full py-2 px-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-semibold transisiton ease-in-out duration-150 rounded-md hover:scale-105">{isSignUp ? 'Sign Up' : 'Log In'}</button>
         </form>
         <button 
           onClick={handleToggleSignUp} 
-          className="mt-4 w-full py-2 px-4 bg-red-500 text-white font-semibold  hover:bg-red-600"
+          className="rounded-md mt-4 w-full py-2 px-4 bg-red-500 text-white font-semibold  hover:bg-red-600"
         >
           {isSignUp ? 'Already have an account? Log In' : "Don't have an account? Sign Up"}
         </button>
         
         <button 
       onClick={handleGoogleSignIn} 
-      className="mt-4 w-full py-2 px-4 bg-blue-500 text-white font-semibold hover:bg-blue-700 flex items-center justify-center"
+      className="rounded-md mt-4 w-full py-2 px-4 bg-blue-500 text-white font-semibold hover:bg-blue-700 flex items-center justify-center"
     >
       Log In with 
       <FontAwesomeIcon icon={faGoogle} className="ml-2" />

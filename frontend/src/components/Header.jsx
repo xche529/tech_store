@@ -76,7 +76,7 @@ const location = useLocation();
     }
   };
   return (
-    <div className="flex flex-col justify-center item-center mb-4">
+    <div className="flex flex-col item-center mb-4">
       <div>
         <div className="my-10 flex justify-between">
           <div className="ml-20">
