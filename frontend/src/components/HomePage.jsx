@@ -38,15 +38,12 @@ function HomePage() {
     }
   }, [keyWords]);
 
-  // Calculate total number of pages
   const totalPages = Math.ceil(products.length / productsPerPage);
 
-  // Handle page change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  // Calculate which products to display for the current page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);

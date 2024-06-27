@@ -6,6 +6,7 @@ import { useAuth } from "../context/authContext";
 import { SearchBar } from "./SearchBar";
 import LogIn from "./account/LogIn";
 import Cart from "./shoppingCart/Cart";
+import About from "./AboutModal";
 import { useCart } from '../context/cartContext';
 import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
 
@@ -20,6 +21,7 @@ const location = useLocation();
   const { user, userDetail, login } = useAuth();
   const [isLoginOverlayOpen, setLoginOverlayOpen] = useState(false);
   const [isCartOverlayOpen, setCartOverlayOpen] = useState(false);
+  const [isAboutOverlayOpen, setAboutOverlayOpen] = useState(false);
   const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
@@ -53,6 +55,15 @@ const location = useLocation();
     setLoginOverlayOpen(!isLoginOverlayOpen);
   };
 
+const setAboutOpen = () => {
+    setAboutOverlayOpen(true);
+    }
+
+ const setAboutClose = () => {
+    setAboutOverlayOpen(false);
+    }
+
+
   const setCartOpen = () => {
     setCartOverlayOpen(true);
   };
@@ -85,7 +96,7 @@ const location = useLocation();
             </Link>
           </div>
 
-          <div className="space-x-4 flex">
+          <div className="flex space-x-4">
           {userEmail ? (
               <div className="flex items-center">     
                 <button
@@ -93,7 +104,7 @@ const location = useLocation();
                   className="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg"
                 >
                 <span className="text-green-400 font-bold">
-                  Welcome, {userEmail.slice(0, 3)}!  
+                  Welcome, {userEmail.slice(0, 4)}!  
                 </span>
                   Sign Out
                 </button>
@@ -107,11 +118,11 @@ const location = useLocation();
               </button>
             )}
             <Link to="/admin">
-              <button class="hidden sm:block px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+              <button className="hidden sm:block px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
                 Admin
               </button>
             </Link>
-            <button class="hidden md:block px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+            <button onClick={setAboutOpen} className="hidden md:block px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
               About <FontAwesomeIcon icon={faStore} />
             </button>
           </div>
@@ -135,6 +146,7 @@ const location = useLocation();
             <LogIn closeLogin={setLoginClose}/>
       )}
       {isCartOverlayOpen && <Cart closeCart={setCartClose} userDetail={user}/>}
+      {isAboutOverlayOpen && <About closeAbout={setAboutClose} />}
     </div>
   );
 }
