@@ -56,12 +56,15 @@ exports.updateProductInfo = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     try {
       const { productId, name, price, stock, description } = req.body;
-      const productDocRef = admin
-        .firestore()
+      const productDocRef = db
         .collection("products")
         .doc(productId);
-      await productDocRef.update({ name, price, stock, description });
-      res.status(200).json({ message: "Product updated successfully" });
+      await productDocRef.update({ 
+        name: name, 
+        price: price, 
+        stock: stock, 
+        description: description});
+      console.log("Product updated successfully");
     } catch (error) {
       console.error("Error updating product:", error);
       res.status(500).json({ error: "Internal Server Error" });
@@ -80,11 +83,17 @@ exports.uploadImageToStorage = functions.https.onRequest((req, res) => {
       }
 
       const storageBucket = admin.storage().bucket();
-      const storagePath = `product_images/${productId}/${file.originalname}`;
+      const storagePath = `product_images/${file.name}`;
 
-      // Upload file to Firebase Storage
-      const storageRef = storageBucket.file(storagePath);
-      await storageRef.save(file.buffer, { contentType: file.mimetype });
+        // Upload file to Cloud Storage
+        const storageRef = storageBucket.file(storagePath);
+        const metadata = {
+          contentType: file.mimetype,
+          metadata: {
+            firebaseStorageDownloadTokens: uuidv4(),
+          },
+        };
+        await storageRef.save(file.buffer, { metadata });
 
       // Get download URL of the uploaded file
       const downloadURL = await storageRef.getSignedUrl({
@@ -93,8 +102,7 @@ exports.uploadImageToStorage = functions.https.onRequest((req, res) => {
       });
 
       // Update Firestore document with the download URL
-      const productDocRef = admin
-        .firestore()
+      const productDocRef = db
         .collection("products")
         .doc(productId);
       await productDocRef.update({ imageURL: downloadURL });
