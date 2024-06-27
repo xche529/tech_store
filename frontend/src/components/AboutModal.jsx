@@ -12,9 +12,9 @@ const AboutModal = ({ closeAbout }) => {
         <div
           className="border-2 bg-white flex flex-col text-center p-4 rounded-lg max-w-[80vw]"
         >
-          <h2>About KiwiMart</h2>
+          <h2>About KIWI TECH</h2>
           <br />
-          <p>Kiwi Tech is a project built by a team of 3.</p>
+          <p>KIWI TECH is a project built by a team of 3.</p>
           <p>
             The project is built on React for Frontend, Firebase for Backend,
             and TailwindCSS for styling.

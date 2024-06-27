@@ -52,13 +52,16 @@ const AdminProductList = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="mb-3">
+    <div>
+        <div className="flex flex-col items-center justify-center">
+           <div className="mb-2">
         <h1 className="text-4xl font-bold font-montserrat text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text">Admin Dashboard</h1>
-      </div>
-      <div className="w-2/3 mb-4">
-        <Search onSearch={handleSearch} onCategoryChange={handleCategoryChange} />
-      </div>
+          </div>
+    <div className="w-2/3 mb-2">
+    <Search onSearch={handleSearch} onCategoryChange={handleCategoryChange} />
+    </div>
+  </div>
+    <div className="flex flex-col items-center justify-center">
       <div className="w-full flex flex-col items-center">
         {currentProducts.map((product) => (
           <div
@@ -91,6 +94,7 @@ const AdminProductList = () => {
       {selectedProduct && (
         <ProductOverlay product={selectedProduct} onClose={() => setSelectedProduct(null)} />
       )}
+    </div>
     </div>
   );
 };
