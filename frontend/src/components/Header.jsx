@@ -6,17 +6,32 @@ import { useAuth } from "../context/authContext";
 import { SearchBar } from "./SearchBar";
 import LogIn from "./account/LogIn";
 import Cart from "./shoppingCart/Cart";
+import { useCart } from '../context/cartContext';
 import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
 
 function Header() {
 const location = useLocation();
   const navigate = useNavigate();
   const auth = getAuth();
+  const {cartItems} = useCart();
 
+
+  const [totalPrice, setTotalPrice] = useState(0); // State to hold total price
   const { user, userDetail, login } = useAuth();
   const [isLoginOverlayOpen, setLoginOverlayOpen] = useState(false);
   const [isCartOverlayOpen, setCartOverlayOpen] = useState(false);
   const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    const calculateTotalPrice = () => {
+      let total = 0;
+      cartItems.forEach(item => {
+        total += item.price * item.quantity;
+      });
+      setTotalPrice(total);
+    };
+    calculateTotalPrice();
+  }, [cartItems]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -112,9 +127,9 @@ const location = useLocation();
             <button
               onClick={setCartOpen}
               class="px-3 py-3 bg-black text-white font-bold rounded-2xl transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg"
-            >
+             >
               <FontAwesomeIcon icon={faCartShopping} size="2x" />
-              $0.00
+              ${totalPrice.toFixed(2)}
             </button>
           </div>
         </div>

@@ -17,6 +17,7 @@ import Item from "./components/Item";
 import Admin from "./components/admin/dashboard";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./context/authContext";
+import { CartProvider } from './context/cartContext';
 import "firebase/auth";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
     <div>
       <div className="wrapper">
         <AuthProvider>
+            <CartProvider>
           <Router>
             <Header />
             <Routes>
@@ -33,11 +35,11 @@ function App() {
               <Route path="/items" element={<ItemDetails />} />
               <Route path="/home/:keyWordString" element={<HomePage />} />
               <Route path="/item/:itemId" element={<Item />} />
-              <Route path="/profile" element={<Profile />} />
               <Route path="/admin" element={<Admin />} />
             </Routes>
             <Footer />
           </Router>
+          </CartProvider>
         </AuthProvider>
       </div>
     </div>

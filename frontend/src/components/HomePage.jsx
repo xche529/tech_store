@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ShowOffButton from './ShowOffButton';
 import { fetchProductsByTag } from '../api';
+import { useCart } from '../context/cartContext';
 
 function HomePage() {
   const [products, setProducts] = useState([]);
   const { keyWordString = "homepage" } = useParams();
   const [keyWords, setKeyWords] = useState([]);
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   const handleButtonClick = (product, index) => {
     navigate('/Item/' + product.id);
@@ -37,11 +39,12 @@ function HomePage() {
   return (
     <div className="main bg-gray-100 grid grid-cols-1 sm:grid-cols-3 md:grid-col-4 justify-center">
       {products.map((product, index) => (
-        <ShowOffButton
+          <ShowOffButton
           key={index}
           alt="seacucumber"
           onClick={() => handleButtonClick(product, index)}
           product={product}
+          addToCart={addToCart}
         />
       ))}
     </div>
