@@ -4,23 +4,19 @@ import { db } from '../../firebase-config';
 import { Audio } from 'react-loader-spinner';
 import 'firebase/firestore';
 import UpdateImage from './product-component/UpdateImage';
+import { updatProductField } from '../../api';
 
 const ProductOverlay = ({ product, onClose }) => {
   const [loading, setLoading] = useState(false);
-  const [hovered, setHovered] = useState(false); // Define 'hovered' state
+  const [hovered, setHovered] = useState(false);
 
   const saveChanges = async (product, onClose) => {
     try {
       setLoading(true);
-
-      const productDocRef = doc(db, 'products', product.id);
-      await updateDoc(productDocRef, {
-        name: document.getElementById('productNameInput').value,
-        price: parseFloat(document.getElementById('productPriceInput').value),
-        stock: parseInt(document.getElementById('productStockInput').value),
-        description: document.getElementById('productDescriptionInput').value 
-      });
-      console.log('Document successfully updated!');
+      await updatProductField(product.id,
+        document.getElementById('productNameInput').value, parseFloat(document.getElementById('productPriceInput').value),
+        parseInt(document.getElementById('productStockInput').value),
+        document.getElementById('productDescriptionInput').value)
       onClose();
     } catch (error) {
       console.error('Error updating document: ', error);
@@ -69,7 +65,7 @@ const ProductOverlay = ({ product, onClose }) => {
           <div className="mb-4">
             <div>
             <label className="block font-semibold">Item Name:</label>
-            <input type="text" defaultValue={product.name} id="productNameInput" className="font-sans p-4 border-2 border-black " disabled={loading} style={{ borderColor: 'black' }} />
+            <input type="text" defaultValue={product.name} id="productNameInput" className="font-sans p-2 border-2 border-black " disabled={loading} style={{ borderColor: 'black' }} />
             </div>
           </div>
           <div className="flex justify-between mb-4">
@@ -88,7 +84,7 @@ const ProductOverlay = ({ product, onClose }) => {
             <textarea defaultValue={product.description} id="productDescriptionInput" disabled={loading} className="h-24 w-full border-2 border-black font-sans p-2"></textarea>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-x-4">
           <button onClick={onClose} disabled={loading} className="px-3 py-2 bg-red-500 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">Close</button>
           <button onClick={() => saveChanges(product, onClose)} disabled={loading} className="px-3 py-2 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
             {loading ? (

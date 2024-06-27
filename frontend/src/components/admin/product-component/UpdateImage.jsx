@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { storage } from '../../../firebase-config';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { updateImage } from '../../../api';
 
 const UpdateImage = ({ product, onUpdateImage }) => {
   const [loading, setLoading] = useState(false);
@@ -14,20 +15,16 @@ const UpdateImage = ({ product, onUpdateImage }) => {
       setLoading(true);
       setUploadStatus('Uploading your file...');
 
-      // Create a storage reference
-      const storageRef = ref(storage, `product_images/${file.name}`);
+     await updateImage(product.id, file);
+    //   const storageRef = ref(storage, `product_images/${file.name}`);
+    //   const snapshot = await uploadBytes(storageRef, file);
+    //   console.log('Uploaded a file:', snapshot);
+    //   const downloadURL = await getDownloadURL(storageRef);
+    //   onUpdateImage(downloadURL);
 
-      // Upload file
-      const snapshot = await uploadBytes(storageRef, file);
-      console.log('Uploaded a file:', snapshot);
-
-      // Get the download URL
-      const downloadURL = await getDownloadURL(storageRef);
-      onUpdateImage(downloadURL);
-
-    } catch (error) {
-      console.error('Error updating image:', error);
-      setUploadStatus('Error uploading image.');
+    // } catch (error) {
+    //   console.error('Error updating image:', error);
+    //   setUploadStatus('Error uploading image.');
     } finally {
       setLoading(false);
       setTimeout(() => setUploadStatus('Upload your file to our website'), 3000); // Reset status after 3 seconds

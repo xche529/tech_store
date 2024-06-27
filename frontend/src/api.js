@@ -40,7 +40,7 @@ export const getProductById = async (itemId) => {
 
   export const updateImage = async (itemId, file) => {
     try {
-      const response = await axios.post('https://us-central1-tech-store-68146.cloudfunctions.net/updateImage', {
+      const response = await axios.post('https://us-central1-tech-store-68146.cloudfunctions.net/uploadImageToStorage', {
         itemId,
         file
       });
@@ -72,7 +72,7 @@ export const updateQuantity = async (itemId, value, email) => {
 export const updatProductField = async (productId, name, price, stock, description) => { 
     try {
         const response = await axios.post(
-        "https://us-central1-tech-store-68146.cloudfunctions.net/updateProductField",
+        "https://us-central1-tech-store-68146.cloudfunctions.net/updateProductInfo",
         {
             productId,
             name,
