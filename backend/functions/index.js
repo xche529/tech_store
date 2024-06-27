@@ -73,51 +73,42 @@ exports.updateProductInfo = functions.https.onRequest((req, res) => {
 });
 
 exports.uploadImageToStorage = functions.https.onRequest((req, res) => {
-  cors(req, res, async () => {
-    try {
-      const { productId } = req.body;
-      const file = req.file;
+    corsHandler(req, res, async () => {
+      try {
+        const { productId, file } = req.body;
+  
+        // Ensure the file object is present
+        if (!file || !file.name || !file.buffer) {
+          throw new Error('File is missing or incorrect format');
+        }
+  
+        const storageBucket = admin.storage().bucket();
+        const storagePath = `product_images/${file.name}`;
+  
 
-      if (!productId || !file) {
-        return res.status(400).send("ProductId and file are required");
-      }
-
-      const storageBucket = admin.storage().bucket();
-      const storagePath = `product_images/${file.name}`;
-
-        // Upload file to Cloud Storage
         const storageRef = storageBucket.file(storagePath);
-        const metadata = {
-          contentType: file.mimetype,
-          metadata: {
-            firebaseStorageDownloadTokens: uuidv4(),
-          },
-        };
-        await storageRef.save(file.buffer, { metadata });
+  
+        await storageRef.save(Buffer.from(file.buffer, 'base64'));
 
-      // Get download URL of the uploaded file
-      const downloadURL = await storageRef.getSignedUrl({
-        action: "read",
-        expires: "03-09-2491",
-      });
-
-      // Update Firestore document with the download URL
-      const productDocRef = db
-        .collection("products")
-        .doc(productId);
-      await productDocRef.update({ imageURL: downloadURL });
-
-      // Respond with success message or updated product data
-      res.status(200).json({
-        message: "Image uploaded successfully",
-        imageURL: downloadURL,
-      });
-    } catch (error) {
-      console.error("Error uploading image:", error.message);
-      res.status(500).send("Internal Server Error");
-    }
+        const [downloadURL] = await storageRef.getSignedUrl({
+          action: 'read',
+          expires: '01-01-2100',
+        });
+  
+        const productDocRef = admin.firestore().collection('products').doc(productId);
+        await productDocRef.update({ imageUrl: downloadURL });
+  
+        // Respond with success message or updated product data
+        res.status(200).json({
+          message: 'Image uploaded successfully',
+          imageURL: downloadURL,
+        });
+      } catch (error) {
+        console.error('Error uploading image:', error.message);
+        res.status(500).send('Internal Server Error');
+      }
+    });
   });
-});
 
 exports.getProducts = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
