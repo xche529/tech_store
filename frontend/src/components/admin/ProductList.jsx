@@ -73,7 +73,7 @@ const AdminProductList = () => {
               <h1 className="font-bold">{product.name}</h1>
             </div>
             <div>
-              <h1>{product.price}</h1>
+              <h1>$ {product.price}</h1>
             </div>
           </div>
         ))}

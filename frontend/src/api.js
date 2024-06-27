@@ -87,3 +87,21 @@ export const updatProductField = async (productId, name, price, stock, descripti
         return null;
     }
 };
+
+export const createNewItem = async (name, price, stock, description) => {
+    try {
+        const response = await axios.post(
+        "https://us-central1-tech-store-68146.cloudfunctions.net/createItem",
+        {
+            name,
+            price,
+            stock,
+            description,
+        }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error creating new item:", error);
+        return null;
+    }
+}

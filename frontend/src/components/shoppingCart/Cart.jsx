@@ -50,6 +50,8 @@ function Cart({ closeCart }) {
 
   const handleCheckout = () => {
     setIsCheckout(true);
+    // Set total price to 0
+    updateCartItem([]);
   };
 
   const update = async (itemId, newQuantity) => {
