@@ -1,32 +1,38 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faStore,
-  faHeart,
-  faCartShopping,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faStore, faHeart, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../context/authContext";
 import { SearchBar } from "./SearchBar";
 import LogIn from "./account/LogIn";
 import Cart from "./shoppingCart/Cart";
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
 
 function Header() {
-  const location = useLocation();
+const location = useLocation();
   const navigate = useNavigate();
+  const auth = getAuth();
 
-  const { user, userDetail } = useAuth();
+  const { user, userDetail, login } = useAuth();
   const [isLoginOverlayOpen, setLoginOverlayOpen] = useState(false);
   const [isCartOverlayOpen, setCartOverlayOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUserEmail(currentUser.email);
+        login(currentUser);
+      } else {
+        setUserEmail('');
+      }
+    });
+    return () => unsubscribe();
+  }, [auth, login]);
 
- const setLoginclose= () => {
+  const setLoginClose = () => {
     setLoginOverlayOpen(false);
- };
-
-
+  };
 
   const toggleLoginOverlay = () => {
     setLoginOverlayOpen(!isLoginOverlayOpen);
@@ -46,6 +52,14 @@ function Header() {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Sign out error:', error);
+    }
+  };
   return (
     <div className="flex flex-col justify-cneter item-center mb-4">
       <div>
@@ -56,21 +70,27 @@ function Header() {
             </Link>
           </div>
 
-          <div className="space-x-4">
-            {/* {user ? (<Link to="/profile" className='link-to-normal'>
-        {userDetail ? (userDetail.avatar ? (
-          <img src={userDetail.avatar} alt="Avatar" className="avatar" />
-        ) : (user.email)) : (user.email)}
-      </Link>) : (<Link to="/login" className='link-to-normal'> */}
-            <button
-              onClick={toggleLoginOverlay}
-              class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg"
-            >
-              Account{" "}
-              <Link to="/items">
-                <FontAwesomeIcon icon={faUser} />
-              </Link>
-            </button>
+          <div className="space-x-4 flex">
+          {userEmail ? (
+              <div className="flex items-center">     
+                <button
+                  onClick={handleSignOut}
+                  className="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg"
+                >
+                <span className="text-green-400 font-bold">
+                  Welcome, {userEmail.slice(0, 3)}!  
+                </span>
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={toggleLoginOverlay}
+                className="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg"
+              >
+                Account <FontAwesomeIcon icon={faUser} />
+              </button>
+            )}
             <Link to="/admin">
               <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
                 Admin
@@ -103,7 +123,7 @@ function Header() {
         </div>
       </div>
       {isLoginOverlayOpen && (
-            <LogIn closeLogin={setLoginclose}/>
+            <LogIn closeLogin={setLoginClose}/>
       )}
       {isCartOverlayOpen && <Cart closeCart={setCartClose} userDetail={user}/>}
     </div>

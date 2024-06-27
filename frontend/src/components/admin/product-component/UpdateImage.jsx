@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { storage } from '../../../firebase-config';
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateImage } from '../../../api';
 
 const UpdateImage = ({ product, onUpdateImage }) => {

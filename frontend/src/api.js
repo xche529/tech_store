@@ -46,7 +46,7 @@ export const getProductById = async (itemId) => {
       });
       return response.data;
     } catch (error) {
-      console.error("Error updating image:", error);
+        console.error(error.response.data);
       return null;
     }
   }

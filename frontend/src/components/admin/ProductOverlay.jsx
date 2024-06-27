@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { updateDoc, doc } from 'firebase/firestore';
-import { db } from '../../firebase-config';
 import { Audio } from 'react-loader-spinner';
-import 'firebase/firestore';
 import UpdateImage from './product-component/UpdateImage';
 import { updatProductField } from '../../api';
 
@@ -20,10 +17,9 @@ const ProductOverlay = ({ product, onClose }) => {
       onClose();
     } catch (error) {
       console.error('Error updating document: ', error);
-    } finally {
-      setLoading(false);
     }
-  };
+    };
+
 
   const handleHover = () => { 
     setHovered(true);
@@ -33,10 +29,10 @@ const ProductOverlay = ({ product, onClose }) => {
     setHovered(false);
   };
 
-  const updateImageUrl = (url) => {
-    const productDocRef = doc(db, 'products', product.id);
-    updateDoc(productDocRef, { imageUrl: url });
-   };
+//   const updateImageUrl = (url) => {
+//     const productDocRef = doc(db, 'products', product.id);
+//     updateDoc(productDocRef, { imageUrl: url });
+//    };
 
   if (!product) {
     return null;
@@ -50,7 +46,7 @@ const ProductOverlay = ({ product, onClose }) => {
           <div className="relative mx-auto my-4 cursor:pointer max-h-60 sm:max-h-96 overflow-hidden" onMouseEnter={handleHover} onMouseLeave={handleMouseLeave}>
           <div className="relative w-64 h-64 mx-auto"> 
             {hovered && (
-                   <UpdateImage product={product} onUpdateImage={updateImageUrl} />
+                   <UpdateImage product={product} />
             )}
            
           <img 
