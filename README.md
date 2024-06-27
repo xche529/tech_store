@@ -1,13 +1,12 @@
 # KIWITECH
 
-### KIWITECH is a full stack e-commerce store project with admin dashboard using React as frontend, Firebase as backend and TailwindCSS for styling.
+KIWITECH is a full stack e-commerce store project with admin dashboard using React as frontend, Firebase as backend and TailwindCSS for styling.
 
-### Contributors: Betty, Tommy and James
+Contributors: Tommy, James and Betty
 
 ## User Functionality
 
 <img width="703" alt="image" src="https://github.com/xche529/tech_store/blob/backend/frontend/src/images/home.png">
-
 
 
 
