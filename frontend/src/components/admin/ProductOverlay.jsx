@@ -69,28 +69,28 @@ const ProductOverlay = ({ product, onClose }) => {
           <div className="mb-4">
             <div>
             <label className="block font-semibold">Item Name:</label>
-            <input type="text" defaultValue={product.name} id="productNameInput" className="font-sans" disabled={loading} style={{ borderColor: 'black' }} />
+            <input type="text" defaultValue={product.name} id="productNameInput" className="font-sans p-4 border-2 border-black " disabled={loading} style={{ borderColor: 'black' }} />
             </div>
           </div>
           <div className="flex justify-between mb-4">
             <div>
               <label className="block font-semibold">Price:</label>
-              <input type="number" defaultValue={product.price} id="productPriceInput" disabled={loading} className="input-field mr-2 w-13 border-2 border-black font-sans" />
+              <input type="number" defaultValue={product.price} id="productPriceInput" disabled={loading} className="mr-2 w-13 border-2 border-black font-sans p-1" />
             </div>
             <div>
               <label className="block font-semibold">Stock:</label>
-              <input type="number" defaultValue={product.stock} id="productStockInput" disabled={loading} className="input-field ml-2 w-12 border-2 border-black font-sans" />
+              <input type="number" defaultValue={product.stock} id="productStockInput" disabled={loading} className="ml-2 w-12 border-2 border-black font-sans p-1" />
              
             </div>
           </div>
           <div className="mb-4">
             <label className="block font-semibold">Description:</label>
-            <textarea defaultValue={product.description} id="productDescriptionInput" disabled={loading} className="input-field h-24 w-full border-2 border-black font-sans"></textarea>
+            <textarea defaultValue={product.description} id="productDescriptionInput" disabled={loading} className="h-24 w-full border-2 border-black font-sans p-2"></textarea>
           </div>
         </div>
         <div className="flex justify-center">
-          <button onClick={onClose} disabled={loading} className="btn bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border-2 border-grey-300 hover:bg-red-700 rounded">Close</button>
-          <button onClick={() => saveChanges(product, onClose)} disabled={loading} className="btn btn-primary bg-blue-500 hover:bg-blue-400 text-black font-bold py-2 px-4 border-2 border-grey-200 hover:bg-blue-300 rounded">
+          <button onClick={onClose} disabled={loading} className="px-3 py-2 bg-red-500 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">Close</button>
+          <button onClick={() => saveChanges(product, onClose)} disabled={loading} className="px-3 py-2 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
             {loading ? (
               <Audio
                 height={24}

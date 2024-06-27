@@ -18,16 +18,18 @@ function Header() {
   const navigate = useNavigate();
 
   const { user, userDetail } = useAuth();
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isLoginOverlayOpen, setLoginOverlayOpen] = useState(false);
   const [isCartOverlayOpen, setCartOverlayOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen); // Toggle dropdown state
-  };
+
+ const setLoginclose= () => {
+    setLoginOverlayOpen(false);
+ };
+
+
 
   const toggleLoginOverlay = () => {
-    setLoginOverlayOpen(!isLoginOverlayOpen); // Toggle overlay state
+    setLoginOverlayOpen(!isLoginOverlayOpen);
   };
 
   const setCartOpen = () => {
@@ -101,17 +103,7 @@ function Header() {
         </div>
       </div>
       {isLoginOverlayOpen && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50"
-          onClick={toggleLoginOverlay}
-        >
-          <div
-            className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <LogIn />
-          </div>
-        </div>
+            <LogIn closeLogin={setLoginclose}/>
       )}
       {isCartOverlayOpen && <Cart closeCart={setCartClose} userDetail={user}/>}
     </div>

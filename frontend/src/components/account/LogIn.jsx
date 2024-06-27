@@ -4,7 +4,7 @@ import '../../css/signUp.css';
 import { GoogleAuthProvider, signInWithPopup, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 import { useAuth } from '../../context/authContext';
 
-function LogIn() {
+function LogIn({closeLogin}) {
   const provider = new GoogleAuthProvider();
   const { login } = useAuth();
   const [email, setEmail] = useState('');
@@ -50,8 +50,8 @@ function LogIn() {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50" onClick={closeLogin}>
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"  onClick={(e) => e.stopPropagation()}>
         <h1 className="text-2xl font-bold mb-4">{isSignUp ? 'Sign Up' : 'Log In'}</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -84,7 +84,6 @@ function LogIn() {
         >
           {isSignUp ? 'Already have an account? Log In' : "Don't have an account? Sign Up"}
         </button>
-        <button>
             <button 
                 onClick={() => signInWithPopup(getAuth(), provider)
                 .then((result) => {
@@ -98,7 +97,6 @@ function LogIn() {
             >
                 Log In with Google
             </button>
-        </button>
       </div>
 
     </div>

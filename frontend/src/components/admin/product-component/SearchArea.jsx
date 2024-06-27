@@ -13,15 +13,17 @@ const SearchArea = ({ onSearch, onCategoryChange }) => {
   
     return (
       <div className="flex flex-col items-center justify-center w-full space-y-4">
-        <div className="w-1/2">
+        <div className="w-1/2 border-2 border-black flex items-center px-4 h-10 rounded-lg bg-white shadow-md">
+        <span className="material-symbols-outlined search">
+          search
+        </span>
           <input
             type="text"
             placeholder="Enter Product Name"
             onChange={handleSearchChange}
-            className="text-md w-full p-4 border border-gray-300 rounded"
+            className="w-full bg-transparent border-none text-base ml-1 focus:outline-none"
           />
         </div>
-        <div className="w-1/2">
         
         <div>
           <label>Category:  </label>
@@ -36,10 +38,9 @@ const SearchArea = ({ onSearch, onCategoryChange }) => {
           </select>
           </div>
         </div>
-      </div>
     );
   };
-  
+ 
   export default SearchArea;
   
 

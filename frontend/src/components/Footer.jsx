@@ -2,10 +2,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="mt-4 ">
+    <div className="mt-4 item-center flex justify-center">
 
         <h2>
-            This is the footer
+            @ 2024 Betty, Tommy and James
         </h2>
     </div>
   );
