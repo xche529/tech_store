@@ -76,7 +76,7 @@ const location = useLocation();
     }
   };
   return (
-    <div className="flex flex-col justify-cneter item-center mb-4">
+    <div className="flex flex-col justify-center item-center mb-4">
       <div>
         <div className="my-10 flex justify-between">
           <div className="ml-20">
@@ -107,22 +107,16 @@ const location = useLocation();
               </button>
             )}
             <Link to="/admin">
-              <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+              <button class="hidden sm:block px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
                 Admin
               </button>
             </Link>
-            <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
+            <button class="hidden md:block px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
               About <FontAwesomeIcon icon={faStore} />
             </button>
           </div>
 
           <div className="mr-20 space-x-4">
-            <button class="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">
-              Watchlist{" "}
-              <Link to="/cart">
-                <FontAwesomeIcon icon={faHeart} />
-              </Link>
-            </button>
 
             <button
               onClick={setCartOpen}

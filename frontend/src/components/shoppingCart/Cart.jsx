@@ -40,28 +40,28 @@
 // }
 
 import React from 'react';
-import { useCart } from '../../context/cartContext'; // Assuming your CartContext is correctly implemented
-import { updateQuantity } from '../../api'; // Ensure updateQuantity function is correctly implemented
+import { useCart } from '../../context/cartContext'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
 function Cart({ closeCart }) {
-  const { cartItems, removeFromCart, updateCartItem } = useCart(); // Access cartItems, removeFromCart, and updateCartItem from CartContext
+  const { cartItems, removeFromCart, updateCartItem } = useCart(); 
 
-  // Function to update quantity
   const update = async (itemId, newQuantity) => {
-    try {
-      // Update locally first
-      const updatedItems = cartItems.map(item =>
-        item.id === itemId ? { ...item, quantity: newQuantity } : item
-      );
-      updateCartItem(updatedItems); // Update context with new quantity
+    const updatedItems = cartItems.map(item =>
+      item.id === itemId ? { ...item, quantity: newQuantity } : item
+    );
+    updateCartItem(updatedItems);
+  }
 
-      // Call API to update quantity on the server
-      const response = await updateQuantity(itemId, newQuantity);
-      console.log(response); // Optionally handle response from API
-    } catch (error) {
-      console.error('Error updating quantity:', error);
-      // Handle error as needed (e.g., rollback changes, display error message)
+  const decreaseQuantity = (itemId, currentQuantity) => {
+    if (currentQuantity > 1) {
+      update(itemId, currentQuantity - 1);
     }
+  };
+
+  const increaseQuantity = (itemId, currentQuantity) => {
+    update(itemId, currentQuantity + 1);
   };
 
   return (
@@ -99,15 +99,15 @@ function Cart({ closeCart }) {
                     </button>
                     <div className="flex items-center border border-gray-300 rounded-md px-3">
                       <button
-                        onClick={() => update(item.id, item.quantity - 1)}
+                        onClick={() => decreaseQuantity(item.id, item.quantity)}
                         disabled={item.quantity <= 1}
-                        className={`text-gray-400 ${item.quantity <= 1 && 'cursor-not-allowed'}`}
+                        className={`text-gray-400 ${item.quantity < 1 && 'cursor-not-allowed'}`}
                       >
                         -
                       </button>
                       <span className="mx-2">{item.quantity}</span>
                       <button
-                        onClick={() => update(item.id, item.quantity + 1)}
+                        onClick={() => increaseQuantity(item.id, item.quantity)}
                         className="text-gray-400"
                       >
                         +
@@ -120,23 +120,27 @@ function Cart({ closeCart }) {
           </ul>
         )}
         <div>
-            <p className="text-xl mt-4 font-bold">Total: ${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}</p>
+          <p className="text-xl mt-4 font-bold">
+            Total: ${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}
+          </p>
         </div>
         <div className='flex flex-col gap-y-4 mt-2'>
-            <button className='px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-medium hover:bg-gray-300 transition duration-200 '>
-                Checkout
-            </button>
-        <button
+        <button className='checkout-button px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold  rounded-md font-medium transition hover:scale-105'>
+      <FontAwesomeIcon icon={faCreditCard} className='mr-2' />
+      Checkout
+    </button>
+          <button
             onClick={closeCart}
             className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-medium hover:bg-gray-300 transition duration-200"
           >
             Close
-            </button>
-         </div>
+          </button>
         </div>
+      </div>
+    </div>
+  );
+}
 
-     </div>
-
-  )};
 export default Cart;
+
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithPopup, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useAuth } from '../../context/authContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 function LogIn({ closeLogin }) {
   const provider = new GoogleAuthProvider();
@@ -9,14 +11,17 @@ function LogIn({ closeLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    setError('');
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    setError('');
   };
 
   const handleToggleSignUp = () => {
@@ -34,10 +39,11 @@ function LogIn({ closeLogin }) {
         userCredential = await signInWithEmailAndPassword(auth, email, password);
       }
       login(userCredential.user);
-      closeLogin(); // Close the overlay on successful login/signup
+      closeLogin();
       navigate('/');
     } catch (error) {
       console.error(error.code, error.message);
+        setError(error.message);
     }
   };
 
@@ -50,6 +56,7 @@ function LogIn({ closeLogin }) {
       navigate('/');
     } catch (error) {
       console.error(error.code, error.message);
+        setError(error.message);
     }
   };
 
@@ -80,6 +87,7 @@ function LogIn({ closeLogin }) {
               required 
             />
           </div>
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           <button type="submit" className="w-full py-2 px-4 bg-black text-white font-semibold hover:bg-blue-700">{isSignUp ? 'Sign Up' : 'Log In'}</button>
         </form>
         <button 
@@ -88,15 +96,17 @@ function LogIn({ closeLogin }) {
         >
           {isSignUp ? 'Already have an account? Log In' : "Don't have an account? Sign Up"}
         </button>
+        
         <button 
-          onClick={handleGoogleSignIn} 
-          className="mt-4 w-full py-2 px-4 bg-blue-500 text-white font-semibold hover:bg-blue-700"
-        >
-          Log In with Google
-        </button>
+      onClick={handleGoogleSignIn} 
+      className="mt-4 w-full py-2 px-4 bg-blue-500 text-white font-semibold hover:bg-blue-700 flex items-center justify-center"
+    >
+      Log In with 
+      <FontAwesomeIcon icon={faGoogle} className="ml-2" />
+    </button>
       </div>
     </div>
   );
 }
 
-export default LogIn;
+export default LogIn; 
