@@ -10,6 +10,8 @@ function HomePage() {
   const [keyWords, setKeyWords] = useState([]);
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 12; // 3 rows of 4 products each
 
   const handleButtonClick = (product, index) => {
     navigate('/Item/' + product.id);
@@ -36,17 +38,45 @@ function HomePage() {
     }
   }, [keyWords]);
 
+  // Calculate total number of pages
+  const totalPages = Math.ceil(products.length / productsPerPage);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Calculate which products to display for the current page
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
   return (
-    <div className="main bg-gray-100 grid grid-cols-1 sm:grid-cols-3 md:grid-col-4 justify-center">
-      {products.map((product, index) => (
+    <div className="flex flex-col items-center">
+      <div className="main bg-gray-100 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 justify-center">
+        {currentProducts.map((product, index) => (
           <ShowOffButton
-          key={index}
-          alt="seacucumber"
-          onClick={() => handleButtonClick(product, index)}
-          product={product}
-          addToCart={addToCart}
-        />
-      ))}
+            key={index}
+            alt="seacucumber"
+            onClick={() => handleButtonClick(product, index)}
+            product={product}
+            addToCart={addToCart}
+          />
+        ))}
+      </div>
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-4">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`px-4 py-2 mx-2 bg-gray-300 text-gray-800 rounded-md font-medium hover:bg-gray-400 transition duration-200 ${currentPage === index + 1 ? 'bg-gray-400' : ''}`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
