@@ -105,3 +105,33 @@ export const createNewItem = async (name, price, stock, description) => {
         return null;
     }
 }
+
+export const deleteItem = async (itemId) => {
+    try {
+        const response = await axios.post(
+        "https://us-central1-tech-store-68146.cloudfunctions.net/deleteItem",
+        {
+            itemId,
+        }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error deleting item:", error);
+        return null;
+    }
+}
+
+export const getCartItems = async (email) => {
+  try {
+    const response = await axios.post(
+      "https://us-central1-tech-store-68146.cloudfunctions.net/getCartItems",
+      {
+        email,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching cart items:", error);
+    return [];
+  }
+};
