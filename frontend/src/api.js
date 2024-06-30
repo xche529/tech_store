@@ -142,10 +142,15 @@ export const getCart = async (email) => {
         'https://us-central1-tech-store-68146.cloudfunctions.net/getCart',
         { email }
       );
-      
+
       const productDetails = response.data.map(item => item.product);
   
-      return productDetails;
+     // return quantity and product details
+        return response.data.map((item, index) => ({
+            ...item,
+            quantity: item.quantity,
+            ...productDetails[index]
+        }));
     } catch (error) {
       console.error('Error fetching cart:', error);
       return [];

@@ -43,14 +43,14 @@ import React, { useState } from 'react';
 import { useCart } from '../../context/cartContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
+import { updateQuantity } from '../../api';
 
-function Cart({ closeCart }) {
+function Cart({ closeCart, userDetail}) {
   const { cartItems, removeFromCart, updateCartItem } = useCart();
   const [isCheckout, setIsCheckout] = useState(false);
 
   const handleCheckout = () => {
     setIsCheckout(true);
-    // Set total price to 0
     updateCartItem([]);
   };
 
@@ -59,6 +59,10 @@ function Cart({ closeCart }) {
       item.id === itemId ? { ...item, quantity: newQuantity } : item
     );
     updateCartItem(updatedItems);
+
+    const email = userDetail.email;
+    const response = await updateQuantity(itemId, newQuantity, email);
+    console.log(response);
   };
 
   const decreaseQuantity = (itemId, currentQuantity) => {

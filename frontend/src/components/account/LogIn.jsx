@@ -30,10 +30,10 @@ function LogIn({ closeLogin }) {
   const handleFetchCart = async (userEmail) => {
     try {
       const products = await getCart(userEmail);
-      const updatedItems = products.map((product, index) => ({
+    const updatedItems = products.map((product, index) => ({
         ...product,
-        quantity: 1,
-      }));
+        quantity: product.quantity,
+        }));
       updateCartItem(updatedItems);
     } catch (error) {
       console.error('Error fetching cart items:', error);

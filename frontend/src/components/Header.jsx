@@ -18,7 +18,7 @@ const location = useLocation();
 
 
   const [totalPrice, setTotalPrice] = useState(0); // State to hold total price
-  const { user, userDetail, login } = useAuth();
+  const { user, login } = useAuth();
   const [isLoginOverlayOpen, setLoginOverlayOpen] = useState(false);
   const [isCartOverlayOpen, setCartOverlayOpen] = useState(false);
   const [isAboutOverlayOpen, setAboutOverlayOpen] = useState(false);
