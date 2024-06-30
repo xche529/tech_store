@@ -4,9 +4,12 @@ import { GoogleAuthProvider, signInWithPopup, getAuth, signInWithEmailAndPasswor
 import { useAuth } from '../../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { useCart } from '../../context/cartContext';
+import { getCart } from '../../api';
 
 function LogIn({ closeLogin }) {
   const provider = new GoogleAuthProvider();
+  const { updateCartItem } = useCart();
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,6 +27,19 @@ function LogIn({ closeLogin }) {
     setError('');
   };
 
+  const handleFetchCart = async (userEmail) => {
+    try {
+      const products = await getCart(userEmail);
+      const updatedItems = products.map((product, index) => ({
+        ...product,
+        quantity: 1,
+      }));
+      updateCartItem(updatedItems);
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
+    }
+  }
+
   const handleToggleSignUp = () => {
     setIsSignUp(!isSignUp); 
   };
@@ -39,6 +55,7 @@ function LogIn({ closeLogin }) {
         userCredential = await signInWithEmailAndPassword(auth, email, password);
       }
       login(userCredential.user);
+      await handleFetchCart(email);
       closeLogin();
       navigate('/');
     } catch (error) {

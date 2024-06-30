@@ -34,21 +34,11 @@ const cartReducer = (state, action) => {
         cartItems: state.cartItems.filter(item => item.id !== action.payload),
       };
 
-    // case UPDATE_CART_ITEM:
-    //   return {
-    //     ...state,
-    //     cartItems: state.cartItems.map(item =>
-    //       item.id === action.payload.itemId ? { ...item, quantity: action.payload.newQuantity } : item
-    //     ),
-    //   };
-
     case UPDATE_CART_ITEM:
-  return {
-    ...state,
-    cartItems: action.payload,
-  };
-
-
+        return {
+          ...state,
+          cartItems: action.payload,
+        }
     default:
       return state;
   }

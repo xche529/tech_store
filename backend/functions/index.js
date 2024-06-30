@@ -25,11 +25,26 @@ exports.getCart = functions.https.onRequest((req, res) => {
       const userDocRef = userCollectionRef.doc(email);
       const cartCollectionRef = userDocRef.collection("cart");
       const cartSnapshot = await cartCollectionRef.get();
-      const cartItems = cartSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+    //   const cartItems = cartSnapshot.docs.map((doc) => ({
+    //     id: doc.id,
+    //     ...doc.data(),
+    //   }));
+    //   res.status(200).json(cartItems);
+
+    // Get the cart items and product details
+    const cartItems = await Promise.all(
+        cartSnapshot.docs.map(async (doc) => {
+          const productDoc = await db.collection("products").doc(doc.id).get();
+          return {
+            id: doc.id,
+            quantity: doc.data().quantity,
+            product: productDoc.exists ? productDoc.data() : null,
+          };
+        })
+      );
+
       res.status(200).json(cartItems);
+
     } catch (error) {
       res.status(500).json({ error: "Something went wrong" });
     }

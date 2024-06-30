@@ -135,3 +135,19 @@ export const getCartItems = async (email) => {
     return [];
   }
 };
+
+export const getCart = async (email) => {
+    try {
+      const response = await axios.post(
+        'https://us-central1-tech-store-68146.cloudfunctions.net/getCart',
+        { email }
+      );
+      
+      const productDetails = response.data.map(item => item.product);
+  
+      return productDetails;
+    } catch (error) {
+      console.error('Error fetching cart:', error);
+      return [];
+    }
+  };
