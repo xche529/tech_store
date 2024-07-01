@@ -3,11 +3,12 @@ import { useCart } from '../../context/cartContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import { updateQuantity, RemoveItemFromCart } from '../../api';
-
+import { useAuth } from '../../context/authContext';
 
 function Cart({ closeCart, userDetail}) {
   const { cartItems, removeFromCart, updateCartItem } = useCart();
   const [isCheckout, setIsCheckout] = useState(false);
+    const { user } = useAuth();
 
   const handleCheckout = () => {
     setIsCheckout(true);
@@ -16,6 +17,7 @@ function Cart({ closeCart, userDetail}) {
 
   const handleRemoveItem = async (itemId) => {
     const email = userDetail.email;
+    removeFromCart(itemId);
 
     // Only call the API if the user is logged in
     if (!email) {
@@ -23,7 +25,7 @@ function Cart({ closeCart, userDetail}) {
     }
     const response = await RemoveItemFromCart(itemId, email);
     console.log(response);
-    removeFromCart(itemId);
+   
     };
 
   const update = async (itemId, newQuantity) => {
@@ -32,9 +34,11 @@ function Cart({ closeCart, userDetail}) {
     );
     updateCartItem(updatedItems);
 
+    if (user){
     const email = userDetail.email;
     const response = await updateQuantity(itemId, newQuantity, email);
     console.log(response);
+    }
   };
 
   const decreaseQuantity = (itemId, currentQuantity) => {

@@ -11,7 +11,8 @@ const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM';
 const cartReducer = (state, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      const existingItem = state.cartItems.find(item => item.id === action.payload.id);
+      const existingItem = state.cartItems.find(item => item.name === action.payload.name);
+      console.log(existingItem);
 
       if (existingItem) {
         return {

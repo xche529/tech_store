@@ -3,7 +3,7 @@ import SeaCucumber from '../images/SeaCucumber.jpg';
 import ImageWithFallback from './image';
 import { useCart } from '../context/cartContext';
 
-function ShowOffButton({ alt, onClick, product}) {
+function ShowOffButton({ alt, product, onClick }) {
     const { addToCart } = useCart();
 
     const handleClickAddToCart = (e) => {

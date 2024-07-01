@@ -11,12 +11,7 @@ function HomePage() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 12; // 3 rows of 4 products each
-
-  const handleButtonClick = (product, index) => {
-    navigate('/Item/' + product.id);
-    console.log('SeaCucumber' + index + 'clicked!');
-  };
+  const productsPerPage = 12;
 
   useEffect(() => {
     const keyWordsArray = keyWordString ? keyWordString.split(" ") : ["homepage"];
@@ -38,6 +33,10 @@ function HomePage() {
     }
   }, [keyWords]);
 
+  const handleButtonClick = (product, index) => {
+    navigate(`/Item/${product.id}`); // Navigate to the item page for the selected product
+  };
+
   const totalPages = Math.ceil(products.length / productsPerPage);
 
   const handlePageChange = (pageNumber) => {
@@ -57,7 +56,6 @@ function HomePage() {
             alt="seacucumber"
             onClick={() => handleButtonClick(product, index)}
             product={product}
-            addToCart={addToCart}
           />
         ))}
       </div>

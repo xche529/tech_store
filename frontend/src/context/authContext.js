@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   async function login(userData) {
     try {
       localStorage.setItem('user', JSON.stringify(userData));
-      reloadUserDetail()
+    //   reloadUserDetail()
       setUser(userData);
     } catch (err) {
       console.log(err)
@@ -36,27 +36,27 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
   };
 
-  //update local storage of userDetail
-  const reloadUserDetail = async () => {
-    localStorage.removeItem('userDetail');
-    setUserDetail(null);
-    const userData = JSON.parse(localStorage.getItem('user'));
-    try {
-      const userDetailRef = collection(db, 'users')
-      const userDetailDoc = doc(userDetailRef, userData.email)
-      const userDetail = await getDoc(userDetailDoc)
-      if (userDetail.exists()) {
-        setUserDetail(userDetail.data());
-        localStorage.setItem('userDetail', JSON.stringify(userDetail.data()));
-        console.log("User detail refreshed:", userDetail.data())
-      }
-    } catch {
+//   //update local storage of userDetail
+//   const reloadUserDetail = async () => {
+//     localStorage.removeItem('userDetail');
+//     setUserDetail(null);
+//     const userData = JSON.parse(localStorage.getItem('user'));
+//     try {
+//       const userDetailRef = collection(db, 'users')
+//       const userDetailDoc = doc(userDetailRef, userData.email)
+//       const userDetail = await getDoc(userDetailDoc)
+//       if (userDetail.exists()) {
+//         setUserDetail(userDetail.data());
+//         localStorage.setItem('userDetail', JSON.stringify(userDetail.data()));
+//         console.log("User detail refreshed:", userDetail.data())
+//       }
+//     } catch {
 
-    }
-  }
+//     }
+//   }
 
   return (
-    <AuthContext.Provider value={{ user, userDetail, login, logout, reloadUserDetail }}>
+    <AuthContext.Provider value={{ user, userDetail, login, logout}}>
       {children}
     </AuthContext.Provider>
   );
