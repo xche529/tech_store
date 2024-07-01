@@ -7,7 +7,7 @@ import { useAuth } from '../context/authContext';
 
 function Item() {
   const { itemId } = useParams();
-  const { addToCart } = useCart();
+  const { addToCart, getItemQuantity} = useCart();
   const [item, setItem] = useState(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [description, setDescription] = useState(null);
@@ -39,6 +39,10 @@ function Item() {
     if (item) {
       console.log(item.name)
       addToCart(item);
+      if (user) {
+        const quantity = getItemQuantity(item.name);
+        updateQuantity(itemId, quantity + 1, user.email);
+      }
     }
   }
 

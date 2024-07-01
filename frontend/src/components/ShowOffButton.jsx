@@ -2,16 +2,23 @@ import React from 'react';
 import SeaCucumber from '../images/SeaCucumber.jpg';
 import ImageWithFallback from './image';
 import { useCart } from '../context/cartContext';
+import { useAuth } from '../context/authContext';
+import { updateQuantity } from '../api';
 
 function ShowOffButton({ alt, product, onClick }) {
-    const { addToCart } = useCart();
+    const { addToCart, getItemQuantity, cartItems} = useCart();
+    const { user } = useAuth();
 
     const handleClickAddToCart = (e) => {
         e.stopPropagation();
         addToCart(product);
-        }
+        console.log(cartItems);
+        const quantity = getItemQuantity(product.name);
+            if (user){
+                updateQuantity(product.id, quantity + 1 , user.email);
+            }
+     }
             
-
   return (
     <div className="cursor-pointer bg-white w-80 h-100 flex flex-col justify-center items-center m-2 p-2 border border-gray-300 rounded-lg hover:bg-gray-200 transition ease-in-out">
       <div className="w-full flex justify-center items-center">

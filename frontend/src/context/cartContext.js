@@ -12,13 +12,12 @@ const cartReducer = (state, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       const existingItem = state.cartItems.find(item => item.name === action.payload.name);
-      console.log(existingItem);
 
       if (existingItem) {
         return {
           ...state,
           cartItems: state.cartItems.map(item =>
-            item.id === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item
+            item.name === action.payload.name ? { ...item, quantity: item.quantity + 1 } : item
           ),
         };
       } else {
@@ -58,11 +57,16 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: REMOVE_FROM_CART, payload: productId });
   };
 
+  const getItemQuantity = itemName => {
+    const item = state.cartItems.find(item => item.name === itemName);
+    return item ? item.quantity : 0;
+  };
+
   const updateCartItem = (updatedItems) => {
     dispatch({ type: UPDATE_CART_ITEM, payload: updatedItems });
   };
   return (
-    <CartContext.Provider value={{ cartItems: state.cartItems, addToCart, removeFromCart, updateCartItem }}>
+    <CartContext.Provider value={{ cartItems: state.cartItems, addToCart, removeFromCart, updateCartItem, getItemQuantity}}>
       {children}
     </CartContext.Provider>
   );

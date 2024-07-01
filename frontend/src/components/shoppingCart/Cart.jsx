@@ -22,9 +22,10 @@ function Cart({ closeCart, userDetail}) {
     // Only call the API if the user is logged in
     if (!email) {
       return;
-    }
+    } else {
     const response = await RemoveItemFromCart(itemId, email);
     console.log(response);
+    }
    
     };
 
