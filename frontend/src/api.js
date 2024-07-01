@@ -1,5 +1,22 @@
 import axios from "axios";
 
+export const addUser = async (email) => {
+    try {
+        const response = await axios.post(
+        "https://us-central1-tech-store-68146.cloudfunctions.net/addUser",
+        {
+            email,
+        }
+        );
+        return response.data;
+    }
+    catch (error) {
+        console.error("Error adding user:", error);
+        return null;
+    }
+};
+
+
 
 export const fetchProducts = async () => {
   const response = await axios.get(
@@ -22,6 +39,22 @@ export const fetchProductsByTag = async (keyWords) => {
     return [];
   }
 };
+
+export const RemoveItemFromCart = async (itemId, email) => {
+    try {
+        const response = await axios.post(
+        "https://us-central1-tech-store-68146.cloudfunctions.net/removeItem",
+        {
+            itemId,
+            email,
+        }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error removing item from cart:", error);
+        return null;
+    }
+    }
 
 export const getProductById = async (itemId) => {
   try {
@@ -120,21 +153,6 @@ export const deleteItem = async (itemId) => {
         return null;
     }
 }
-
-export const getCartItems = async (email) => {
-  try {
-    const response = await axios.post(
-      "https://us-central1-tech-store-68146.cloudfunctions.net/getCartItems",
-      {
-        email,
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching cart items:", error);
-    return [];
-  }
-};
 
 export const getCart = async (email) => {
     try {

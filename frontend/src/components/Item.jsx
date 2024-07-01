@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ImageWithFallback from './image';
-import { getProductById } from '../api';
+import { getProductById, updateQuantity } from '../api';
 import { useCart } from '../context/cartContext';
+import { useAuth } from '../context/authContext';
 
 function Item() {
   const { itemId } = useParams();
@@ -10,11 +11,17 @@ function Item() {
   const [item, setItem] = useState(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [description, setDescription] = useState(null);
+  const { user } = useAuth();
   const defaultDescription = "Discover innovation at its finest with our cutting-edge product! Unfortunately, the detailed description is temporarily unavailable.";
 
   const handleClickAddToCart = (e) => {
     e.stopPropagation();
     addToCart(item);
+    // if user logged in, add to cart in database
+    if (user) {
+      updateQuantity(user.email, item.id, 1);
+      console.log('Adding to cart in database');
+    }
   }
 
   useEffect(() => {

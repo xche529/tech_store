@@ -1,4 +1,3 @@
-const { onRequest } = require("firebase-functions/v2/https");
 const { getFirestore } = require("firebase-admin/firestore");
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
@@ -17,6 +16,36 @@ const getCartRef = (email, itemId) => {
   return cartCollectionRef.doc(itemId);
 };
 
+exports.addUser = functions.https.onRequest((req, res) => {
+    corsHandler(req, res, async () => {
+        try {
+            const { email } = req.body;
+            const userCollectionRef = db.collection("users");
+            if (!userCollectionRef.doc(email).exists) {
+                // Add user to users collection, user id is email
+                await userCollectionRef.doc(email).set(
+                    {
+                        email: email,
+                    },
+                    { merge: true
+                }
+                );
+            }
+            // Add a new cart collection to the user
+            const cartCollectionRef = userCollectionRef.doc(email).collection("cart");
+            await cartCollectionRef.add({ 
+                id: "1",
+                quantity: 1,
+             });
+            res.status(200).json({ message: "User added successfully" });
+        } catch (error) {
+            res.status(500).json({ error: "Something went wrong" });
+        }
+    }); 
+});
+
+
+
 exports.getCart = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     try {
@@ -25,13 +54,6 @@ exports.getCart = functions.https.onRequest((req, res) => {
       const userDocRef = userCollectionRef.doc(email);
       const cartCollectionRef = userDocRef.collection("cart");
       const cartSnapshot = await cartCollectionRef.get();
-    //   const cartItems = cartSnapshot.docs.map((doc) => ({
-    //     id: doc.id,
-    //     ...doc.data(),
-    //   }));
-    //   res.status(200).json(cartItems);
-
-    // Get the cart items and product details
     const cartItems = await Promise.all(
         cartSnapshot.docs.map(async (doc) => {
           const productDoc = await db.collection("products").doc(doc.id).get();
@@ -57,7 +79,7 @@ exports.removeItem = functions.https.onRequest((req, res) => {
       logger.info("Request body:", req.body);
       const { email, itemId } = req.body;
       const cartRef = getCartRef(email, itemId);
-      await deleteDoc(cartRef);
+      await cartRef.delete(cartRef);
       res.status(200).json("removed");
     } catch (error) {
       res.status(500).json({ error: "Something went wrong" });
@@ -69,22 +91,27 @@ exports.updateQuantity = functions.https.onRequest((req, res) => {
   corsHandler(req, res, async () => {
     try {
       const { itemId, email, value } = req.body;
+      // If item exists in cart, update the quantity, otherwise add the item to the cart
+      if (getCartRef(email, itemId).exists) {
       const cartRef = getCartRef(email, itemId);
-
       await cartRef.update({
         quantity: value,
       });
+    } else {
+        // Add the item to the cart
+        const userCollectionRef = db.collection("users");
+        const cartCollectionRef = userCollectionRef.doc(email).collection("cart");
+        await cartCollectionRef.add({
+          id: itemId,
+          quantity: value,
+        });
+    }
       res.status(200).json("quantity updated");
     } catch (error) {
       logger.error("Error updating quantity:", error);
       res.status(500).json({ error: error.message });
     }
   });
-});
-
-exports.helloWorld = onRequest((request, response) => {
-  logger.info("Hello logs!", { structuredData: true });
-  response.send("Hello from Firebase!");
 });
 
 exports.updateProductInfo = functions.https.onRequest((req, res) => {

@@ -1,49 +1,9 @@
-// import React, { useState } from "react";
-// import {
-//   getAuth,
-//   signInWithEmailAndPassword,
-//   GoogleAuthProvider,
-//   signInWithPopup,
-//   createUserWithEmailAndPassword,
-// } from "firebase/auth";
-// import { updateQuantity } from "../../api";
-
-// function Cart({ closeCart, userDetail }) {
-//   const update = async (itemId, value) => {
-//     const email = userDetail.email;
-//     itemId = '23'
-//     value = 50
-//     console.log(itemId, value, email);
-//     const response = await updateQuantity(itemId, value, email);
-//     console.log(response);
-//   };
-
-//   const test = () => {
-//     console.log(userDetail);
-//   }
-
-//   return (
-//     <div
-//       onClick={closeCart}
-//       className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50"
-//     >
-//       <div
-//         onClick={(e) => e.stopPropagation()}
-//         className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
-//       >
-//         <button onClick={update}> hi</button>
-//         <h1></h1>
-//         <button onClick={test}> test </button>
-//       </div>
-//     </div>
-//   );
-// }
-
 import React, { useState } from 'react';
 import { useCart } from '../../context/cartContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
-import { updateQuantity } from '../../api';
+import { updateQuantity, RemoveItemFromCart } from '../../api';
+
 
 function Cart({ closeCart, userDetail}) {
   const { cartItems, removeFromCart, updateCartItem } = useCart();
@@ -53,6 +13,18 @@ function Cart({ closeCart, userDetail}) {
     setIsCheckout(true);
     updateCartItem([]);
   };
+
+  const handleRemoveItem = async (itemId) => {
+    const email = userDetail.email;
+
+    // Only call the API if the user is logged in
+    if (!email) {
+      return;
+    }
+    const response = await RemoveItemFromCart(itemId, email);
+    console.log(response);
+    removeFromCart(itemId);
+    };
 
   const update = async (itemId, newQuantity) => {
     const updatedItems = cartItems.map(item =>
@@ -115,7 +87,7 @@ function Cart({ closeCart, userDetail}) {
                       <p className="text-gray-500">Price: ${item.price}</p>
                       <div className="flex items-center mt-2">
                         <button
-                          onClick={() => removeFromCart(item.id)}
+                          onClick={() => handleRemoveItem(item.id)}
                           className="text-red-500 hover:text-red-700 font-medium mr-4"
                         >
                           Remove
