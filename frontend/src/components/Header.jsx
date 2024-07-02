@@ -90,7 +90,7 @@ const setAboutOpen = () => {
     <div className="flex flex-col item-center mb-4">
       <div>
         <div className="my-10 flex justify-between">
-          <div className="ml-20">
+          <div className="ml-10">
             <Link to="/">
               <h1 className="font-bold text-5xl">KIWITECH</h1>
             </Link>

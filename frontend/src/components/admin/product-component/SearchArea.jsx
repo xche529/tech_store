@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTag } from '@fortawesome/free-solid-svg-icons';
+import NewItem from '../NewItem';
 
 const SearchArea = ({ onSearch, onCategoryChange, onSortChange }) => {
   const [newItemOverlayOpen, setNewItemOverlayOpen] = useState(false);
-  const [sortBy, setSortBy] = useState('price_asc'); // Default sort by price ascending
+  const [sortBy, setSortBy] = useState('price_asc'); 
 
   const toggleNewItemOverlay = () => {
     setNewItemOverlayOpen(!newItemOverlayOpen);
@@ -42,7 +43,7 @@ const SearchArea = ({ onSearch, onCategoryChange, onSortChange }) => {
         onClick={toggleNewItemOverlay}
         className="rounded-md border border-2 border-black transition ease-in-out duration-200 hover:scale-105 p-2"
       >
-        <FontAwesomeIcon icon={faTag} size="2x" />
+        <FontAwesomeIcon icon={faTag} size="2x"/>
       </button>
 
 <div className='flex mb-4 gap-x-4'>
@@ -56,9 +57,11 @@ const SearchArea = ({ onSearch, onCategoryChange, onSortChange }) => {
           <option value="">All Categories</option>
           <option value="phone">Phone</option>
           <option value="laptop">Laptop</option>
+          <option value="TV">TV</option>
           <option value="tablet">Tablet</option>
-          <option value="accessory">Accessory</option>
+          <option value="accessories">Accessories</option>
           <option value="camera">Camera</option>
+          <option value="headphone">Wearable</option>
         </select>
       </div>
 
@@ -75,6 +78,7 @@ const SearchArea = ({ onSearch, onCategoryChange, onSortChange }) => {
         </select>
       </div>
      </div>
+    {newItemOverlayOpen && <NewItem onClose={toggleNewItemOverlay} />}
     </div>
   );
 };

@@ -245,13 +245,15 @@ exports.createNewItem = functions.https.onRequest((req, res) => {
     corsHandler(req, res, async () => {
         try {
             const productCollectionRef = db.collection("products");
-            const { name, price, stock, description, imageUrl } = req.body;
+            const { name, price, stock, description, imageUrl, category, tags} = req.body;
             await productCollectionRef.add({
                 name: name,
                 price: price,
                 stock: stock,
                 description: description,
                 imageUrl: imageUrl,
+                category: category,
+                tag: ["homepage" , ...tags],
             });
             console.log("Product added successfully");
         } catch (error) {
@@ -261,3 +263,18 @@ exports.createNewItem = functions.https.onRequest((req, res) => {
     }
     );
 });
+
+exports.updateImage = functions.https.onRequest((req, res) => {
+    corsHandler(req, res, async () => {
+        try {
+            const { itemId, imageUrl } = req.body;
+            const productDocRef = db.collection("products").doc(itemId);
+            await productDocRef.update({ imageUrl: imageUrl });
+            console.log("Image updated successfully");
+        } catch (error) {
+            console.error("Error updating image:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    });
+});
+

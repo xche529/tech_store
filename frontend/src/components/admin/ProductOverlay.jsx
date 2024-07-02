@@ -7,10 +7,10 @@ const ProductOverlay = ({ product, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [hovered, setHovered] = useState(false);
 
-  const saveChanges = async (product, onClose) => {
+  const saveChanges = (product, onClose) => {
     try {
       setLoading(true);
-      await updatProductField(product.id,
+       updatProductField(product.id,
         document.getElementById('productNameInput').value, parseFloat(document.getElementById('productPriceInput').value),
         parseInt(document.getElementById('productStockInput').value),
         document.getElementById('productDescriptionInput').value)

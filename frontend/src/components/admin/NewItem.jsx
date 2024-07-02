@@ -3,7 +3,7 @@ import { Audio } from 'react-loader-spinner';
 import { createNewItem } from '../../api';
 import UploadImage from './product-component/UploadImage';
 
-const NewItemOverlay = ({ onClose }) => {
+const NewItem = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
@@ -13,31 +13,33 @@ const NewItemOverlay = ({ onClose }) => {
     setFile(selectedFile);
   };
 
-  const saveChanges = async (product, onClose) => {
+  const saveChanges = (onClose) => {
     
     try {
       setLoading(true);
         if (document.getElementById('productNameInput').value === '' ||
          document.getElementById('productPriceInput').value === '' || 
          document.getElementById('productStockInput').value === '' || 
-         document.getElementById('productDescriptionInput').value === '') {
+         document.getElementById('productDescriptionInput').value === ''
+         || document.getElementById('productCategoriesInput').value === ''){
         alert('Please fill in all fields');
         setLoading(false);
             return;
 
         }
-        // Immidiately close the overlay
-         await createNewItem(
+        createNewItem(
             document.getElementById('productNameInput').value,
             parseFloat(document.getElementById('productPriceInput').value),
             parseInt(document.getElementById('productStockInput').value),
             document.getElementById('productDescriptionInput').value,
-            imageUrl 
+            imageUrl,
+            document.getElementById('productCategoryInput').value,
+            document.getElementById('productCategoriesInput').value.split(',').map((category) => category.trim())
         );
         console.log('Item created successfully.'); 
         setLoading(false);
         onClose();
-   
+
     } catch (error) {
       console.error('Error updating document: ', error);
     }
@@ -82,7 +84,7 @@ const NewItemOverlay = ({ onClose }) => {
             <input type="text"  id="productNameInput" className="font-sans p-1 border-2 border-black" disabled={loading} style={{ borderColor: 'black' }} />
             </div>
           </div>
-         
+          
             <div>
               <label className="block font-semibold">Price:</label>
               <input type="number" id="productPriceInput" disabled={loading} className="mr-2 w-13 border-2 border-black font-sans p-1" />
@@ -91,10 +93,28 @@ const NewItemOverlay = ({ onClose }) => {
               <label className="block font-semibold">Stock:</label>
              <input type="number" id="productStockInput" disabled={loading} className="w-12 border-2 border-black font-sans p-1" />      
             </div>
+            <div>
+            <label className="block font-semibold">Keywords:</label>
+            <input type="text" id="productCategoriesInput" placeholder="Seprate by comma, eg: tablet,apple,grey" disabled={loading} className="w-full border-2 border-black font-sans p-1" />
+          </div> 
+            <div>
+                <label className="block font-semibold">Category</label>
+                <select id="productCategoryInput" disabled={loading} className="p-1 border border-gray-300 rounded">
+                  <option value="phone">Phone</option>
+                  <option value="laptop">Laptop</option>
+                  <option value="tablet">Tablet</option>
+                  <option value="accessories">Accessories</option>
+                  <option value="camera">Camera</option>
+                 <option value="headphone">Headphone</option>
+                 <option value ="smartwatch">Wearable</option>
+                <option value="TV">TV</option>
+                </select>
+            </div>
           <div className="mb-4">
             <label className="block font-semibold">Description:</label>
             <textarea id="productDescriptionInput" disabled={loading} className="h-24 w-full border-2 border-black font-sans p-2"></textarea>
           </div>
+         
         </div>
         <div className="flex justify-center gap-x-4">
           <button onClick={onClose} disabled={loading} className="px-3 py-2 bg-red-500 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">Close</button>
@@ -116,4 +136,4 @@ const NewItemOverlay = ({ onClose }) => {
   );
 };
 
-export default NewItemOverlay;
+export default NewItem;
