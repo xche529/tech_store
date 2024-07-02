@@ -29,11 +29,6 @@ const ProductOverlay = ({ product, onClose }) => {
     setHovered(false);
   };
 
-//   const updateImageUrl = (url) => {
-//     const productDocRef = doc(db, 'products', product.id);
-//     updateDoc(productDocRef, { imageUrl: url });
-//    };
-
   if (!product) {
     return null;
   }

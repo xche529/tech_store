@@ -14,28 +14,34 @@ const NewItemOverlay = ({ onClose }) => {
   };
 
   const saveChanges = async (product, onClose) => {
+    
     try {
       setLoading(true);
         if (document.getElementById('productNameInput').value === '' ||
          document.getElementById('productPriceInput').value === '' || 
          document.getElementById('productStockInput').value === '' || 
          document.getElementById('productDescriptionInput').value === '') {
-            alert('Please fill in all fields');
+        alert('Please fill in all fields');
         setLoading(false);
             return;
 
         }
-        await createNewItem(
+        // Immidiately close the overlay
+         await createNewItem(
             document.getElementById('productNameInput').value,
             parseFloat(document.getElementById('productPriceInput').value),
             parseInt(document.getElementById('productStockInput').value),
             document.getElementById('productDescriptionInput').value,
             imageUrl 
         );
-      onClose();
+        console.log('Item created successfully.'); 
+        setLoading(false);
+        onClose();
+   
     } catch (error) {
       console.error('Error updating document: ', error);
     }
+   
     };
 
     const handleUpload = async () => {

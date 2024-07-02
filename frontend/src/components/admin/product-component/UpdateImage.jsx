@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import UploadImage from './UploadImage';
+import { updateImage } from '../../../api';
 
 
 const UpdateImage = ({ product, onUpdateImage }) => {
@@ -15,7 +16,7 @@ const UpdateImage = ({ product, onUpdateImage }) => {
       setUploadStatus('Uploading your file...');
 
     const downloadUrl =  await UploadImage({ file });
-
+    await updateImage(product.id, downloadUrl);
     } catch (error) {
       console.error('Error updating image:', error);
       setUploadStatus('Error uploading image.');

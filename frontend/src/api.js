@@ -71,11 +71,11 @@ export const getProductById = async (itemId) => {
   }
 };
 
-  export const updateImage = async (itemId, file) => {
+  export const updateImage = async (itemId, imageUrl) => {
     try {
-      const response = await axios.post('https://us-central1-tech-store-68146.cloudfunctions.net/uploadImageToStorage', {
+      const response = await axios.post('https://us-central1-tech-store-68146.cloudfunctions.net/updateImage', {
         itemId,
-        file
+        imageUrl
       });
       return response.data;
     } catch (error) {

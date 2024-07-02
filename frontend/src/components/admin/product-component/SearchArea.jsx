@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTag } from "@fortawesome/free-solid-svg-icons";
-import NewItem from "../NewItem";
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTag } from '@fortawesome/free-solid-svg-icons';
 
-const SearchArea = ({ onSearch, onCategoryChange }) => {
+const SearchArea = ({ onSearch, onCategoryChange, onSortChange }) => {
   const [newItemOverlayOpen, setNewItemOverlayOpen] = useState(false);
+  const [sortBy, setSortBy] = useState('price_asc'); // Default sort by price ascending
 
   const toggleNewItemOverlay = () => {
     setNewItemOverlayOpen(!newItemOverlayOpen);
@@ -18,6 +18,12 @@ const SearchArea = ({ onSearch, onCategoryChange }) => {
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
     onCategoryChange(selectedCategory);
+  };
+
+  const handleSortChange = (e) => {
+    const selectedSort = e.target.value;
+    setSortBy(selectedSort);
+    onSortChange(selectedSort);
   };
 
   return (
@@ -39,6 +45,7 @@ const SearchArea = ({ onSearch, onCategoryChange }) => {
         <FontAwesomeIcon icon={faTag} size="2x" />
       </button>
 
+<div className='flex mb-4 gap-x-4'>
       <div>
         <label>Category: </label>
         <select
@@ -49,14 +56,32 @@ const SearchArea = ({ onSearch, onCategoryChange }) => {
           <option value="">All Categories</option>
           <option value="phone">Phone</option>
           <option value="laptop">Laptop</option>
+          <option value="tablet">Tablet</option>
+          <option value="accessory">Accessory</option>
+          <option value="camera">Camera</option>
         </select>
       </div>
-        {newItemOverlayOpen && <NewItem onClose={toggleNewItemOverlay} />}
+
+      <div>
+        <label>Sort by: </label>
+        <select
+          id="sort"
+          value={sortBy}
+          onChange={handleSortChange}
+          className="p-1 border border-gray-300 rounded"
+        >
+          <option value="price_asc">Price (Low to High)</option>
+          <option value="price_desc">Price (High to Low)</option>
+        </select>
+      </div>
+     </div>
     </div>
   );
 };
 
 export default SearchArea;
+
+
 
   
 
