@@ -12,17 +12,25 @@ Contributors: Tommy, James and Betty
 
 <img width="703" alt="image" src="https://github.com/xche529/tech_store/blob/backend/frontend/src/images/home.png">
 
+## Fully Functioning Shopping Cart
+<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/cart.png">
 
-
-## Admin Dashboard supports CRUD operations
-
-<img width="703" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/dashboard.png">
-
-<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/admin.png">
 
 
 # User Login Function
 
 <img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/login.png">
+
+## Admin Dashboard supports CRUD operations
+
+<img width="703" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/dashboard.png">
+
+
+
+## Create and change existing product
+<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/create.png">
+<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/admin.png">
+
+
 
 
