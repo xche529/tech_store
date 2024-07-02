@@ -104,7 +104,7 @@ const setAboutOpen = () => {
                   className="px-5 py-4 bg-gradient-to-r from-purple-500 to-blue-700 text-white font-bold rounded-full transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg"
                 >
                 <span className="text-green-400 font-bold">
-                  Welcome, {userEmail.slice(0, 4)}!  
+                  Welcome, {userEmail.slice(0,5)}!  
                 </span>
                   Sign Out
                 </button>

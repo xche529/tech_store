@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
+import NewItem from "../NewItem";
 
 const SearchArea = ({ onSearch, onCategoryChange }) => {
   const [newItemOverlayOpen, setNewItemOverlayOpen] = useState(false);
@@ -31,12 +32,12 @@ const SearchArea = ({ onSearch, onCategoryChange }) => {
         />
       </div>
 
-      {/* <button
+      <button
         onClick={toggleNewItemOverlay}
         className="rounded-md border border-2 border-black transition ease-in-out duration-200 hover:scale-105 p-2"
       >
         <FontAwesomeIcon icon={faTag} size="2x" />
-      </button> */}
+      </button>
 
       <div>
         <label>Category: </label>
@@ -50,6 +51,7 @@ const SearchArea = ({ onSearch, onCategoryChange }) => {
           <option value="laptop">Laptop</option>
         </select>
       </div>
+        {newItemOverlayOpen && <NewItem onClose={toggleNewItemOverlay} />}
     </div>
   );
 };

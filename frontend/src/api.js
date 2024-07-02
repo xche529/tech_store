@@ -121,15 +121,16 @@ export const updatProductField = async (productId, name, price, stock, descripti
     }
 };
 
-export const createNewItem = async (name, price, stock, description) => {
+export const createNewItem = async (name, price, stock, description, imageUrl) => {
     try {
         const response = await axios.post(
-        "https://us-central1-tech-store-68146.cloudfunctions.net/createItem",
+        "https://us-central1-tech-store-68146.cloudfunctions.net/createNewItem",
         {
             name,
             price,
             stock,
             description,
+            imageUrl,
         }
         );
         return response.data;

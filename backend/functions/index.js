@@ -240,3 +240,24 @@ exports.getProductById = functions.https.onRequest(async (req, res) => {
     }
   });
 });
+
+exports.createNewItem = functions.https.onRequest((req, res) => {
+    corsHandler(req, res, async () => {
+        try {
+            const productCollectionRef = db.collection("products");
+            const { name, price, stock, description, imageUrl } = req.body;
+            await productCollectionRef.add({
+                name: name,
+                price: price,
+                stock: stock,
+                description: description,
+                imageUrl: imageUrl,
+            });
+            console.log("Product added successfully");
+        } catch (error) {
+            console.error("Error adding product:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+    );
+});

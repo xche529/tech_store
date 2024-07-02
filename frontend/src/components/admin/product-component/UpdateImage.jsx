@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-// import { updateImage } from '../../../api';
-import { storage } from '../../../firebase-config';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import UploadImage from './UploadImage';
 
 
 const UpdateImage = ({ product, onUpdateImage }) => {
@@ -15,11 +13,8 @@ const UpdateImage = ({ product, onUpdateImage }) => {
     try {
       setLoading(true);
       setUploadStatus('Uploading your file...');
-      const storageRef = ref(storage, `product_images/${file.name}`);
-      const snapshot = await uploadBytes(storageRef, file);
-      console.log('Uploaded a file:', snapshot);
-      const downloadURL = await getDownloadURL(storageRef);
-      onUpdateImage(downloadURL);
+
+    const downloadUrl =  await UploadImage({ file });
 
     } catch (error) {
       console.error('Error updating image:', error);
