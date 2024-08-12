@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { collection, getDocs, getDoc, doc, updateDoc, increment, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 
 const AuthContext = createContext();
@@ -7,56 +7,56 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userDetail, setUserDetail] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const storedUserDetail = localStorage.getItem('userDetail');
-    let tempUser = null;
     if (storedUser) {
-      setUser(JSON.parse(storedUser))
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
       if (storedUserDetail) {
-        setUserDetail(JSON.parse(storedUserDetail))
-        console.log("Read User Success")
+        setUserDetail(JSON.parse(storedUserDetail));
       }
+      checkAdminRole(parsedUser.email);
     }
   }, []);
 
-  //store user data and get user detail from db
+
+  const checkAdminRole = async (email) => {
+    try {
+      const userDetailRef = doc(db, 'users', email);
+      const userDetailDoc = await getDoc(userDetailRef);
+      if (userDetailDoc.exists()) {
+        const data = userDetailDoc.data();
+        setIsAdmin(data.role === 'admin');
+      }
+    } catch (err) {
+      console.log('Error checking admin role:', err);
+    }
+  };
+
   async function login(userData) {
     try {
       localStorage.setItem('user', JSON.stringify(userData));
-    //   reloadUserDetail()
       setUser(userData);
+      checkAdminRole(userData.email);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  };
+  }
+
+  // Logout function
   const logout = () => {
     setUser(null);
+    setUserDetail(null);
+    setIsAdmin(false);
     localStorage.removeItem('user');
+    localStorage.removeItem('userDetail');
   };
 
-//   //update local storage of userDetail
-//   const reloadUserDetail = async () => {
-//     localStorage.removeItem('userDetail');
-//     setUserDetail(null);
-//     const userData = JSON.parse(localStorage.getItem('user'));
-//     try {
-//       const userDetailRef = collection(db, 'users')
-//       const userDetailDoc = doc(userDetailRef, userData.email)
-//       const userDetail = await getDoc(userDetailDoc)
-//       if (userDetail.exists()) {
-//         setUserDetail(userDetail.data());
-//         localStorage.setItem('userDetail', JSON.stringify(userDetail.data()));
-//         console.log("User detail refreshed:", userDetail.data())
-//       }
-//     } catch {
-
-//     }
-//   }
-
   return (
-    <AuthContext.Provider value={{ user, userDetail, login, logout}}>
+    <AuthContext.Provider value={{ user, userDetail, isAdmin, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
