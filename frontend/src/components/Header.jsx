@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faStore, faHeart, faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { useAuth } from "../context/authContext";
+import { useAuth} from "../context/authContext";
 import { SearchBar } from "./SearchBar";
 import LogIn from "./account/LogIn";
 import Cart from "./shoppingCart/Cart";
@@ -15,6 +15,8 @@ const location = useLocation();
   const navigate = useNavigate();
   const auth = getAuth();
   const {cartItems} = useCart();
+  const { logout } = useAuth();
+
 
 
   const [totalPrice, setTotalPrice] = useState(0); // State to hold total price
@@ -81,6 +83,7 @@ const setAboutOpen = () => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+     logout();
       navigate('/');
     } catch (error) {
       console.error('Sign out error:', error);
