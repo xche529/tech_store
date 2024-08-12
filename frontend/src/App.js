@@ -9,7 +9,6 @@ import {
 import "./css/homePage.css";
 import ItemDetails from "./components/admin/dashboard";
 import Header from "./components/Header";
-import Profile from "./components/account/Profile";
 import LogIn from "./components/account/LogIn";
 import SignUp from "./components/account/SignUp";
 import HomePage from "./components/HomePage";
@@ -25,20 +24,22 @@ function App() {
     <div>
       <div className="wrapper">
         <AuthProvider>
-            <CartProvider>
-          <Router>
-            <Header />
-            <Routes>
-              <Route path="/*" element={<Navigate to="/home/homepage" />} />
-              <Route path="/login" element={<LogIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/items" element={<ItemDetails />} />
-              <Route path="/home/:keyWordString" element={<HomePage />} />
-              <Route path="/item/:itemId" element={<Item />} />
-              <Route path="/admin" element={<Admin />} />
-            </Routes>
-            <Footer />
-          </Router>
+          <CartProvider>
+            <Router>
+              <Header />
+              <Routes>
+                <Route path="/*" element={<Navigate to="/home/homepage" />} />
+                <Route path="/login" element={<LogIn />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/items" element={<ItemDetails />} />
+                <Route path="/home/:keyWordString" element={<HomePage />} />
+                <Route path="/item/:itemId" element={<Item />} />
+                <Route path="/admin" element={
+                    <Admin />
+                } />
+                </Routes>
+              <Footer />
+            </Router>
           </CartProvider>
         </AuthProvider>
       </div>
