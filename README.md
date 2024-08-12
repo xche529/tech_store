@@ -2,7 +2,7 @@
 
 KIWITECH is a full stack e-commerce store project with admin dashboard using React as frontend, Firebase as backend and TailwindCSS for styling. 
 Features: 
-- CRUD operations via admin dashboard
+- CRUD operations via admin dashboard (Restricted access due to recent unauthorised activity)
 - Saved shopping cart items for logged in users
 - Search product via keywords, e.g., "Smartwatch", "Wearable", "Phone".
 
