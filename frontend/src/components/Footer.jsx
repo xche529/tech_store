@@ -1,10 +1,9 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Footer = () => {
   return (
-    <div className="footer mt-4 item-center flex justify-center">
-      <h2>@ 2024 Tommy, James and Betty</h2>
-    </div>
+      <FontAwesomeIcon icon="fa-brands fa-github"/>
   );
 };
 
