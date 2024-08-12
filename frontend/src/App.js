@@ -14,7 +14,6 @@ import SignUp from "./components/account/SignUp";
 import HomePage from "./components/HomePage";
 import Item from "./components/Item";
 import Admin from "./components/admin/dashboard";
-import Footer from "./components/Footer";
 import { AuthProvider } from "./context/authContext";
 import { CartProvider } from './context/cartContext';
 import "firebase/auth";
@@ -38,7 +37,6 @@ function App() {
                     <Admin />
                 } />
                 </Routes>
-              <Footer />
             </Router>
           </CartProvider>
         </AuthProvider>
