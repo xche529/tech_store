@@ -177,3 +177,16 @@ export const getCart = async (email) => {
       return [];
     }
   };
+
+  export const checkAdmin = async (email, password) => {
+    try {
+      const response = await axios.post(
+        'https://us-central1-tech-store-68146.cloudfunctions.net/CheckAdmin',
+        { email, password }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error checking admin:', error);
+      return null;
+    }
+  }

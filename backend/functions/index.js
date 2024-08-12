@@ -44,6 +44,30 @@ exports.addUser = functions.https.onRequest((req, res) => {
     }); 
 });
 
+exports.CheckAdmin = functions.https.onRequest((req, res) => {
+    corsHandler(req, res, async () => {
+        try {
+            const { email, password} = req.body;
+            const userDocRef = db.collection("admin").doc(email);
+              const userDoc = await userDocRef.get();
+                if (userDoc.exists) {
+                    const data = userDoc.data();
+                    if (data.password === password) {
+                        res.status(200).json({ isAdmin: true });
+                    } else {
+                        res.status(200).json({ isAdmin: false });
+                    }
+                }
+                else {
+                    res.status(200).json({ isAdmin: false });
+                }
+        } catch (error) {
+            res.status(500).json({ error: "Something went wrong" });
+        }
+    });
+});
+
+
 
 
 exports.getCart = functions.https.onRequest((req, res) => {

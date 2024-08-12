@@ -1,17 +1,16 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { collection, getDocs, getDoc, doc, updateDoc, increment, deleteDoc } from 'firebase/firestore';
-import { db } from '../firebase-config';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userDetail, setUserDetail] = useState(null);
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const storedUserDetail = localStorage.getItem('userDetail');
-    let tempUser = null;
+
     if (storedUser) {
       setUser(JSON.parse(storedUser))
       if (storedUserDetail) {
@@ -20,13 +19,17 @@ export const AuthProvider = ({ children }) => {
       }
     }
   }, []);
+  
 
-  //store user data and get user detail from db
-  async function login(userData) {
+  async function login(userData, isadmin) {
     try {
       localStorage.setItem('user', JSON.stringify(userData));
-    //   reloadUserDetail()
       setUser(userData);
+      if (!admin) {
+        localStorage.setItem('admin', JSON.stringify(isadmin));
+        setAdmin(isadmin);
+      }
+    console.log("Login Success" + admin)
     } catch (err) {
       console.log(err)
     }
@@ -34,29 +37,13 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
+    setAdmin(false);
   };
 
-//   //update local storage of userDetail
-//   const reloadUserDetail = async () => {
-//     localStorage.removeItem('userDetail');
-//     setUserDetail(null);
-//     const userData = JSON.parse(localStorage.getItem('user'));
-//     try {
-//       const userDetailRef = collection(db, 'users')
-//       const userDetailDoc = doc(userDetailRef, userData.email)
-//       const userDetail = await getDoc(userDetailDoc)
-//       if (userDetail.exists()) {
-//         setUserDetail(userDetail.data());
-//         localStorage.setItem('userDetail', JSON.stringify(userDetail.data()));
-//         console.log("User detail refreshed:", userDetail.data())
-//       }
-//     } catch {
 
-//     }
-//   }
 
   return (
-    <AuthContext.Provider value={{ user, userDetail, login, logout}}>
+    <AuthContext.Provider value={{ user, userDetail,admin,login, logout}}>
       {children}
     </AuthContext.Provider>
   );
