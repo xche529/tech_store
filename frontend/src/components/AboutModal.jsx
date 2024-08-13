@@ -66,7 +66,7 @@ const AboutModal = ({ closeAbout }) => {
           </p>
           <ul className="text-gray-700 mb-4 list-disc list-inside">
           <h2>Credits</h2>
-            <p>The UI design of our project was inspired by the exceptional work of <a href="https://github/alux444" target="_blank" className="text-blue-600 font-medium hover:underline">Alex</a> and  <a href="https://alux444.github.io/online-store" target="_blank" className="text-blue-600 font-medium hover:underline">his project</a>. 
+            <p>The UI design of our project was inspired by the exceptional work of <a href="https://github.com/alux444" target="_blank" className="text-blue-600 font-medium hover:underline">Alex</a> and  <a href="https://alux444.github.io/online-store" target="_blank" className="text-blue-600 font-medium hover:underline">his project</a>. 
              We appreciate the creativity and design that influenced our project.</p>
           </ul>
           <button
