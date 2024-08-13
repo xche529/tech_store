@@ -18,7 +18,9 @@ const AboutModal = ({ closeAbout }) => {
             About The Project
           </h2>
           <p id="about-modal-description" className="text-gray-700 mb-4">
-            KIWI TECH is an e-commerce website project that sells a variety of tech products.
+            KIWI TECH is an e-commerce website practice project that lists a variety of tech products. 
+            Please note that this is a demo website created for practice purposes only. 
+            The products listed are fictional, and no real transactions or purchases can be made. 
           </p>
           <p className="text-gray-700 mb-6">
             The project is built with React, Firebase Cloud Functions, and TailwindCSS.
