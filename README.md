@@ -16,26 +16,26 @@ We would like to acknowledge the following for their contributions and inspirati
 
 ## User Functionality
 
-<img width="703" alt="image" src="https://github.com/xche529/tech_store/blob/frontend/src/images/home.png">
+<img width="500" alt="image" src="https://github.com/xche529/tech_store/blob/main/frontend/src/images/home.png">
 
 ## Fully Functioning Shopping Cart
-<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/cart.png">
+<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/main/frontend/src/images/cart.png">
 
 
 
 # User Login Function
 
-<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/login.png">
+<img width="400" alt="image" src= "https://github.com/xche529/tech_store/blob/main/frontend/src/images/login1.png">
 
 ## Admin Dashboard supports CRUD operations
 
-<img width="703" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/dashboard.png">
+<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/main/frontend/src/images/dashboard.png">
 
 
 
 ## Create and change existing product
-<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/create.png">
-<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/admin.png">
+<img width="400" alt="image" src= "https://github.com/xche529/tech_store/blob/main/frontend/src/images/create.png">
+<img width="400" alt="image" src= "https://github.com/xche529/tech_store/blob/main/frontend/src/images/admin.png">
 
 
 
