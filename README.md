@@ -8,28 +8,34 @@ Features:
 
 Contributors: Tommy, James and Betty
 
+## Acknowledgments
+
+We would like to acknowledge the following for their contributions and inspiration:
+
+- **Credits**: The UI design of our project was inspired by the exceptional work of [Alex](https://github.com/alux444) and [his project](https://alux444.github.io/online-store). We appreciate the creativity and design that influenced our project.
+
 ## User Functionality
 
-<img width="703" alt="image" src="https://github.com/xche529/tech_store/blob/backend/frontend/src/images/home.png">
+<img width="703" alt="image" src="https://github.com/xche529/tech_store/blob/frontend/src/images/home.png">
 
 ## Fully Functioning Shopping Cart
-<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/cart.png">
+<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/cart.png">
 
 
 
 # User Login Function
 
-<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/login.png">
+<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/login.png">
 
 ## Admin Dashboard supports CRUD operations
 
-<img width="703" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/dashboard.png">
+<img width="703" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/dashboard.png">
 
 
 
 ## Create and change existing product
-<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/create.png">
-<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/backend/frontend/src/images/admin.png">
+<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/create.png">
+<img width="500" alt="image" src= "https://github.com/xche529/tech_store/blob/frontend/src/images/admin.png">
 
 
 
